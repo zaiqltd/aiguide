@@ -1,0 +1,231 @@
+---
+/*
+  AskAI.astro — a premium "AI answer" demo card: it shows THIS guide being the answer an AI
+  engine returns. A --coal card with a --line border, --radius-lg and a restrained violet
+  glow. Top: an engine badge (violet dot + mono label). Then the user's question in a muted
+  mono style, prefixed with ">". Then the AI's answer in --bone, with ONE key phrase wrapped
+  in a violet <mark> and a softly blinking block cursor trailing the text. Footer: a small
+  mono "Cited: <domain>" with a violet link glyph.
+
+  The highlight is split SERVER-SIDE: if `highlight` occurs in `answer`, the answer is sliced
+  into before / mark / after so the <mark> is real markup (no innerHTML, no XSS surface). If
+  the phrase isn't found, the answer renders plain — never breaks. Only the cursor animates
+  (blink); the answer text itself is static. Decorative glyphs are aria-hidden; the question
+  + answer are real readable text.
+
+  Tokens: --coal surface, --line / --lime-line border, --radius-lg, --lime / --lime-bright /
+  --lime-wash / --lime-glow accent, --bone / --silver / --ash ink, --font-mono, --glow-lime.
+
+  Props:
+    engine?:    string   // badge label, default 'ChatGPT'
+    question:   string   // the user's prompt (required)
+    answer:     string   // the AI's answer (required)
+    highlight?: string   // substring of `answer` to wrap in a violet <mark>
+    cite?:      string   // domain shown in the footer, default 'aiguide.co.za'
+*/
+interface Props {
+  engine?: string;
+  question: string;
+  answer: string;
+  highlight?: string;
+  cite?: string;
+}
+const {
+  engine = 'ChatGPT',
+  question,
+  answer,
+  highlight,
+  cite = 'aiguide.co.za',
+} = Astro.props;
+
+// Split the answer around the first occurrence of `highlight` (case-sensitive) so we can wrap
+// exactly that run in a <mark> as genuine markup. Fall back to a plain answer if absent.
+const hlIndex = highlight ? answer.indexOf(highlight) : -1;
+const hasHl = hlIndex !== -1 && !!highlight;
+const before = hasHl ? answer.slice(0, hlIndex) : answer;
+const marked = hasHl ? answer.slice(hlIndex, hlIndex + (highlight as string).length) : '';
+const after = hasHl ? answer.slice(hlIndex + (highlight as string).length) : '';
+---
+<figure class="askai">
+  <figcaption class="askai__bar">
+    <span class="askai__dot" aria-hidden="true"></span>
+    <span class="askai__engine">{engine}</span>
+    <span class="askai__tag" aria-hidden="true">AI answer</span>
+  </figcaption>
+
+  <p class="askai__q">
+    <span class="askai__caret" aria-hidden="true">&gt;</span>
+    <span class="askai__qtext">{question}</span>
+  </p>
+
+  <p class="askai__a">
+    {before}<!--
+    -->{hasHl && <mark class="askai__hl">{marked}</mark>}<!--
+    -->{after}<span class="askai__cursor" aria-hidden="true"></span>
+  </p>
+
+  <div class="askai__cite">
+    <span class="askai__link" aria-hidden="true">&#8599;</span>
+    <span>Cited: {cite}</span>
+  </div>
+</figure>
+
+<style>
+  .askai {
+    --pad: clamp(1.15rem, 2.4vw, 1.6rem);
+    position: relative;
+    max-width: 38rem;
+    margin: 0;
+    padding: var(--pad);
+    background: var(--coal);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    /* Restrained violet glow: a hairline lime edge + a soft outer bloom, layered on the
+       standard card shadow so it still reads as a real surface on #0a0a0c. */
+    box-shadow:
+      0 0 0 1px var(--lime-line),
+      0 0 48px -16px var(--lime-glow),
+      var(--shadow-card);
+    isolation: isolate;
+  }
+
+  /* A faint top-edge violet wash so the card feels lit from the badge down. */
+  .askai::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      120% 60% at 18% 0%,
+      var(--lime-wash),
+      transparent 60%
+    );
+    z-index: -1;
+  }
+
+  /* ---- Engine badge row ---- */
+  .askai__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .askai__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--lime-bright);
+    box-shadow: 0 0 10px 1px var(--lime-glow);
+    flex: none;
+  }
+  .askai__engine {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--silver);
+  }
+  .askai__tag {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ash);
+    padding: 0.18rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  /* ---- The question (muted, mono, prompt-style) ---- */
+  .askai__q {
+    display: flex;
+    gap: 0.55rem;
+    margin: 0 0 0.95rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--ash);
+  }
+  .askai__caret {
+    color: var(--lime);
+    font-weight: 600;
+    flex: none;
+  }
+  .askai__qtext {
+    text-wrap: pretty;
+  }
+
+  /* ---- The answer (bone body, the thing AI "says") ---- */
+  .askai__a {
+    margin: 0 0 1.15rem;
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    line-height: 1.62;
+    color: var(--bone);
+    text-wrap: pretty;
+  }
+
+  /* The single highlighted key phrase. */
+  .askai__hl {
+    background: var(--lime-wash);
+    color: var(--lime-bright);
+    padding: 0.04em 0.3em;
+    margin: 0 -0.04em;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px var(--lime-line);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  /* Blinking block cursor trailing the answer — the only animated element. */
+  .askai__cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 0.18em;
+    vertical-align: -0.18em;
+    background: var(--lime);
+    border-radius: 1px;
+    box-shadow: 0 0 8px 0 var(--lime-glow);
+    animation: askai-blink 1.05s steps(1, end) infinite;
+  }
+
+  @keyframes askai-blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    50.01%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* ---- Citation footer ---- */
+  .askai__cite {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    color: var(--silver);
+  }
+  .askai__link {
+    color: var(--lime);
+    font-size: 0.85em;
+    text-shadow: 0 0 8px var(--lime-glow);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* Hold a steady (visible) cursor — no blink for motion-sensitive users. */
+    .askai__cursor {
+      animation: none;
+      opacity: 0.9;
+    }
+  }
+</style>

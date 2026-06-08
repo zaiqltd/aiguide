@@ -1,0 +1,100 @@
+/* AI Guide — design tokens v3. Original black-led, high-contrast dark system.
+   Near-black canvas, warm-white ink, a single electric acid-lime signal. No warm-paper palette. */
+:root {
+  /* Canvas (the dark) */
+  --void: #060607;
+  --base: #0a0a0c;
+  --coal: #101013;
+  --smoke: #16161a;
+  --slate: #1e1e23;
+  --steel: #2a2a31;
+
+  /* Lines */
+  --line: rgba(243, 240, 233, 0.09);
+  --line-2: rgba(243, 240, 233, 0.16);
+  --line-3: rgba(243, 240, 233, 0.28);
+
+  /* Ink (warm whites + greys) */
+  --bone: #f4f1ea;
+  --silver: #cdcac3;
+  --ash: #908d86;
+  --faint: #5c5a55;
+
+  /* The signal (electric violet) + a fuchsia counter for duotone glow.
+     NOTE: token names kept as --lime* so the whole system re-skins from one place;
+     the VALUES are now violet. White ink sits on the accent. */
+  --lime: #8b5cff;
+  --lime-bright: #a884ff;
+  --lime-deep: #6f3cff;
+  --lime-ink: #0a0a0c; /* dark text on the violet accent: 4.8:1 on #8b5cff, passes WCAG AA */
+  --lime-wash: rgba(139, 92, 255, 0.14);
+  --lime-line: rgba(139, 92, 255, 0.46);
+  --lime-glow: rgba(139, 92, 255, 0.62);
+  --cyan: #e25cff;
+  --violet: #8b5cff;
+
+  /* Gradients (used with discipline) */
+  --grad-signal: linear-gradient(100deg, var(--lime-bright), var(--lime) 40%, var(--cyan));
+  --grad-ink: linear-gradient(180deg, var(--bone), var(--silver));
+  --grad-fade: linear-gradient(180deg, var(--base), var(--void));
+
+  /* Type */
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Fluid scale */
+  --fs-mega: clamp(3rem, 8.2vw, 7.5rem);
+  --fs-hero: clamp(2.5rem, 6vw, 5rem);
+  --fs-h1: clamp(2.1rem, 4.6vw, 3.6rem);
+  --fs-h2: clamp(1.6rem, 3vw, 2.4rem);
+  --fs-h3: clamp(1.2rem, 1.9vw, 1.55rem);
+  --fs-lede: clamp(1.2rem, 1.6vw, 1.55rem);
+  --fs-body: clamp(1.02rem, 1.02vw, 1.135rem);
+  --fs-mono: 0.7rem;
+  --fs-small: 0.82rem;
+
+  /* Rhythm */
+  --measure: 38rem;
+  --measure-wide: 52rem;
+  --gutter: clamp(1.15rem, 5vw, 4rem);
+  --section: clamp(5.5rem, 12vh, 10rem);
+  --maxw: 1240px;
+  --maxw-text: 44rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 0.18s;
+  --t-med: 0.4s;
+
+  /* Radii + elevation */
+  --radius: 6px;
+  --radius-lg: 13px;
+  --radius-xl: 20px;
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 60px -34px rgba(0, 0, 0, 0.9);
+  --shadow-lift: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 40px 90px -40px rgba(0, 0, 0, 0.95);
+  --glow-lime: 0 0 0 1px var(--lime-line), 0 0 40px -8px var(--lime-glow);
+
+  --z-head: 40;
+  color-scheme: dark;
+
+  /* Legacy aliases → dark system, so existing component scoped-styles render correctly. */
+  --ink: var(--bone);
+  --ink-soft: var(--silver);
+  --graphite: var(--silver);
+  --graphite-soft: var(--ash);
+  --hair: var(--line);
+  --hair-strong: var(--line-2);
+  --paper: var(--coal);
+  --paper-raised: var(--smoke);
+  --bone-deep: var(--slate);
+  --cadmium: var(--lime);
+  --cadmium-ink: var(--lime);
+  --cadmium-wash: var(--lime-wash);
+  --oxblood: var(--lime);
+  --oxblood-deep: var(--lime-deep);
+  --grad: var(--grad-signal);
+  --grad-warm: var(--grad-signal);
+  --shadow-sm: 0 1px 0 var(--line);
+}

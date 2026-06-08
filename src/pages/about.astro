@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { graph, websiteNode, organizationNode, breadcrumbNode } from '../lib/schema';
+
+const path = '/about';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
+const jsonld = graph(websiteNode(), organizationNode(), breadcrumbNode(path, crumbs));
+const authors = await getCollection('authors');
+const initials = (n: string) => n.split(' ').map((x) => x[0]).join('');
+const tone = (id: string) => (id.includes('chad') ? 'chad' : 'adam');
+
+const receipts = [
+  ['AI-Search Growth System', 'Tracks where ChatGPT, Gemini, Claude and Perplexity rank a business, then engineers it to the top of the answers they give.'],
+  ['AI Visibility Audit', 'Runs the exact questions buyers ask the engines and reports where you stand: named, ranked, or invisible.'],
+  ['The Campaign Engine', 'Scrapes a niche, learns each brand, art-directs a full campaign. Proved on 28 of South Africa’s best restaurants.'],
+  ['The Video Pipeline', 'One googled question to a finished, cited, captioned short, shipped across platforms. 27 episodes, a few rand each.'],
+];
+---
+<Base
+  title="About AI Guide"
+  description="Why AI Guide exists: straight, rand-priced, POPIA-aware answers about AI for South African business, from the two engineers behind Zaiq."
+  path={path}
+  schema={jsonld}
+>
+  <article class="wrap about">
+    <Breadcrumb crumbs={crumbs} />
+    <p class="kicker reveal">About</p>
+    <h1 class="about__h1 reveal" data-d="1">Straight answers, because we ship the answers.</h1>
+    <p class="about__lede reveal" data-d="2">
+      South African business owners are drowning in AI hype and short on people who will tell them the
+      plain truth. What it costs. What works. What does not. We wrote this guide to be the answer you
+      would get if you asked an engineer who builds this for a living, not an agency selling a retainer.
+    </p>
+
+    <section class="about__authors reveal">
+      {authors.map((a) => (
+        <a href={`/authors/${a.id}`} class="about__author mcard">
+          <span class={`avatar avatar--md avatar--${tone(a.id)}`} aria-hidden="true">{initials(a.data.name)}</span>
+          <span>
+            <strong>{a.data.name}</strong>
+            <span class="about__author-role">{a.data.jobTitle}</span>
+            <span class="about__author-short">{a.data.short}</span>
+          </span>
+        </a>
+      ))}
+    </section>
+
+    <div class="prose dropcap about__body">
+      <h2>Who we are</h2>
+      <p>
+        We are Chad Etkind and Adam Sacharowitz, two University of the Witwatersrand Electrical and
+        Information Engineering students going all-in on AI, and the founders of
+        <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>, an AI engineering studio in
+        Johannesburg. Our work is simple to describe: you bring a business problem, we point the best
+        AI at it, and we ship the working fix on a fixed price. Different problems, same move.
+      </p>
+
+      <h2>Why a guide</h2>
+      <p>
+        Because the questions repeat. How much does a website cost. Which CRM. Can AI really automate
+        my invoicing. How do I get my business named when someone asks ChatGPT for the best in my
+        category. We were answering these one message at a time, so we wrote them down properly, with
+        real rand figures and current sources, and made them free.
+      </p>
+
+      <h2>How we write it</h2>
+      <ul>
+        <li>Prices in rand, shown openly. No "contact us for pricing".</li>
+        <li>Every claim sits next to a real number or a real source.</li>
+        <li>AI is the how, never the headline. We lead with the problem and the result.</li>
+        <li>We never rank a competitor we have not used. We show you how to decide for yourself.</li>
+        <li>POPIA-aware, because your data matters and most AI advice ignores it.</li>
+      </ul>
+    </div>
+
+    <section class="about__studio reveal">
+      <div class="about__studio-inner dotgrid">
+        <div>
+          <p class="kicker">The studio behind the guide</p>
+          <h2>We answer the questions because we ship the answers.</h2>
+          <p class="about__studio-lede">
+            A few of the things two people have already put into production at
+            <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>. The proof is the point.
+          </p>
+          <p><a class="btn btn--ghost" href="https://zaiq.co.za/work" rel="noopener">See the work &rarr;</a></p>
+        </div>
+        <ul class="receipts">
+          {receipts.map(([t, d]) => (
+            <li>
+              <strong>{t}</strong>
+              <span>{d}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <CTA commercial={false} line="Read the guides, or skip straight to the build." />
+  </article>
+</Base>
+
+<style>
+  .about { padding-top: 2.2rem; max-width: var(--measure-wide); }
+  .about__h1 { font-size: var(--fs-hero); }
+  .about__lede { font-size: var(--fs-lede); color: var(--graphite); max-width: 42rem; }
+  .about__authors { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 2rem 0; }
+  .about__author { display: flex; gap: 1rem; align-items: center; padding: 1rem 1.2rem; border: 1px solid var(--hair); border-radius: var(--radius-lg); background: var(--paper-raised); text-decoration: none; color: var(--ink); transition: border-color var(--t-fast), transform var(--t-fast); }
+  .about__author:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .about__author strong { font-family: var(--font-display); font-size: 1.15rem; display: block; }
+  .about__author-role { display: block; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cadmium-ink); margin: 0.15rem 0; }
+  .about__author-short { display: block; color: var(--graphite); font-size: 0.88rem; }
+  .about__body { margin-top: 1rem; }
+  .about__studio { margin-top: 2.8rem; }
+  .about__studio-inner { border: 1px solid var(--hair); border-radius: var(--radius-xl); padding: clamp(1.6rem, 4vw, 2.8rem); background: var(--paper-raised); display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+  .about__studio-lede { color: var(--graphite); max-width: 28rem; }
+  .receipts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7rem; }
+  .receipts li { padding: 0.9rem 1.1rem; border: 1px solid var(--hair); border-left: 3px solid var(--cadmium); border-radius: var(--radius); background: var(--paper); }
+  .receipts strong { font-family: var(--font-display); font-size: 1.05rem; display: block; margin-bottom: 0.15rem; }
+  .receipts span { color: var(--graphite); font-size: 0.92rem; }
+  @media (max-width: 760px) { .about__authors, .about__studio-inner { grid-template-columns: 1fr; } }
+</style>

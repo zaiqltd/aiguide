@@ -1,0 +1,39 @@
+---
+// Visible breadcrumb. Mirrors the BreadcrumbList JSON-LD built from the same crumbs.
+interface Props {
+  crumbs: { name: string; path: string }[];
+}
+const { crumbs } = Astro.props;
+---
+<nav class="crumbs mono" aria-label="Breadcrumb">
+  <ol>
+    {crumbs.map((c, i) => (
+      <li>
+        {i < crumbs.length - 1 ? (
+          <a href={c.path}>{c.name}</a>
+        ) : (
+          <span aria-current="page">{c.name}</span>
+        )}
+        {i < crumbs.length - 1 && <span class="crumbs__sep" aria-hidden="true">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .crumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0 0 1.2rem;
+    color: var(--graphite-soft);
+    font-size: 0.66rem;
+  }
+  .crumbs li { display: inline-flex; gap: 0.4rem; align-items: center; }
+  .crumbs a { color: var(--graphite); text-decoration: none; }
+  .crumbs a:hover { color: var(--ink); }
+  .crumbs__sep { color: var(--hair-strong); }
+  .crumbs [aria-current='page'] { color: var(--ink); }
+</style>

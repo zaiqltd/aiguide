@@ -1,0 +1,99 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { graph, websiteNode, organizationNode, personNode, breadcrumbNode } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const authors = await getCollection('authors');
+  return authors.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const path = `/authors/${entry.id}`;
+const d = entry.data;
+const initials = d.name.split(' ').map((x: string) => x[0]).join('');
+const tone = entry.id.includes('chad') ? 'chad' : 'adam';
+
+const guides = await getCollection('guides', ({ data }) => !data.draft && data.author === entry.id);
+guides.sort((a, b) => (a.data.datePublished < b.data.datePublished ? 1 : -1));
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: d.name, path },
+];
+const labelFor = (u: string) => {
+  if (u.includes('linkedin')) return 'LinkedIn';
+  if (u.includes('about.me')) return 'about.me';
+  if (u.includes('github')) return 'GitHub';
+  if (u.includes('x.com') || u.includes('twitter')) return 'X';
+  return u.replace(/^https?:\/\/(www\.)?/, '').split('/')[0];
+};
+
+const jsonld = graph(
+  websiteNode(),
+  organizationNode(),
+  breadcrumbNode(path, crumbs),
+  personNode({
+    id: entry.id, name: d.name, jobTitle: d.jobTitle, description: d.short,
+    affiliation: d.affiliation, award: d.award, knowsAbout: d.knowsAbout,
+    image: d.image, sameAs: d.sameAs,
+  })
+);
+---
+<Base
+  title={d.name}
+  description={`${d.name}. ${d.short} Writing the practical AI guide for South African business.`}
+  path={path}
+  schema={jsonld}
+>
+  <article class="wrap author-page">
+    <header class="author-hero">
+      <span class={`avatar avatar--lg avatar--${tone}`} aria-hidden="true">{initials}</span>
+      <div>
+        <p class="kicker">Author</p>
+        <h1>{d.name}</h1>
+        <p class="author-hero__role mono">{d.jobTitle}{d.award ? ` · ${d.award}` : ''}</p>
+      </div>
+    </header>
+
+    {d.credential && <p class="author-hero__cred">{d.credential}</p>}
+
+    {d.sameAs.length > 0 && (
+      <p class="social author-hero__social">
+        {d.sameAs.map((u: string) => <a href={u} rel="me noopener" target="_blank">{labelFor(u)}</a>)}
+        <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>
+      </p>
+    )}
+
+    <div class="prose author-page__bio"><Content /></div>
+
+    {guides.length > 0 && (
+      <section class="author-page__work">
+        <h2>Guides by {d.name.split(' ')[0]}</h2>
+        <ul class="cards cards--auto">
+          {guides.map((g) => (
+            <li class="card">
+              <a href={`/guides/${g.id}`}>
+                <span class="card__cluster">{g.data.clusterLabel}</span>
+                <span class="card__title">{g.data.title}</span>
+                <span class="card__desc">{g.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</Base>
+
+<style>
+  .author-page { padding-top: 2.4rem; max-width: var(--measure-wide); }
+  .author-hero { display: flex; align-items: center; gap: 1.3rem; }
+  .author-hero h1 { margin: 0.1rem 0 0.2rem; }
+  .author-hero__role { color: var(--cadmium-ink); margin: 0; }
+  .author-hero__cred { color: var(--graphite); margin: 1.2rem 0 0; }
+  .author-hero__social { margin: 1.1rem 0 0; }
+  .author-page__bio { margin-top: 1.6rem; }
+  .author-page__work { margin-top: 2.8rem; }
+</style>

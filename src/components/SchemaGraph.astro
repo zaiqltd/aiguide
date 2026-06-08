@@ -1,0 +1,8 @@
+---
+// Renders a JSON-LD @graph string built by src/lib/schema.ts into a script tag.
+interface Props {
+  json: string;
+}
+const { json } = Astro.props;
+---
+<script type="application/ld+json" set:html={json} is:inline />

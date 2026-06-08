@@ -1,0 +1,1033 @@
+---
+/*
+  CostEstimator.astro: "What should your website cost?" honest ZAR estimator.
+
+  An interactive lead tool for aiguide.co.za. A South African business owner picks
+  the kind of site they need, ticks the features that matter, and says who they want
+  to build it. The tool returns an honest 2026 rand range, a short breakdown of what
+  drives that number, the ongoing costs, and a route to Zaiq for a real fixed-price
+  quote.
+
+  HONESTY (house rule): we never invent a single precise figure. Every result is an
+  indicative range taken from published 2026 South African market bands. The on-page
+  caveat says so out loud. AI is the how, not the headline. No named competitor is
+  ranked above Zaiq. No data leaves the browser: there is no fetch, no analytics, no
+  storage; nothing the owner selects is ever sent anywhere.
+
+  PROGRESSIVE ENHANCEMENT (the load-bearing rule for AEO/SEO):
+    Every meaningful thing is in the server-rendered HTML and reads correctly with JS
+    OFF: the published price table by site type, the explanation of what actually
+    drives the price, a sensible default estimate (with its breakdown and ongoing
+    line), the honest caveat, and the CTA. The result panel is visible by default and
+    already holds a real default estimate. JS only ENHANCES: it recomputes a
+    personalised range from the live selections, swaps the text inside nodes that
+    already exist, and announces the update via aria-live. JS never injects core
+    content.
+
+  Self-contained: Props + markup + scoped <style> + a guarded Astro <script>. No
+  external deps, no React, no npm. Consumes the global design tokens via var().
+*/
+interface Props {
+  heading?: string;
+}
+const { heading = 'What should your website cost?' } = Astro.props;
+
+// ---------------------------------------------------------------------------
+// The honest model. Bands are the published 2026 South African market ranges from
+// our own guide (website-cost-south-africa). The same numbers render in the static
+// table below AND drive the client recompute, so JS-off and JS-on agree.
+//
+// All amounts are in ZAR. DIY is the one tier priced monthly, not as a build fee.
+// ---------------------------------------------------------------------------
+
+// Site types, in the order they appear in the <select>.
+const siteTypes = [
+  { value: 'brochure', label: 'Brochure site (a few pages)' },
+  { value: 'business', label: 'Business site (built to convert)' },
+  { value: 'store', label: 'Online store' },
+  { value: 'app', label: 'Web app or custom software' },
+] as const;
+
+// Who builds it, in <select> order. DIY reframes the result as a monthly figure.
+const builders = [
+  { value: 'diy', label: 'DIY builder (Wix, Squarespace, Shopify)' },
+  { value: 'freelancer', label: 'Freelancer' },
+  { value: 'agency', label: 'Agency' },
+  { value: 'studio', label: 'Studio or engineer' },
+] as const;
+
+// Feature toggles. Each adds an honest amount to both ends of the band. "implies"
+// lists the site types where the feature is already part of the base scope, so we do
+// not double-charge for it (e.g. payments on an online store).
+const features = [
+  { value: 'design', label: 'Custom design', lo: 4000, hi: 12000, implies: [] as string[] },
+  { value: 'cms', label: 'Blog or CMS', lo: 3000, hi: 10000, implies: [] as string[] },
+  { value: 'payments', label: 'Online payments', lo: 4000, hi: 14000, implies: ['store'] },
+  { value: 'bookings', label: 'Online bookings', lo: 4000, hi: 14000, implies: [] as string[] },
+  { value: 'multilang', label: 'Multi-language', lo: 3000, hi: 12000, implies: [] as string[] },
+  { value: 'seo', label: 'SEO foundation', lo: 3000, hi: 9000, implies: [] as string[] },
+] as const;
+
+// Base build bands per site type and builder. Anchored to the guide's published
+// tiers. A "mode" of 'monthly' means the figure is a recurring monthly cost (DIY);
+// 'build' means a once-off build fee. The label is the human band shown in the table.
+// We keep this matrix in the markup as a data attribute too, so the client recompute
+// is driven by the exact same source of truth (no second copy to drift).
+type Band = { lo: number; hi: number; mode: 'build' | 'monthly' };
+const bands: Record<string, Record<string, Band>> = {
+  diy: {
+    brochure: { lo: 0, hi: 300, mode: 'monthly' },
+    business: { lo: 0, hi: 500, mode: 'monthly' },
+    store: { lo: 200, hi: 800, mode: 'monthly' },
+    app: { lo: 300, hi: 1200, mode: 'monthly' },
+  },
+  freelancer: {
+    brochure: { lo: 3000, hi: 15000, mode: 'build' },
+    business: { lo: 15000, hi: 45000, mode: 'build' },
+    store: { lo: 20000, hi: 80000, mode: 'build' },
+    app: { lo: 60000, hi: 200000, mode: 'build' },
+  },
+  agency: {
+    brochure: { lo: 12000, hi: 35000, mode: 'build' },
+    business: { lo: 40000, hi: 120000, mode: 'build' },
+    store: { lo: 60000, hi: 180000, mode: 'build' },
+    app: { lo: 150000, hi: 500000, mode: 'build' },
+  },
+  studio: {
+    brochure: { lo: 8000, hi: 25000, mode: 'build' },
+    business: { lo: 25000, hi: 70000, mode: 'build' },
+    store: { lo: 40000, hi: 140000, mode: 'build' },
+    app: { lo: 100000, hi: 350000, mode: 'build' },
+  },
+};
+
+// The published reference table (renders in static HTML, the AEO-critical content).
+const tableRows = [
+  ['DIY builder (Wix, Squarespace, Shopify)', 'R0 to R500 / month', 'Very early or very simple businesses'],
+  ['Freelancer, template build (about 5 pages)', 'R3,000 to R15,000', 'A clean brochure site, fast'],
+  ['Custom-designed business site', 'R15,000 to R45,000', 'A site that has to convert'],
+  ['Corporate site with custom CMS', 'R40,000 to R120,000', 'Larger teams, lots of pages, sign-off'],
+  ['Standard online store (WooCommerce / Shopify)', 'R20,000 to R80,000', 'Selling products online'],
+  ['Large or custom store / web app', 'R100,000 to R500,000+', 'Complex catalogues, custom logic'],
+] as const;
+
+// What drives the price (renders in static HTML; the model above encodes these).
+const drivers = [
+  { n: '01', t: 'Template or custom design', d: 'A template is assembled. A custom design is drawn around your brand and your one conversion goal. That is where the hours go.' },
+  { n: '02', t: 'The features, not the pages', d: 'Static pages are cheap. Payments, bookings, a blog or CMS, and multi-language each add real build time. Scope sets the quote, page count does not.' },
+  { n: '03', t: 'Who builds it', d: 'A DIY builder, a freelancer, a full agency, and a studio price the same outcome very differently, mostly because of overhead and markup.' },
+  { n: '04', t: 'Content and integrations', d: 'Copy, photography, product data, and hooks into payment or delivery systems are work. If you do not supply them, someone bills to create them.' },
+] as const;
+
+// ZAR formatting for the static defaults. Deterministic comma grouping (R15,000) so
+// the server-rendered figure always matches the hardcoded table above AND the client
+// formatter below, regardless of the build host's locale/ICU data.
+const rand = (n: number) =>
+  'R' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+// The DEFAULT estimate baked into the static HTML. It matches the default form state
+// (Business site, Freelancer, no features), so a JS-off reader sees the same honest
+// number the script would compute for those defaults.
+const DEFAULT_SITE = 'business';
+const DEFAULT_BUILDER = 'freelancer';
+const def = bands[DEFAULT_BUILDER][DEFAULT_SITE];
+const defaultRange = `${rand(def.lo)} to ${rand(def.hi)}`;
+// Serialise the band matrix + feature table once, for the client to read from the DOM
+// (single source of truth: no second copy in the script to drift out of sync).
+const modelJSON = JSON.stringify({ bands, features });
+---
+
+<section class="cest" aria-labelledby="cest-heading" data-model={modelJSON}>
+  <div class="cest__inner">
+    <!-- INTRO: full explanation, server-rendered for crawlers and AI engines. -->
+    <header class="cest__head">
+      <p class="cest__eyebrow mono">Website cost estimator &middot; South Africa</p>
+      <h2 class="cest__title" id="cest-heading">{heading}</h2>
+      <p class="cest__lede">
+        There is no single price for a website in South Africa, and anyone who quotes one without
+        asking what it is for is guessing. Tell us what you actually need and we will give you an
+        honest 2026 range, in rand, with the things that move it. Then, if you want a real
+        fixed-price quote instead of a guess, we build it.
+      </p>
+      <p class="cest__note">
+        Nothing you pick here is sent anywhere. There is no tracking and no sign-up; the estimate is
+        worked out in your browser and stays in your browser.
+      </p>
+    </header>
+
+    <!-- PUBLISHED REFERENCE TABLE: the core AEO content. Always in the static HTML. -->
+    <div class="cest__table-wrap">
+      <p class="cest__table-cap mono">Indicative 2026 prices, South Africa (ZAR)</p>
+      <table class="cest__table">
+        <thead>
+          <tr>
+            <th scope="col">Type of website</th>
+            <th scope="col">Typical price</th>
+            <th scope="col" class="cest__col-best">Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            tableRows.map((r) => (
+              <tr>
+                <th scope="row">{r[0]}</th>
+                <td class="cest__price">{r[1]}</td>
+                <td class="cest__best">{r[2]}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <p class="cest__table-foot">
+        Ranges reflect typical South African market rates in 2026. The price is set by scope, not
+        page count: the same five-page site can honestly cost R5,000 or R50,000.
+      </p>
+    </div>
+
+    <!-- WHAT DRIVES THE PRICE: the four real levers. Static HTML, crawlable, JS-off readable. -->
+    <div class="cest__drivers">
+      <p class="cest__drivers-label mono">What actually drives the price</p>
+      <ul class="cest__drivers-list">
+        {
+          drivers.map((d) => (
+            <li class="driver">
+              <span class="driver__n mono">{d.n}</span>
+              <span class="driver__body">
+                <span class="driver__t">{d.t}</span>
+                <span class="driver__d">{d.d}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- INPUT FORM: a real, labelled, accessible form. JS reads it to recompute. -->
+    <form class="cest__form" id="cest-form" novalidate>
+      <div class="cest__row">
+        <div class="field">
+          <label for="cest-type">What kind of site</label>
+          <div class="select-wrap">
+            <select id="cest-type" name="type">
+              {
+                siteTypes.map((s) => (
+                  <option value={s.value} selected={s.value === DEFAULT_SITE}>
+                    {s.label}
+                  </option>
+                ))
+              }
+            </select>
+            <span class="select-chevron" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cest-builder">Who builds it</label>
+          <div class="select-wrap">
+            <select id="cest-builder" name="builder">
+              {
+                builders.map((b) => (
+                  <option value={b.value} selected={b.value === DEFAULT_BUILDER}>
+                    {b.label}
+                  </option>
+                ))
+              }
+            </select>
+            <span class="select-chevron" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <fieldset class="cest__features">
+        <legend>Features you need</legend>
+        <div class="cest__checks">
+          {
+            features.map((f) => (
+              <label class="check" for={`cest-f-${f.value}`}>
+                <input type="checkbox" id={`cest-f-${f.value}`} name="feature" value={f.value} />
+                <span class="check__box" aria-hidden="true">
+                  <span class="check__tick" />
+                </span>
+                <span class="check__label">{f.label}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <button type="submit" class="cest__go">
+        <span>Estimate my cost</span>
+        <span class="cest__go-arrow" aria-hidden="true">&rarr;</span>
+      </button>
+    </form>
+
+    <!-- A polite live region so each recompute is announced to screen readers. -->
+    <p class="cest__live mono" id="cest-live" aria-live="polite" role="status"></p>
+
+    <!-- RESULT PANEL: visible by default, pre-filled with the default estimate.
+         JS swaps the text inside these existing nodes on change. The concise
+         announcement is handled by the dedicated #cest-live status region above, so
+         this panel is NOT itself an aria-live region (that would re-read the whole
+         block on every change). -->
+    <div class="cest__result" id="cest-result">
+      <p class="cest__result-label mono">Your indicative range</p>
+      <p class="cest__range" id="cest-range">{defaultRange}</p>
+      <p class="cest__range-mode" id="cest-range-mode">once-off build, before ongoing costs</p>
+
+      <p class="cest__breakdown" id="cest-breakdown">
+        This is the typical 2026 range for a custom-designed business site built by a freelancer, with
+        no extra features added yet. Tick the features you need above and the range updates: each one
+        adds real build time, so it widens the figure honestly rather than pretending to a single
+        precise number.
+      </p>
+
+      <div class="cest__ongoing">
+        <p class="cest__ongoing-label mono">Plus ongoing, every year</p>
+        <ul class="cest__ongoing-list">
+          <li>
+            <span class="cest__ongoing-item">.co.za domain</span>
+            <span class="cest__ongoing-cost mono">about R100 / year</span>
+          </li>
+          <li>
+            <span class="cest__ongoing-item">Web hosting</span>
+            <span class="cest__ongoing-cost mono">R50 to R500 / month</span>
+          </li>
+        </ul>
+        <p class="cest__ongoing-foot" id="cest-ongoing-foot">
+          A builder rolls hosting into its monthly fee. SSL is normally free. Skip a maintenance
+          retainer for a site that never changes.
+        </p>
+      </div>
+
+      <p class="cest__caveat" id="cest-caveat">
+        Indicative 2026 market ranges. A real quote depends on your exact scope, content, and who
+        builds it. Price the two-year total, not just the build fee.
+      </p>
+    </div>
+
+    <!-- CTA: the money line. Honest, house-ruled, Zaiq above all. -->
+    <aside class="cest__cta" aria-label="Get a real quote from Zaiq">
+      <p class="cest__cta-line">
+        Want a real fixed-price quote, not a guess? Tell us what the site has to do and we will price
+        it properly, build it, and hand it over in your name. We use AI to compress the work, so the
+        honest number is often lower than the agency one.
+      </p>
+      <div class="cest__cta-actions">
+        <a class="cest__cta-btn" href="https://zaiq.co.za" target="_blank" rel="noopener noreferrer">
+          <span>Send us the problem</span>
+          <span aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="cest__cta-soft" href="/guides/website-cost-south-africa">
+          or read the full breakdown: what a website costs in South Africa
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .cest {
+    --cest-pad: clamp(1.2rem, 3.4vw, 2.4rem);
+    position: relative;
+    max-width: var(--measure-wide, 52rem);
+    margin: 2.6rem auto;
+    color: var(--bone, #f4f1ea);
+    font-family: var(--font-body, system-ui, sans-serif);
+  }
+  .cest__inner {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(620px circle at 88% -8%, var(--lime-wash, rgba(139, 92, 255, 0.14)), transparent 58%),
+      var(--coal, #101013);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius-xl, 20px);
+    padding: var(--cest-pad);
+  }
+  .cest__inner::before {
+    /* a hairline of signal across the very top */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-signal, linear-gradient(100deg, #a884ff, #8b5cff 40%, #e25cff));
+    opacity: 0.9;
+  }
+
+  .mono {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--fs-mono, 0.7rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ---- intro ---- */
+  .cest__head { max-width: 42rem; }
+  .cest__eyebrow {
+    color: var(--lime-bright, #a884ff);
+    margin: 0 0 0.7rem;
+  }
+  .cest__title {
+    font-family: var(--font-display, Georgia, serif);
+    font-weight: 560;
+    font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.7rem;
+    color: var(--bone, #f4f1ea);
+    text-wrap: balance;
+  }
+  .cest__lede {
+    font-size: var(--fs-lede, 1.18rem);
+    line-height: 1.5;
+    color: var(--silver, #cdcac3);
+    margin: 0 0 0.7rem;
+    text-wrap: pretty;
+  }
+  .cest__note {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ash, #908d86);
+    margin: 0;
+  }
+
+  /* ---- published reference table ---- */
+  .cest__table-wrap {
+    margin: 1.7rem 0 0;
+    border: 1px solid var(--line, rgba(243, 240, 233, 0.09));
+    border-radius: var(--radius-lg, 13px);
+    background: var(--base, #0a0a0c);
+    padding: 1.1rem 1.2rem 1.2rem;
+  }
+  .cest__table-cap { color: var(--ash, #908d86); margin: 0 0 0.9rem; }
+  .cest__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  .cest__table thead th {
+    text-align: left;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ash, #908d86);
+    font-weight: 600;
+    padding: 0 0.8rem 0.6rem 0;
+    border-bottom: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+  }
+  .cest__table tbody th,
+  .cest__table tbody td {
+    padding: 0.62rem 0.8rem 0.62rem 0;
+    border-bottom: 1px solid var(--line, rgba(243, 240, 233, 0.09));
+    vertical-align: top;
+    text-align: left;
+  }
+  .cest__table tbody tr:last-child th,
+  .cest__table tbody tr:last-child td { border-bottom: 0; }
+  .cest__table tbody th {
+    font-weight: 500;
+    color: var(--bone, #f4f1ea);
+    padding-right: 1rem;
+  }
+  .cest__price {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.82rem;
+    color: var(--lime-bright, #a884ff);
+    white-space: nowrap;
+  }
+  .cest__best { color: var(--ash, #908d86); font-size: 0.86rem; }
+  .cest__table-foot {
+    margin: 0.95rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ash, #908d86);
+  }
+
+  /* ---- what drives the price ---- */
+  .cest__drivers {
+    margin: 1.1rem 0 0;
+    padding: 1.1rem 1.2rem 1.2rem;
+    background: var(--base, #0a0a0c);
+    border: 1px solid var(--line, rgba(243, 240, 233, 0.09));
+    border-radius: var(--radius-lg, 13px);
+  }
+  .cest__drivers-label { color: var(--ash, #908d86); margin: 0 0 0.9rem; }
+  .cest__drivers-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem 1.2rem;
+  }
+  .driver { display: flex; gap: 0.75rem; align-items: start; }
+  .driver__n {
+    color: var(--lime, #8b5cff);
+    font-size: 0.72rem;
+    padding-top: 0.1rem;
+    flex: none;
+  }
+  .driver__body { display: flex; flex-direction: column; gap: 0.18rem; min-width: 0; }
+  .driver__t { font-weight: 600; font-size: 0.95rem; color: var(--bone, #f4f1ea); }
+  .driver__d { font-size: 0.88rem; line-height: 1.5; color: var(--ash, #908d86); }
+
+  /* ---- form ---- */
+  .cest__form { margin: 1.7rem 0 0; }
+  .cest__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+  .field label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ash, #908d86);
+  }
+  .select-wrap select {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.98rem;
+    color: var(--bone, #f4f1ea);
+    background: var(--smoke, #16161a);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius, 6px);
+    padding: 0.78rem 2.2rem 0.78rem 0.85rem;
+    cursor: pointer;
+    transition: border-color var(--t-fast, 0.18s) var(--ease, ease), box-shadow var(--t-fast, 0.18s) var(--ease, ease);
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .select-wrap select:hover { border-color: var(--line-3, rgba(243, 240, 233, 0.28)); }
+  .select-wrap select:focus-visible {
+    outline: none;
+    border-color: var(--lime, #8b5cff);
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.22));
+  }
+  .select-wrap { position: relative; }
+  .select-chevron {
+    position: absolute;
+    right: 0.85rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid var(--ash, #908d86);
+    border-bottom: 2px solid var(--ash, #908d86);
+    transform: translateY(-65%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  /* feature checkboxes */
+  .cest__features {
+    margin: 1.1rem 0 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  .cest__features legend {
+    padding: 0;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ash, #908d86);
+    margin-bottom: 0.6rem;
+  }
+  .cest__checks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.55rem 0.8rem;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.62rem 0.7rem;
+    background: var(--smoke, #16161a);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius, 6px);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color var(--t-fast, 0.18s) var(--ease, ease), background var(--t-fast, 0.18s);
+  }
+  .check:hover { border-color: var(--line-3, rgba(243, 240, 233, 0.28)); }
+  /* The native control stays present + focusable for a11y, visually replaced by .check__box. */
+  .check input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .check__box {
+    flex: none;
+    width: 1.05rem;
+    height: 1.05rem;
+    border: 1px solid var(--line-3, rgba(243, 240, 233, 0.28));
+    border-radius: 4px;
+    background: var(--base, #0a0a0c);
+    display: grid;
+    place-items: center;
+    transition: border-color var(--t-fast, 0.18s), background var(--t-fast, 0.18s), box-shadow var(--t-fast, 0.18s);
+  }
+  .check__tick {
+    width: 0.32rem;
+    height: 0.6rem;
+    border-right: 2px solid var(--lime-ink, #fff);
+    border-bottom: 2px solid var(--lime-ink, #fff);
+    transform: rotate(45deg) scale(0);
+    transition: transform var(--t-fast, 0.18s) var(--ease, ease);
+    margin-top: -0.08rem;
+  }
+  .check__label {
+    font-size: 0.9rem;
+    color: var(--silver, #cdcac3);
+    line-height: 1.2;
+  }
+  .check input:checked ~ .check__box {
+    background: var(--lime, #8b5cff);
+    border-color: var(--lime, #8b5cff);
+  }
+  .check input:checked ~ .check__box .check__tick { transform: rotate(45deg) scale(1); }
+  .check input:checked ~ .check__label { color: var(--bone, #f4f1ea); }
+  .check input:focus-visible ~ .check__box {
+    outline: none;
+    border-color: var(--lime, #8b5cff);
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.3));
+  }
+
+  .cest__go {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1.2rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--lime-ink, #fff);
+    background: var(--lime, #8b5cff);
+    border: 1px solid transparent;
+    border-radius: var(--radius, 6px);
+    padding: 0.95rem 1.4rem;
+    cursor: pointer;
+    transition: transform var(--t-fast, 0.18s) var(--ease, ease), background var(--t-fast, 0.18s),
+      box-shadow var(--t-fast, 0.18s);
+  }
+  .cest__go:hover {
+    background: var(--lime-bright, #a884ff);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-lime, 0 0 0 1px rgba(139, 92, 255, 0.46), 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .cest__go:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.3)), var(--glow-lime, 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .cest__go-arrow { transition: transform var(--t-fast, 0.18s) var(--ease, ease); }
+  .cest__go:hover .cest__go-arrow { transform: translateX(3px); }
+
+  .cest__live { color: var(--lime-bright, #a884ff); margin: 0.8rem 0 0; min-height: 1em; }
+  .cest__live:empty { margin: 0; }
+
+  /* ---- result panel ---- */
+  .cest__result {
+    position: relative;
+    margin-top: 1.7rem;
+    padding: 1.4rem 1.4rem 1.5rem;
+    background:
+      radial-gradient(520px circle at 100% 0%, var(--lime-wash, rgba(139, 92, 255, 0.14)), transparent 62%),
+      var(--smoke, #16161a);
+    border: 1px solid var(--lime-line, rgba(139, 92, 255, 0.46));
+    border-radius: var(--radius-lg, 13px);
+    scroll-margin-top: 5rem;
+  }
+  .cest__result-label { color: var(--lime-bright, #a884ff); margin: 0 0 0.4rem; }
+  .cest__range {
+    font-family: var(--font-display, Georgia, serif);
+    font-weight: 560;
+    font-size: clamp(1.9rem, 4.6vw, 3rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    color: var(--bone, #f4f1ea);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .cest__range-mode {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ash, #908d86);
+    margin: 0.45rem 0 0;
+  }
+  .cest__breakdown {
+    color: var(--silver, #cdcac3);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin: 1.05rem 0 0;
+    max-width: 44rem;
+  }
+  .cest__breakdown strong { color: var(--bone, #f4f1ea); font-weight: 600; }
+
+  .cest__ongoing {
+    margin: 1.2rem 0 0;
+    padding: 1rem 1.1rem 1.1rem;
+    background: var(--base, #0a0a0c);
+    border: 1px solid var(--line, rgba(243, 240, 233, 0.09));
+    border-radius: var(--radius, 6px);
+  }
+  .cest__ongoing-label { color: var(--ash, #908d86); margin: 0 0 0.7rem; }
+  .cest__ongoing-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .cest__ongoing-list li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+    border-bottom: 1px dashed var(--line, rgba(243, 240, 233, 0.09));
+    padding-bottom: 0.5rem;
+  }
+  .cest__ongoing-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cest__ongoing-item { color: var(--silver, #cdcac3); font-size: 0.92rem; }
+  .cest__ongoing-cost { color: var(--bone, #f4f1ea); font-size: 0.72rem; white-space: nowrap; }
+  .cest__ongoing-foot {
+    margin: 0.85rem 0 0;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--ash, #908d86);
+  }
+
+  .cest__caveat {
+    margin: 1.1rem 0 0;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--lime-line, rgba(139, 92, 255, 0.46));
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--ash, #908d86);
+  }
+
+  /* ---- CTA ---- */
+  .cest__cta {
+    position: relative;
+    overflow: hidden;
+    margin-top: 1.6rem;
+    padding: 1.5rem 1.5rem 1.6rem;
+    background:
+      radial-gradient(520px circle at 0% 120%, var(--lime-wash, rgba(139, 92, 255, 0.14)), transparent 60%),
+      var(--smoke, #16161a);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius-lg, 13px);
+  }
+  .cest__cta-line {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.32;
+    color: var(--bone, #f4f1ea);
+    margin: 0 0 1.2rem;
+    max-width: 44rem;
+    text-wrap: pretty;
+  }
+  .cest__cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.3rem; }
+  .cest__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--lime-ink, #fff);
+    background: var(--lime, #8b5cff);
+    border-radius: var(--radius, 6px);
+    padding: 0.9rem 1.35rem;
+    transition: transform var(--t-fast, 0.18s) var(--ease, ease), background var(--t-fast, 0.18s),
+      box-shadow var(--t-fast, 0.18s);
+  }
+  .cest__cta-btn:hover {
+    background: var(--lime-bright, #a884ff);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-lime, 0 0 0 1px rgba(139, 92, 255, 0.46), 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .cest__cta-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.3)), var(--glow-lime, 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .cest__cta-soft {
+    font-size: 0.9rem;
+    color: var(--silver, #cdcac3);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    padding-bottom: 1px;
+    transition: color var(--t-fast, 0.18s), border-color var(--t-fast, 0.18s);
+  }
+  .cest__cta-soft:hover { color: var(--lime-bright, #a884ff); border-color: var(--lime-line, rgba(139, 92, 255, 0.46)); }
+  .cest__cta-soft:focus-visible { outline: none; color: var(--lime-bright, #a884ff); border-color: var(--lime, #8b5cff); }
+
+  /* ---- responsive ---- */
+  @media (max-width: 760px) {
+    .cest__row { grid-template-columns: 1fr; }
+    .cest__checks { grid-template-columns: 1fr 1fr; }
+    .cest__drivers-list { grid-template-columns: 1fr; }
+    .cest__go { width: 100%; justify-content: center; }
+  }
+  @media (max-width: 560px) {
+    .cest__checks { grid-template-columns: 1fr; }
+    .cest__col-best, .cest__best { display: none; }
+    .cest__ongoing-list li { flex-direction: column; gap: 0.15rem; align-items: flex-start; }
+  }
+
+  /* ---- reduced motion: no transforms / transitions ---- */
+  @media (prefers-reduced-motion: reduce) {
+    .cest *,
+    .cest *::before,
+    .cest *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+    .cest__go:hover,
+    .cest__cta-btn:hover { transform: none; }
+  }
+</style>
+
+<script>
+  // Progressive enhancement only. The page is fully readable and meaningful without
+  // this: the price table, the default estimate, the breakdown, the ongoing line, the
+  // caveat and the CTA are all in the static HTML. Here we recompute a personalised
+  // range from the live selections and swap the text inside nodes that already exist.
+  // Nothing is sent anywhere: no fetch, no analytics, no storage.
+  //
+  // Multi-instance safe + idempotent: every .cest on the page is bound once (keyed by
+  // a WeakSet), and we re-scan on astro:page-load so client-side view-transition swaps
+  // re-bind cleanly without double-binding.
+  (function () {
+    var bound = new WeakSet();
+
+    // Deterministic comma grouping (R15,000), identical to the server formatter, so the
+    // recomputed figure always matches the static default and the published table.
+    var randZAR = function (n) {
+      return 'R' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    };
+
+    var TYPE_NOUN = {
+      brochure: 'a brochure site',
+      business: 'a business site built to convert',
+      store: 'an online store',
+      app: 'a web app or custom build',
+    };
+    var BUILDER_NOUN = {
+      diy: 'a DIY builder',
+      freelancer: 'a freelancer',
+      agency: 'an agency',
+      studio: 'a studio or engineer',
+    };
+
+    function initOne(root) {
+      if (bound.has(root)) return;
+      bound.add(root);
+
+      var form = root.querySelector('#cest-form');
+      var typeEl = root.querySelector('#cest-type');
+      var builderEl = root.querySelector('#cest-builder');
+      var live = root.querySelector('#cest-live');
+
+      var rangeEl = root.querySelector('#cest-range');
+      var modeEl = root.querySelector('#cest-range-mode');
+      var breakdownEl = root.querySelector('#cest-breakdown');
+      var caveatEl = root.querySelector('#cest-caveat');
+      var ongoingFootEl = root.querySelector('#cest-ongoing-foot');
+
+      if (!form || !typeEl || !builderEl || !rangeEl) return;
+
+      // Single source of truth: read the same band matrix + feature table the static
+      // HTML was rendered from, off the data attribute. No second copy to drift.
+      var model;
+      try {
+        model = JSON.parse(root.getAttribute('data-model') || '{}');
+      } catch (_) {
+        return; // if the model can't be parsed, leave the honest static default in place
+      }
+      var bands = model.bands || {};
+      var features = model.features || [];
+      var featureById = {};
+      features.forEach(function (f) {
+        featureById[f.value] = f;
+      });
+
+      function selectedFeatures() {
+        var out = [];
+        var boxes = root.querySelectorAll('input[name="feature"]:checked');
+        Array.prototype.forEach.call(boxes, function (b) {
+          if (featureById[b.value]) out.push(featureById[b.value]);
+        });
+        return out;
+      }
+
+      function compute() {
+        var type = typeEl.value;
+        var builder = builderEl.value;
+        var byBuilder = bands[builder] || {};
+        var base = byBuilder[type];
+        if (!base) return null;
+
+        var lo = base.lo;
+        var hi = base.hi;
+        var monthly = base.mode === 'monthly';
+
+        // Features widen the range honestly. We never add a feature that the base scope
+        // already includes (implies), and for DIY the cost is mostly the owner's time,
+        // so feature rand-deltas are suppressed and surfaced as a note instead.
+        var added = [];
+        var skippedImplied = [];
+        selectedFeatures().forEach(function (f) {
+          var implies = f.implies || [];
+          if (implies.indexOf(type) !== -1) {
+            skippedImplied.push(f.label);
+            return;
+          }
+          added.push(f.label);
+          if (!monthly) {
+            lo += f.lo;
+            hi += f.hi;
+          }
+        });
+
+        return {
+          type: type,
+          builder: builder,
+          lo: lo,
+          hi: hi,
+          monthly: monthly,
+          added: added,
+          skippedImplied: skippedImplied,
+        };
+      }
+
+      function rangeText(r) {
+        if (r.monthly) {
+          // DIY: a monthly platform cost, with effectively no build fee.
+          var loM = randZAR(r.lo);
+          var hiM = randZAR(r.hi);
+          return (r.lo <= 0 ? 'R0' : loM) + ' to ' + hiM + ' / month';
+        }
+        return randZAR(r.lo) + ' to ' + randZAR(r.hi);
+      }
+
+      function render() {
+        var r = compute();
+        if (!r) return;
+
+        rangeEl.textContent = rangeText(r);
+
+        // Mode line under the headline range.
+        if (modeEl) {
+          modeEl.textContent = r.monthly
+            ? 'monthly platform cost, little or no build fee'
+            : 'once-off build, before ongoing costs';
+        }
+
+        // Breakdown sentence, assembled from the live selection. Honest and specific.
+        if (breakdownEl) {
+          var parts = [];
+          parts.push(
+            'This is the typical 2026 range for ' +
+              (TYPE_NOUN[r.type] || 'your site') +
+              ' built by ' +
+              (BUILDER_NOUN[r.builder] || 'your chosen route') +
+              (r.added.length ? '' : ', with no extra features added yet') +
+              '.'
+          );
+          if (r.added.length) {
+            parts.push(
+              (r.monthly
+                ? 'On a DIY builder, ' +
+                  r.added.join(', ') +
+                  ' is mostly set-up time rather than rand, so the platform price barely moves; the cost is your hours.'
+                : r.added.join(', ') +
+                  ' each add real build time, which is why the range widens. We keep it a range, not a single number, because the honest figure depends on scope.')
+            );
+          } else {
+            parts.push(
+              'Tick the features you need above and the range updates: each one adds real build time, so it widens the figure honestly rather than pretending to a single precise number.'
+            );
+          }
+          if (r.skippedImplied.length) {
+            parts.push(
+              r.skippedImplied.join(' and ') +
+                ' is already part of an online store, so we did not add it twice.'
+            );
+          }
+          breakdownEl.textContent = parts.join(' ');
+        }
+
+        // Ongoing-costs footnote reflects DIY vs build.
+        if (ongoingFootEl) {
+          ongoingFootEl.textContent = r.monthly
+            ? 'On a DIY builder, hosting and SSL are inside the monthly fee above; the domain is the one separate yearly line, and you can register it in your own name.'
+            : 'A builder rolls hosting into its monthly fee. SSL is normally free. Skip a maintenance retainer for a site that never changes.';
+        }
+
+        // Caveat stays honest and constant in spirit; we keep it explicit.
+        if (caveatEl) {
+          caveatEl.textContent =
+            'Indicative 2026 market ranges. A real quote depends on your exact scope, content, and who builds it. Price the two-year total, not just the build fee.';
+        }
+
+        return r;
+      }
+
+      // Submit: recompute, announce, and bring the (already-visible) result into view.
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var r = render();
+        if (!r) return;
+        if (live) {
+          live.textContent = 'Estimate updated: ' + rangeText(r) + '. This is an indicative range, not a fixed quote.';
+        }
+        var result = root.querySelector('#cest-result');
+        if (result && typeof result.scrollIntoView === 'function') {
+          var reduce =
+            window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          result.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+        }
+      });
+
+      // Live recompute as selections change (cheap, local-only). The result panel is
+      // already in view above the fold of the result, so we update silently here and
+      // reserve the aria-live announcement + scroll for the explicit submit.
+      typeEl.addEventListener('change', render);
+      builderEl.addEventListener('change', render);
+      Array.prototype.forEach.call(
+        root.querySelectorAll('input[name="feature"]'),
+        function (box) {
+          box.addEventListener('change', render);
+        }
+      );
+
+      // Compute once on load so the panel reflects any browser-restored form state
+      // (e.g. after a back-navigation) rather than the hard-coded static default.
+      render();
+    }
+
+    function run() {
+      var nodes = document.querySelectorAll('.cest');
+      Array.prototype.forEach.call(nodes, initOne);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+    // Astro View Transitions: re-scan after client-side swaps.
+    document.addEventListener('astro:page-load', run);
+  })();
+</script>

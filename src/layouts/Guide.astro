@@ -1,0 +1,126 @@
+---
+import Base from './Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import AnswerBlock from '../components/AnswerBlock.astro';
+import AuthorByline from '../components/AuthorByline.astro';
+import AuthorBio from '../components/AuthorBio.astro';
+import TOC from '../components/TOC.astro';
+import HowTo from '../components/HowTo.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import {
+  graph, websiteNode, organizationNode, personNode, breadcrumbNode,
+  webPageNode, articleNode, faqPageNode, howToNode, itemListNode,
+} from '../lib/schema';
+
+interface AuthorData {
+  id: string; name: string; jobTitle: string; short: string;
+  affiliation?: string; award?: string; knowsAbout?: string[]; image?: string; sameAs?: string[];
+}
+interface Props {
+  data: any;
+  path: string;
+  author: AuthorData;
+  spokes?: { name: string; path: string }[];
+  headings?: { depth: number; slug: string; text: string }[];
+  related?: { title: string; clusterLabel: string; path: string }[];
+}
+const { data, path, author, spokes = [], headings = [], related = [] } = Astro.props;
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  ...(data.clusterPath && !data.isHub ? [{ name: data.clusterLabel, path: data.clusterPath }] : []),
+  { name: data.title, path },
+];
+const tocItems = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }));
+
+const articleInput = {
+  path, title: data.title, description: data.description, authorId: author.id,
+  datePublished: data.datePublished, dateModified: data.dateModified, image: data.image,
+  section: data.clusterLabel, keywords: data.keywords,
+};
+
+const jsonld = graph(
+  websiteNode(),
+  organizationNode(),
+  personNode({
+    id: author.id, name: author.name, jobTitle: author.jobTitle, description: author.short,
+    affiliation: author.affiliation, award: author.award, knowsAbout: author.knowsAbout,
+    image: author.image, sameAs: author.sameAs,
+  }),
+  breadcrumbNode(path, crumbs),
+  webPageNode(articleInput),
+  articleNode(articleInput),
+  faqPageNode(path, data.faqs),
+  howToNode(path, data.howto),
+  data.isHub ? itemListNode(path, spokes) : null
+);
+---
+<Base title={data.title} description={data.description} path={path} ogImage={data.image} schema={jsonld} article>
+  <article class="guide wrap" data-article>
+    <Breadcrumb crumbs={crumbs} />
+    <p class="kicker">{data.clusterLabel}</p>
+    <h1>{data.title}</h1>
+    <AnswerBlock answer={data.answer} lastVerified={data.lastVerified} />
+    <AuthorByline authorId={author.id} name={author.name} short={author.short} datePublished={data.datePublished} dateModified={data.dateModified} />
+
+    <div class="guide__layout">
+      <aside class="guide__toc">
+        <TOC items={tocItems} howto={data.howto ?? null} hasFaq={data.faqs && data.faqs.length > 0} />
+      </aside>
+      <div>
+        <div class="prose dropcap">
+          <slot />
+        </div>
+
+        {data.isHub && spokes.length > 0 && (
+          <section class="hub-children">
+            <h2>In this guide</h2>
+            <ul class="hub-children__list">
+              {spokes.map((c) => (
+                <li>
+                  <a href={c.path}>
+                    <span class="hub-children__title">{c.name}</span>
+                    <span class="hub-children__go mono" aria-hidden="true">&rarr;</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <HowTo howto={data.howto} />
+        <FAQ faqs={data.faqs} />
+        <AuthorBio authorId={author.id} name={author.name} jobTitle={author.jobTitle} short={author.short} sameAs={author.sameAs} />
+
+        {related.length > 0 && (
+          <section class="related">
+            <h2>Keep reading</h2>
+            <ul class="cards cards--auto">
+              {related.map((r) => (
+                <li class="card">
+                  <a href={r.path}>
+                    <span class="card__cluster">{r.clusterLabel}</span>
+                    <span class="card__title">{r.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <CTA commercial={data.intent === 'commercial'} />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .guide > .kicker { margin-top: 0.4rem; }
+  .hub-children { max-width: var(--measure-wide); margin-top: 2.4rem; }
+  .hub-children__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+  .hub-children__list a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.95rem 1.2rem; border: 1px solid var(--hair); border-left: 4px solid var(--cadmium); border-radius: var(--radius); background: var(--paper-raised); text-decoration: none; transition: border-color var(--t-fast), transform var(--t-fast); }
+  .hub-children__list a:hover { border-color: var(--hair-strong); transform: translateX(3px); }
+  .hub-children__title { font-family: var(--font-display); font-size: 1.12rem; color: var(--ink); font-weight: 560; }
+  .hub-children__go { color: var(--oxblood); }
+</style>

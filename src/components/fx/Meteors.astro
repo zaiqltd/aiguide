@@ -1,0 +1,109 @@
+---
+/**
+ * Meteors.astro — periodic thin lime streaks falling diagonally.
+ *
+ * Ported from the Magic UI <Meteors> React component to zero-JS Astro: each
+ * meteor is a tiny rotated head with a fading gradient tail; the `meteor`
+ * keyframe slides it along the trajectory. Per-meteor position, delay and
+ * duration are randomized once in the frontmatter (runs server-side, so there
+ * is no hydration flash and no client JavaScript) and handed to CSS via inline
+ * custom properties — the vanilla equivalent of the original's inline styles.
+ *
+ * Tasteful by default: few streaks, thin, slow, low opacity.
+ */
+interface Props {
+  /** Number of meteors. Default 12. */
+  count?: number;
+}
+const { count = 12 } = Astro.props;
+
+const rand = (min: number, max: number) => Math.random() * (max - min) + min;
+
+const meteors = Array.from({ length: count }, () => ({
+  left: rand(-5, 100), // % across the top edge (some start just off-screen)
+  top: rand(-15, 10), // % down from the top so they don't all share a baseline
+  delay: rand(0, 8).toFixed(2), // s — staggered so the shower never pulses in sync
+  duration: rand(5, 11).toFixed(2), // s — slow, premium fall
+}));
+---
+
+<div class="meteors" aria-hidden="true">
+  {
+    meteors.map((m) => (
+      <span
+        class="meteor"
+        style={`left:${m.left}%;top:${m.top}%;animation-delay:${m.delay}s;animation-duration:${m.duration}s`}
+      />
+    ))
+  }
+</div>
+
+<style>
+  .meteors {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .meteor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 9999px;
+    /* The head: a small lime point with a hairline halo. */
+    background: var(--lime-bright, #d6ff5c);
+    box-shadow:
+      0 0 0 1px rgba(200, 255, 50, 0.1),
+      0 0 8px 0 var(--lime-glow, rgba(200, 255, 50, 0.55));
+    /* Trajectory: down-left, matching the reference's ~215deg shower. */
+    transform: rotate(215deg);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation-name: meteor-fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  /* The tail streams from the head toward the upper-right (origin direction). */
+  .meteor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 56px;
+    height: 1px;
+    transform: translateY(-50%);
+    background: linear-gradient(
+      90deg,
+      var(--lime-line, rgba(200, 255, 50, 0.4)),
+      transparent
+    );
+  }
+
+  @keyframes meteor-fall {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      /* Travels along its own rotated axis, so the path stays diagonal. */
+      transform: rotate(215deg) translateX(820px);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .meteor {
+      animation: none !important;
+      opacity: 0; /* a falling-streak effect has no meaningful static state */
+    }
+  }
+</style>

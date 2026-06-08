@@ -1,0 +1,162 @@
+---
+/*
+  TiltCard.astro — card that tilts in 3D toward the cursor and reveals a lime spotlight
+  that follows the pointer. Ported from MagicUI special-effects/magic-card (framer-motion
+  spring + radial-gradient at mouse position). Vanilla version uses pointer events to write
+  --mx/--my (spotlight position) and --rx/--ry (tilt) CSS vars; CSS transitions handle the
+  smoothing and the reset on leave. Scoped per-element via [data-tilt] so any number of
+  instances coexist on one page.
+
+  Tokens: --smoke surface, --line border, --radius-lg, --lime-wash / --lime-glow spotlight.
+
+  Props:
+    class?: string  // extra classes merged onto the card
+*/
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+<div class:list={['tiltcard', className]} data-tilt>
+  <div class="tiltcard__inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .tiltcard {
+    position: relative;
+    border-radius: var(--radius-lg);
+    background: var(--smoke);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    /* Default (resting) state for the JS-driven vars. */
+    --rx: 0deg;
+    --ry: 0deg;
+    --mx: 50%;
+    --my: 50%;
+    --spot: 0; /* spotlight opacity, 0 at rest -> 1 while pointer is inside */
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition:
+      transform 0.5s var(--ease),
+      box-shadow 0.5s var(--ease);
+    isolation: isolate;
+    will-change: transform;
+  }
+
+  .tiltcard:hover {
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Lime radial spotlight that tracks the pointer (::before), plus a hairline lime edge
+     lift via a faint border-box wash. Both fade with --spot so leave is graceful. */
+  .tiltcard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(
+      220px circle at var(--mx) var(--my),
+      var(--lime-glow),
+      var(--lime-wash) 38%,
+      transparent 68%
+    );
+    opacity: calc(var(--spot) * 0.55);
+    transition: opacity 0.45s var(--ease);
+    mix-blend-mode: screen;
+  }
+
+  .tiltcard__inner {
+    position: relative;
+    z-index: 2;
+    border-radius: inherit;
+    transform: translateZ(0.01px); /* promote content above the spotlight plane */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tiltcard {
+      transition: box-shadow 0.3s var(--ease);
+      transform: none !important; /* no tilt for motion-sensitive users */
+    }
+    .tiltcard::before {
+      /* Keep a gentle static glow on hover instead of a tracking one. */
+      background: radial-gradient(260px circle at 50% 0%, var(--lime-wash), transparent 70%);
+      transition: opacity 0.3s var(--ease);
+    }
+  }
+</style>
+
+<script>
+  // Per-element pointer tilt + spotlight. Idempotent + multi-instance safe: each
+  // [data-tilt] gets its own listeners, keyed by a WeakSet so re-runs never double-bind.
+  (() => {
+    const MAX_TILT = 5; // degrees
+    const bound = new WeakSet<HTMLElement>();
+    const motionSafe =
+      !window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const init = (el: HTMLElement) => {
+      if (bound.has(el)) return;
+      bound.add(el);
+
+      let raf = 0;
+      let nextX = 0;
+      let nextY = 0;
+
+      const apply = () => {
+        raf = 0;
+        const rect = el.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        const px = (nextX - rect.left) / rect.width; // 0..1
+        const py = (nextY - rect.top) / rect.height; // 0..1
+        el.style.setProperty('--mx', `${px * 100}%`);
+        el.style.setProperty('--my', `${py * 100}%`);
+        if (motionSafe) {
+          // Tilt toward the cursor: top -> rotateX positive, etc. Clamped to MAX_TILT.
+          el.style.setProperty('--ry', `${(px - 0.5) * 2 * MAX_TILT}deg`);
+          el.style.setProperty('--rx', `${(0.5 - py) * 2 * MAX_TILT}deg`);
+        }
+      };
+
+      const onMove = (e: PointerEvent) => {
+        nextX = e.clientX;
+        nextY = e.clientY;
+        if (!raf) raf = requestAnimationFrame(apply);
+      };
+
+      const onEnter = () => el.style.setProperty('--spot', '1');
+
+      const reset = () => {
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+        el.style.setProperty('--spot', '0');
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+        el.style.setProperty('--mx', '50%');
+        el.style.setProperty('--my', '50%');
+      };
+
+      el.addEventListener('pointerenter', onEnter);
+      el.addEventListener('pointermove', onMove);
+      el.addEventListener('pointerleave', reset);
+      el.addEventListener('pointercancel', reset);
+      // Safety: if the pointer exits the window mid-hover, the leave event can be missed.
+      window.addEventListener('blur', reset);
+    };
+
+    const run = () => document.querySelectorAll<HTMLElement>('[data-tilt]').forEach(init);
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+    // Astro View Transitions: re-scan after client-side swaps.
+    document.addEventListener('astro:page-load', run);
+  })();
+</script>

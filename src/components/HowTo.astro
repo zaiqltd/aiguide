@@ -1,0 +1,56 @@
+---
+// Visible HowTo, rendered from the same frontmatter the HowTo JSON-LD is built from, so the
+// schema always matches what the reader sees (a Google requirement for HowTo rich results).
+interface Props {
+  howto?: { name: string; description?: string; steps: { name: string; text: string }[] };
+}
+const { howto } = Astro.props;
+---
+{
+  howto && (
+    <section class="howto" id="how-to">
+      <h2>{howto.name}</h2>
+      {howto.description && <p class="howto__desc">{howto.description}</p>}
+      <ol class="howto__steps">
+        {howto.steps.map((s) => (
+          <li class="howto__step">
+            <p class="howto__name">{s.name}</p>
+            <p class="howto__text">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}
+
+<style>
+  .howto { max-width: var(--measure-wide); margin-top: 2.6rem; }
+  .howto__desc { color: var(--graphite); max-width: var(--measure); }
+  .howto__steps { list-style: none; counter-reset: step; padding: 0; margin: 1.2rem 0 0; }
+  .howto__step {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 1.2rem 3rem;
+    border-left: 1px solid var(--hair);
+    margin-left: 1rem;
+  }
+  .howto__step::before {
+    content: counter(step);
+    position: absolute;
+    left: -1rem;
+    top: -0.2rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    background: var(--lime);
+    color: var(--lime-ink);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    box-shadow: 0 0 18px -2px var(--lime-glow);
+  }
+  .howto__step:last-child { border-left-color: transparent; }
+  .howto__name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 560; margin: 0 0 0.2rem; }
+  .howto__text { margin: 0; color: var(--ink); max-width: var(--measure); }
+</style>

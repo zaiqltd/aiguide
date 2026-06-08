@@ -1,0 +1,32 @@
+---
+// Pull-aside for a key fact or a spiky take. Slot-based so it works inside MDX.
+interface Props {
+  label?: string;
+  variant?: 'fact' | 'note' | 'take';
+}
+const { label, variant = 'fact' } = Astro.props;
+const defaultLabel = { fact: 'Worth knowing', note: 'Note', take: 'The honest take' }[variant];
+---
+<aside class={`callout callout--${variant}`}>
+  <p class="callout__label mono">{label ?? defaultLabel}</p>
+  <div class="callout__body"><slot /></div>
+</aside>
+
+<style>
+  .callout {
+    max-width: var(--measure-wide);
+    margin: 1.8rem 0;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--hair);
+    background: var(--paper);
+  }
+  .callout--take { border-left: 4px solid var(--oxblood); }
+  .callout--fact { border-left: 4px solid var(--cadmium); }
+  .callout--note { border-left: 4px solid var(--graphite); }
+  .callout__label { margin: 0 0 0.4rem; color: var(--graphite); }
+  .callout--take .callout__label { color: var(--oxblood); }
+  .callout--fact .callout__label { color: var(--cadmium-ink); }
+  .callout__body { margin: 0; }
+  .callout__body :global(p):last-child { margin-bottom: 0; }
+</style>

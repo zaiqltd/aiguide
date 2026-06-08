@@ -1,0 +1,154 @@
+---
+title: "The AI benchmarks, explained for a normal person"
+description: "SWE-bench, GPQA Diamond, the Maths Olympiad: what the AI benchmarks behind the 2026 headlines actually test, what the numbers mean, and where they quietly mislead. Sourced and plain."
+answer: >-
+  AI benchmarks are standardised exams for models. The three that matter in 2026: SWE-bench Verified
+  (real bug fixes, now over 70% solved), GPQA Diamond (graduate science, 85%-plus versus about 65% for
+  expert PhDs), and the Maths Olympiad (gold standard, DeepMind 2025). They prove the ceiling is high.
+  They do not promise the same score on your specific task.
+cluster: frontier
+clusterLabel: "What is true about AI"
+clusterPath: /guides/ai-in-2026-south-africa
+author: chad-etkind
+datePublished: "2026-06-08"
+lastVerified: June 2026
+intent: informational
+draft: false
+keywords:
+  - ai benchmarks explained
+  - what is swe-bench
+  - what is gpqa diamond
+  - ai maths olympiad gold
+  - how good is ai 2026
+faqs:
+  - q: What is SWE-bench Verified?
+    a: >-
+      SWE-bench Verified is a test of whether an AI can fix real software bugs taken from open-source
+      projects on GitHub, checked by running the project's own tests. In 2026 top models resolve over
+      70% of these issues, up from about a third in mid-2024. It is the closest thing to a real-world
+      "can it actually do the job" exam for AI coding.
+  - q: What is GPQA Diamond?
+    a: >-
+      GPQA Diamond is a set of graduate-level science questions written to be hard even for experts and
+      resistant to googling. Top models now score over 85% on it, where domain-expert PhDs score about
+      65%. It is evidence that on hard, closed-domain reasoning, the best AI is now above human-expert
+      level, not just fast.
+  - q: Did AI really win a gold medal at the Maths Olympiad?
+    a: >-
+      In 2025 Google DeepMind's system was officially graded at gold-medal standard at the
+      International Mathematical Olympiad, one of the hardest reasoning competitions there is. It is a
+      real milestone in multi-step reasoning. It does not mean the same model can run your business; a
+      Maths Olympiad is a clean problem and a business is a messy one.
+  - q: Do AI benchmark scores apply to my own work?
+    a: >-
+      Not directly. A model that fixes 70% of curated bugs (SWE-bench Verified) will not fix 70% of
+      yours with no supervision, because your problems are messier and unscored. Treat a benchmark as
+      proof the ceiling moved, then run a small test on your actual task before trusting any number.
+  - q: Why do AI benchmarks sometimes feel like marketing?
+    a: >-
+      Because a single number is easy to quote and easy to game. Models can be tuned for popular tests,
+      and a clean exam never looks like your real workflow. The fix is to read what a benchmark
+      actually measures, prefer ones checked by running real code or hidden questions, and verify on
+      your own data.
+  - q: Which AI benchmark matters most for a business?
+    a: >-
+      SWE-bench Verified, because it measures real, checkable work rather than trivia, and it maps onto
+      the kind of task businesses pay for: produce something, then verify it ran. If you only track one
+      number to gauge how capable AI has become, that is the honest one.
+---
+import CostTable from '../../components/CostTable.astro';
+import Callout from '../../components/Callout.astro';
+
+Every alarming or exciting AI headline traces back to a benchmark, and almost nobody explains what
+the benchmark actually is. A benchmark is just a standardised exam for AI models: a fixed set of
+questions or tasks, scored the same way every time, so you can compare models and track progress.
+Here are the three that matter in 2026, what each one genuinely tests, what the number means, and
+where it quietly misleads. No jargon, sources next to every figure.
+
+## SWE-bench Verified: can it do real work?
+
+SWE-bench Verified takes real bugs from real open-source software projects on GitHub and asks the AI
+to fix them. The clever part is the marking: the fix is checked by running the project's own
+automated tests. There is no partial credit for sounding right. Either the code works or it does not.
+
+In 2026 the top models resolve over 70% of these issues (SWE-bench Verified). In mid-2024 it was about
+a third. That jump in under two years is the single most important fact about AI's trajectory, because
+it measures the thing businesses actually pay for: produce something that works, then prove it ran.
+
+<Callout variant="fact">
+SWE-bench is the honest one. It does not reward a confident-sounding answer; it runs the code and
+checks. When a coding model's SWE-bench Verified score climbs, real capability climbed, not the
+marketing.
+</Callout>
+
+## GPQA Diamond: is it actually smart, or just fast?
+
+GPQA Diamond is a set of graduate-level science questions in biology, chemistry, and physics. They are
+deliberately written to be hard for experts and resistant to a quick google, so a model cannot pass by
+pattern-matching a search result. It is a reasoning test, not a memory test.
+
+Top models now score over 85% on GPQA Diamond, where domain-expert PhDs working in the field score
+about 65%. Read that twice. On a hard, closed-domain reasoning exam, the best AI is above human-expert
+level. This is the benchmark that should end the "it is just autocomplete" argument: autocomplete does
+not out-score PhDs on questions designed to stump them.
+
+## The Maths Olympiad: the reasoning milestone
+
+The International Mathematical Olympiad is one of the hardest reasoning competitions on Earth, sat by
+the best young mathematicians in the world. In 2025, Google DeepMind's system was officially graded at
+gold-medal standard at the IMO. These problems demand long, creative, multi-step proofs, exactly the
+kind of reasoning AI was supposed to be bad at.
+
+It is a genuine milestone. It is also the benchmark most likely to be over-read. A Maths Olympiad
+problem is clean, fully specified, and has a correct answer. Your business is none of those. A gold
+medal in maths does not mean the model can run your accounts; it means the reasoning ceiling moved.
+
+## The numbers in one place
+
+<CostTable
+  caption="The headline AI benchmarks in 2026, decoded"
+  head={['Benchmark', 'In one line', 'The number', 'Where it can mislead']}
+  rows={[
+    ['SWE-bench Verified', 'Fixes real bugs, checked by running tests', 'Over 70% (about a third mid-2024)', 'Your bugs are messier and unmonitored'],
+    ['GPQA Diamond', 'Graduate science, google-resistant', '85%-plus vs about 65% expert PhDs', 'Closed questions, not open judgement'],
+    ['IMO (DeepMind, 2025)', 'Elite maths, multi-step proofs', 'Gold-medal standard', 'Clean problems, not messy business ones'],
+  ]}
+  note="Every figure sourced in-text. A benchmark proves the ceiling rose. It does not promise the same score on your specific, unscored task."
+/>
+
+## How a benchmark misleads, and how to read one honestly
+
+Benchmarks fail you in three predictable ways. First, **a clean exam is not your messy workflow**: the
+test is curated, your work is not. Second, **models can be tuned for popular tests**, so a single
+famous number can be partly a marketing artefact. Third, **a high average hides the tail**, and in
+business it is the confidently-wrong 10% that costs you, not the 90% it nails.
+
+<Callout variant="take">
+A benchmark tells you the ceiling moved. It never tells you the floor under your specific task. Anyone
+quoting "AI is 90% accurate" without saying at what, on whose data, checked how, is selling something.
+</Callout>
+
+The honest way to read any benchmark: find out what it actually measures, prefer the ones checked by
+running real code or hidden questions (SWE-bench over a multiple-choice quiz), then run a small test on
+your own data before you trust a single number. That last step is the one almost everyone skips, and
+it is exactly where the 95% of corporate AI pilots that showed no measurable return (MIT, 2025) went
+wrong: they believed a headline instead of testing on their own work.
+
+## What to do with this
+
+You do not need to memorise benchmarks. You need to know that the ceiling is now very high (SWE-bench
+over 70%, GPQA above expert PhDs, IMO gold) and that the number you should trust is the one you measure
+on your own task. That is the entire skill: treat the headline as a signal, then verify. It is also
+how we work. Bring the problem, we point the best AI at it and prove it on your data before anyone
+trusts the result: that is [Zaiq](https://zaiq.co.za).
+
+## Where to go next
+
+- [AI in 2026: what is actually true, for South African business](/guides/ai-in-2026-south-africa) -
+  the hub this page sits under.
+- [What AI just made obsolete (and what it did not)](/guides/what-ai-made-obsolete) - turning these
+  scores into what actually changed at work.
+- [Two engineers and AI vs an agency: the new economics](/guides/two-engineers-vs-agency) - what high
+  benchmarks do to the cost of getting work done.
+- [How to get found on AI search in South Africa](/guides/ai-for-south-african-business) - the
+  practical next step.

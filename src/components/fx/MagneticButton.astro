@@ -1,0 +1,187 @@
+---
+/*
+  MagneticButton.astro — primary CTA anchor for the dark canvas. Lime fill (with --lime-ink
+  text) or a ghost variant (lime border + lime text). On hover it translates a few px toward
+  the cursor (magnetic) and lifts with a lime glow. A real <a> for accessibility; the
+  magnetic motion is purely decorative and JS-driven, scoped per-element so any number of
+  buttons coexist. Inspired by the pointer-tracking craft in MagicUI magic-card, applied to
+  a button.
+
+  Tokens: --lime / --lime-bright fill, --lime-ink text, --lime-line / --lime-glow border+glow,
+  --font-mono, --radius, --glow-lime, --ease, --t-fast.
+
+  Props:
+    href:      string                 // required
+    label:     string                 // visible button text
+    variant?:  'fill' | 'ghost'       // default 'fill'
+    external?: boolean                // adds target=_blank + rel + a visual ↗
+*/
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'fill' | 'ghost';
+  external?: boolean;
+}
+const { href, label, variant = 'fill', external = false } = Astro.props;
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+---
+<a
+  class:list={['magbtn', `magbtn--${variant}`]}
+  href={href}
+  rel={rel}
+  target={target}
+  data-magnetic
+>
+  <span class="magbtn__label">{label}</span>
+  {external && <span class="magbtn__ext" aria-hidden="true">&#8599;</span>}
+</a>
+
+<style>
+  .magbtn {
+    --pull-x: 0px;
+    --pull-y: 0px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.78rem 1.3rem;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transform: translate(var(--pull-x), var(--pull-y));
+    transition:
+      transform 0.35s var(--ease),
+      box-shadow var(--t-fast) var(--ease),
+      background var(--t-fast) var(--ease),
+      color var(--t-fast) var(--ease),
+      border-color var(--t-fast) var(--ease);
+    will-change: transform;
+  }
+
+  .magbtn:focus-visible {
+    outline: 2px solid var(--lime);
+    outline-offset: 3px;
+  }
+
+  /* The inner label sits on its own layer so it can drift slightly more than the shell,
+     deepening the magnetic parallax. */
+  .magbtn__label {
+    display: inline-block;
+    transform: translate(calc(var(--pull-x) * 0.35), calc(var(--pull-y) * 0.35));
+    transition: transform 0.35s var(--ease);
+  }
+
+  .magbtn__ext {
+    font-size: 0.9em;
+    line-height: 1;
+  }
+
+  /* ---- Fill variant ---- */
+  .magbtn--fill {
+    background: var(--lime);
+    color: var(--lime-ink);
+    box-shadow: 0 0 0 1px var(--lime-line);
+  }
+  .magbtn--fill:hover {
+    background: var(--lime-bright);
+    box-shadow: var(--glow-lime), var(--shadow-lift);
+  }
+
+  /* ---- Ghost variant ---- */
+  .magbtn--ghost {
+    background: transparent;
+    color: var(--lime);
+    border-color: var(--lime-line);
+  }
+  .magbtn--ghost:hover {
+    background: var(--lime-wash);
+    color: var(--lime-bright);
+    border-color: var(--lime);
+    box-shadow: var(--glow-lime);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .magbtn,
+    .magbtn__label {
+      /* Kill the magnetic translate; keep the color/glow affordance on hover. */
+      transform: none !important;
+      transition:
+        box-shadow var(--t-fast) var(--ease),
+        background var(--t-fast) var(--ease),
+        color var(--t-fast) var(--ease),
+        border-color var(--t-fast) var(--ease);
+    }
+  }
+</style>
+
+<script>
+  // Per-element magnetic pull toward the cursor. Multi-instance safe via a WeakSet guard;
+  // each [data-magnetic] tracks its own pointer math through CSS vars.
+  (() => {
+    const MAX_PULL = 6; // px — subtle, premium, never rubber-bandy
+    const bound = new WeakSet<HTMLElement>();
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return; // respect reduced motion: no magnetic JS at all
+    }
+
+    const init = (el: HTMLElement) => {
+      if (bound.has(el)) return;
+      bound.add(el);
+
+      let raf = 0;
+      let cx = 0;
+      let cy = 0;
+
+      const apply = () => {
+        raf = 0;
+        const rect = el.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        // Offset from the button's centre, normalised to -1..1, then scaled to MAX_PULL.
+        const dx = (cx - (rect.left + rect.width / 2)) / (rect.width / 2);
+        const dy = (cy - (rect.top + rect.height / 2)) / (rect.height / 2);
+        const clamp = (v: number) => Math.max(-1, Math.min(1, v));
+        el.style.setProperty('--pull-x', `${clamp(dx) * MAX_PULL}px`);
+        el.style.setProperty('--pull-y', `${clamp(dy) * MAX_PULL}px`);
+      };
+
+      const onMove = (e: PointerEvent) => {
+        cx = e.clientX;
+        cy = e.clientY;
+        if (!raf) raf = requestAnimationFrame(apply);
+      };
+
+      const reset = () => {
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+        el.style.setProperty('--pull-x', '0px');
+        el.style.setProperty('--pull-y', '0px');
+      };
+
+      el.addEventListener('pointerenter', onMove);
+      el.addEventListener('pointermove', onMove);
+      el.addEventListener('pointerleave', reset);
+      el.addEventListener('pointercancel', reset);
+      el.addEventListener('blur', reset);
+    };
+
+    const run = () =>
+      document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach(init);
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+    document.addEventListener('astro:page-load', run);
+  })();
+</script>

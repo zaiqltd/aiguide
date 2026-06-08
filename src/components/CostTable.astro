@@ -1,0 +1,48 @@
+---
+// A structured, quotable cost table. Clean data in, consistent styling out.
+interface Props {
+  caption: string;
+  head: string[];
+  rows: (string | number)[][];
+  note?: string;
+}
+const { caption, head, rows, note } = Astro.props;
+---
+<figure class="cost-table full">
+  <figcaption class="cost-table__cap">{caption}</figcaption>
+  <table>
+    <thead>
+      <tr>{head.map((h) => <th scope="col">{h}</th>)}</tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          {r.map((cell, i) =>
+            i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>
+          )}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  {note && <p class="cost-table__note mono">{note}</p>}
+</figure>
+
+<style>
+  .cost-table { margin: 1.8rem 0; }
+  .cost-table__cap {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cadmium-ink);
+    margin-bottom: 0.4rem;
+  }
+  .cost-table th[scope='row'] { font-weight: 560; font-family: var(--font-body); }
+  .cost-table__note {
+    color: var(--graphite-soft);
+    font-size: 0.66rem;
+    margin: 0.4rem 0 0;
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+</style>

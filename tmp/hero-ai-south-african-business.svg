@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI and South African business constellation hero</title>
+  <desc id="desc">Dark editorial vector illustration with luminous violet network nodes, South Africa outline, and a rising signal.</desc>
+  <defs>
+    <radialGradient id="violet-aura" cx="68%" cy="48%" r="48%">
+      <stop offset="0" stop-color="#8b5cff" stop-opacity="0.23"/>
+      <stop offset="0.34" stop-color="#8b5cff" stop-opacity="0.08"/>
+      <stop offset="0.72" stop-color="#8b5cff" stop-opacity="0.015"/>
+      <stop offset="1" stop-color="#0a0a0c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fuchsia-aura" cx="78%" cy="32%" r="28%">
+      <stop offset="0" stop-color="#e25cff" stop-opacity="0.16"/>
+      <stop offset="0.46" stop-color="#e25cff" stop-opacity="0.045"/>
+      <stop offset="1" stop-color="#0a0a0c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="74%">
+      <stop offset="0" stop-color="#0a0a0c" stop-opacity="0"/>
+      <stop offset="0.62" stop-color="#0a0a0c" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.68"/>
+    </radialGradient>
+    <linearGradient id="rising-gradient" x1="575" y1="698" x2="1338" y2="236" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8b5cff" stop-opacity="0.28"/>
+      <stop offset="0.48" stop-color="#8b5cff"/>
+      <stop offset="0.72" stop-color="#e25cff"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="sa-outline-gradient" x1="610" y1="604" x2="1125" y2="668" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8b5cff" stop-opacity="0.16"/>
+      <stop offset="0.42" stop-color="#8b5cff" stop-opacity="0.52"/>
+      <stop offset="0.75" stop-color="#e25cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.18"/>
+    </linearGradient>
+    <pattern id="dot-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.15" fill="#ffffff" opacity="0.28"/>
+    </pattern>
+    <mask id="grid-fade">
+      <rect width="1600" height="900" fill="black"/>
+      <radialGradient id="grid-mask-gradient" cx="63%" cy="49%" r="66%">
+        <stop offset="0" stop-color="white" stop-opacity="0.92"/>
+        <stop offset="0.52" stop-color="white" stop-opacity="0.52"/>
+        <stop offset="1" stop-color="white" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="1600" height="900" fill="url(#grid-mask-gradient)"/>
+    </mask>
+    <filter id="soft-violet-glow" x="-120%" y="-120%" width="340%" height="340%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.545 0 0 0 0 0.361 0 0 0 0 1 0 0 0 0.72 0" result="violet"/>
+      <feMerge>
+        <feMergeNode in="violet"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="tight-violet-glow" x="-90%" y="-90%" width="280%" height="280%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3.4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.545 0 0 0 0 0.361 0 0 0 0 1 0 0 0 0.85 0" result="violet"/>
+      <feMerge>
+        <feMergeNode in="violet"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fuchsia-glow" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5.5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.886 0 0 0 0 0.361 0 0 0 0 1 0 0 0 0.7 0" result="fuchsia"/>
+      <feMerge>
+        <feMergeNode in="fuchsia"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="deep-blur" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="1600" height="900" fill="#0a0a0c"/>
+    <rect width="1600" height="900" fill="url(#violet-aura)"/>
+    <rect width="1600" height="900" fill="url(#fuchsia-aura)"/>
+    <ellipse cx="1040" cy="493" rx="520" ry="260" fill="#8b5cff" opacity="0.048" filter="url(#deep-blur)"/>
+    <ellipse cx="1278" cy="278" rx="270" ry="160" fill="#e25cff" opacity="0.045" filter="url(#deep-blur)"/>
+    <rect width="1600" height="900" fill="url(#vignette)"/>
+  </g>
+
+  <g id="faint-dot-grid" mask="url(#grid-fade)">
+    <rect x="286" y="84" width="1194" height="704" fill="url(#dot-grid)" opacity="0.22"/>
+    <path d="M 480 158 H 1435 M 480 742 H 1435 M 526 120 V 788 M 1392 120 V 788" stroke="#ffffff" stroke-width="1" opacity="0.025"/>
+  </g>
+
+  <g id="editorial-framing" fill="none" stroke="#ffffff" stroke-width="1">
+    <rect x="55.5" y="52.5" width="1489" height="795" opacity="0.07"/>
+    <rect x="100.5" y="95.5" width="1400" height="709" opacity="0.042"/>
+    <path d="M 96 210 H 186 M 96 690 H 186 M 1414 210 H 1504 M 1414 690 H 1504" opacity="0.12"/>
+    <path d="M 232 52 V 95 M 1368 52 V 95 M 232 805 V 848 M 1368 805 V 848" opacity="0.1"/>
+    <path d="M 1160 96 V 140 M 1160 760 V 804 M 100 454 H 142 M 1458 454 H 1500" opacity="0.08"/>
+  </g>
+
+  <g id="negative-space-anchors" fill="none" stroke-linecap="round">
+    <path d="M 160 266 C 274 230 377 219 503 236" stroke="#ffffff" stroke-width="1" opacity="0.028"/>
+    <path d="M 160 624 C 282 648 388 648 520 615" stroke="#ffffff" stroke-width="1" opacity="0.026"/>
+    <path d="M 260 444 H 462" stroke="#8b5cff" stroke-width="1" opacity="0.08"/>
+    <circle cx="522" cy="444" r="3.3" fill="#8b5cff" opacity="0.36" filter="url(#tight-violet-glow)"/>
+  </g>
+
+  <g id="south-africa-business-field" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path id="south-africa-outline"
+      d="M 612 586
+         C 646 555 679 542 716 555
+         C 748 566 771 540 808 542
+         C 840 544 869 563 896 548
+         C 934 527 984 523 1011 550
+         C 1034 573 1065 563 1092 584
+         C 1116 603 1112 631 1089 651
+         C 1063 673 1025 661 992 674
+         C 944 692 899 694 858 679
+         C 811 662 787 690 739 678
+         C 689 665 657 633 612 586 Z"
+      stroke="url(#sa-outline-gradient)" stroke-width="1.35" opacity="0.78" filter="url(#soft-violet-glow)"/>
+    <path d="M 646 589 C 725 593 786 617 856 608 C 923 599 980 580 1062 606" stroke="#ffffff" stroke-width="0.85" opacity="0.08"/>
+    <path d="M 740 556 C 795 590 861 606 922 600 C 970 596 1008 581 1068 590" stroke="#8b5cff" stroke-width="0.9" opacity="0.2"/>
+    <path d="M 795 669 C 850 643 916 646 992 674" stroke="#e25cff" stroke-width="0.9" opacity="0.17"/>
+  </g>
+
+  <g id="business-bars" filter="url(#tight-violet-glow)" fill="none" stroke-linecap="round">
+    <path d="M 1028 718 V 654 M 1054 718 V 626 M 1080 718 V 666 M 1106 718 V 596 M 1132 718 V 632 M 1158 718 V 560 M 1184 718 V 610 M 1210 718 V 520 M 1236 718 V 584 M 1262 718 V 488" stroke="#8b5cff" stroke-width="1.2" opacity="0.55"/>
+    <path d="M 1016 718 H 1281" stroke="#ffffff" stroke-width="1" opacity="0.08"/>
+    <path d="M 1028 654 L 1054 626 L 1080 666 L 1106 596 L 1132 632 L 1158 560 L 1184 610 L 1210 520 L 1236 584 L 1262 488" stroke="#e25cff" stroke-width="1.5" opacity="0.58" filter="url(#fuchsia-glow)"/>
+    <circle cx="1210" cy="520" r="4.2" fill="#0a0a0c" stroke="#e25cff" stroke-width="1.3"/>
+    <circle cx="1262" cy="488" r="4.2" fill="#0a0a0c" stroke="#ffffff" stroke-width="1.1" opacity="0.9"/>
+  </g>
+
+  <g id="rising-signal" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 584 704 C 684 636 732 603 811 588 C 897 571 939 512 1005 480 C 1072 447 1127 379 1192 337 C 1248 301 1290 268 1341 232" stroke="#8b5cff" stroke-width="12" opacity="0.055" filter="url(#deep-blur)"/>
+    <path d="M 584 704 C 684 636 732 603 811 588 C 897 571 939 512 1005 480 C 1072 447 1127 379 1192 337 C 1248 301 1290 268 1341 232" stroke="url(#rising-gradient)" stroke-width="2" opacity="0.95" filter="url(#soft-violet-glow)"/>
+    <path d="M 664 672 C 754 604 826 596 904 544" stroke="#ffffff" stroke-width="0.8" opacity="0.28"/>
+    <path d="M 1168 350 C 1212 317 1254 291 1308 252" stroke="#e25cff" stroke-width="1.3" opacity="0.66" filter="url(#fuchsia-glow)"/>
+    <path d="M 1322 238 L 1341 232 L 1335 251" stroke="#ffffff" stroke-width="1.3" opacity="0.74"/>
+  </g>
+
+  <g id="constellation-lines" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft-violet-glow)">
+    <path d="M 648 584 L 707 618 L 764 587 L 812 621 L 879 576 L 946 610 L 1015 556 L 1080 600" stroke="#8b5cff" stroke-width="1.05" opacity="0.6"/>
+    <path d="M 707 618 L 782 680 L 812 621 L 892 660 L 946 610 L 1000 672" stroke="#8b5cff" stroke-width="0.9" opacity="0.42"/>
+    <path d="M 716 555 L 764 587 L 806 543 L 879 576 L 896 548 L 1015 556" stroke="#ffffff" stroke-width="0.75" opacity="0.2"/>
+    <path d="M 879 576 L 938 514 L 1005 480 L 1058 438 L 1128 386 L 1192 337 L 1260 290 L 1341 232" stroke="#8b5cff" stroke-width="1.15" opacity="0.72"/>
+    <path d="M 938 514 L 1015 556 L 1058 438 L 1135 498 L 1128 386 L 1228 417 L 1192 337 L 1260 290" stroke="#8b5cff" stroke-width="0.82" opacity="0.38"/>
+    <path d="M 1005 480 L 1135 498 L 1228 417 L 1315 382 L 1260 290" stroke="#ffffff" stroke-width="0.7" opacity="0.15"/>
+  </g>
+
+  <g id="signal-rings" fill="none" stroke-linecap="round">
+    <circle cx="1192" cy="337" r="29" stroke="#8b5cff" stroke-width="1" opacity="0.3" filter="url(#tight-violet-glow)"/>
+    <circle cx="1192" cy="337" r="55" stroke="#8b5cff" stroke-width="0.9" opacity="0.18"/>
+    <path d="M 1142 314 A 60 60 0 0 1 1219 281" stroke="#e25cff" stroke-width="1.1" opacity="0.42" filter="url(#fuchsia-glow)"/>
+    <path d="M 1160 502 A 170 170 0 0 1 1325 342" stroke="#8b5cff" stroke-width="1" opacity="0.16"/>
+    <path d="M 1118 534 A 230 230 0 0 1 1346 304" stroke="#ffffff" stroke-width="0.8" opacity="0.08"/>
+  </g>
+
+  <g id="nodes">
+    <g filter="url(#soft-violet-glow)">
+      <circle cx="648" cy="584" r="2.7" fill="#8b5cff" opacity="0.78"/>
+      <circle cx="707" cy="618" r="4.2" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.3"/>
+      <circle cx="716" cy="555" r="3" fill="#8b5cff" opacity="0.8"/>
+      <circle cx="764" cy="587" r="3.4" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.15"/>
+      <circle cx="782" cy="680" r="2.8" fill="#8b5cff" opacity="0.68"/>
+      <circle cx="806" cy="543" r="2.8" fill="#ffffff" opacity="0.58"/>
+      <circle cx="812" cy="621" r="3.8" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.25"/>
+      <circle cx="879" cy="576" r="4.8" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.4"/>
+      <circle cx="892" cy="660" r="3.2" fill="#8b5cff" opacity="0.72"/>
+      <circle cx="896" cy="548" r="2.6" fill="#ffffff" opacity="0.54"/>
+      <circle cx="938" cy="514" r="3.5" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.1"/>
+      <circle cx="946" cy="610" r="3.7" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.2"/>
+      <circle cx="1000" cy="672" r="2.6" fill="#8b5cff" opacity="0.67"/>
+      <circle cx="1005" cy="480" r="4.5" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.35"/>
+      <circle cx="1015" cy="556" r="4.1" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.25"/>
+      <circle cx="1058" cy="438" r="3.6" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.1"/>
+      <circle cx="1080" cy="600" r="3" fill="#8b5cff" opacity="0.7"/>
+      <circle cx="1128" cy="386" r="4" fill="#0a0a0c" stroke="#8b5cff" stroke-width="1.2"/>
+      <circle cx="1135" cy="498" r="3" fill="#8b5cff" opacity="0.65"/>
+      <circle cx="1192" cy="337" r="5.4" fill="#0a0a0c" stroke="#ffffff" stroke-width="1.2"/>
+      <circle cx="1228" cy="417" r="3.1" fill="#8b5cff" opacity="0.7"/>
+      <circle cx="1260" cy="290" r="4.2" fill="#0a0a0c" stroke="#e25cff" stroke-width="1.2"/>
+      <circle cx="1315" cy="382" r="2.8" fill="#ffffff" opacity="0.5"/>
+      <circle cx="1341" cy="232" r="4.9" fill="#ffffff" opacity="0.86"/>
+    </g>
+    <g filter="url(#fuchsia-glow)">
+      <circle cx="879" cy="576" r="9" fill="#e25cff" opacity="0.12"/>
+      <circle cx="1192" cy="337" r="11" fill="#e25cff" opacity="0.13"/>
+      <circle cx="1260" cy="290" r="8" fill="#e25cff" opacity="0.12"/>
+      <circle cx="1341" cy="232" r="10" fill="#e25cff" opacity="0.16"/>
+    </g>
+  </g>
+
+  <g id="micro-circuitry" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 1184 606 H 1336 M 1220 642 H 1372 M 1288 570 H 1400" stroke="#ffffff" stroke-width="0.8" opacity="0.08"/>
+    <path d="M 1336 606 V 582 H 1380 M 1372 642 V 666 H 1416 M 1288 570 V 546 H 1330" stroke="#8b5cff" stroke-width="0.9" opacity="0.22" filter="url(#tight-violet-glow)"/>
+    <circle cx="1380" cy="582" r="2.4" fill="#8b5cff" opacity="0.5"/>
+    <circle cx="1416" cy="666" r="2.4" fill="#e25cff" opacity="0.48" filter="url(#fuchsia-glow)"/>
+    <circle cx="1330" cy="546" r="2.4" fill="#ffffff" opacity="0.38"/>
+  </g>
+
+  <g id="foreground-sparks" fill="none" stroke-linecap="round">
+    <path d="M 1402 224 H 1446 M 1424 202 V 246" stroke="#ffffff" stroke-width="0.9" opacity="0.13"/>
+    <path d="M 580 561 H 618 M 599 542 V 580" stroke="#8b5cff" stroke-width="0.9" opacity="0.22" filter="url(#tight-violet-glow)"/>
+    <path d="M 984 416 H 1024 M 1004 396 V 436" stroke="#e25cff" stroke-width="0.85" opacity="0.2" filter="url(#fuchsia-glow)"/>
+    <circle cx="1438" cy="324" r="1.5" fill="#ffffff" opacity="0.28"/>
+    <circle cx="563" cy="657" r="1.5" fill="#8b5cff" opacity="0.36"/>
+    <circle cx="1354" cy="710" r="1.4" fill="#e25cff" opacity="0.32"/>
+  </g>
+</svg>

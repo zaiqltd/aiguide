@@ -1,0 +1,827 @@
+---
+/*
+  VisibilityCheck.astro: "Is your business invisible to AI?" self-check.
+
+  An interactive lead tool for aiguide.co.za. A business owner enters their name,
+  category and city; the tool hands them the three exact questions to paste into
+  ChatGPT, Google AI / Gemini and Perplexity to see whether they get named, tells
+  them how to read the answer, names the four levers that decide it, and routes
+  them to Zaiq for the fix.
+
+  HONESTY (house rule): we never claim we "scanned" the business. We teach the owner
+  to run the check themselves, in their own engines, and we offer to do the fix. No
+  data leaves the browser: there is no fetch, no analytics call, nothing is sent.
+
+  PROGRESSIVE ENHANCEMENT (the load-bearing rule for AEO/SEO):
+    Every meaningful thing (the explanation, the method, the three prompts with
+    generic placeholders, the scorecard, the four levers and the CTA) is in the
+    server-rendered HTML and reads correctly with JS OFF. The result panel is
+    visible by default. JS only ENHANCES: it personalises the prompt text from the
+    entered values, wires the copy buttons, announces the update via aria-live, and
+    scrolls to the result. JS never injects core content; it only swaps the text
+    inside nodes that already exist.
+
+  Self-contained: Props + markup + scoped <style> + a guarded Astro <script>.
+  No external deps, no React, no npm. Consumes the global design tokens via var().
+*/
+interface Props {
+  heading?: string;
+}
+const { heading = 'Is your business invisible to AI?' } = Astro.props;
+
+// SA cities for the select. "Other" keeps the prompt generic ("near you").
+const cities = [
+  'Johannesburg',
+  'Cape Town',
+  'Durban',
+  'Pretoria',
+  'Gqeberha',
+  'Bloemfontein',
+];
+
+// Generic placeholders, used verbatim in the HTML so the page reads with JS off.
+const CAT = '[your category]';
+const CITY = '[your city]';
+
+// The three engines and their exact question templates. {cat} and {city} are the
+// tokens the client script replaces with the entered values; the rendered HTML
+// shows the generic [your category] / [your city] version until then.
+const engines = [
+  {
+    key: 'chatgpt',
+    name: 'ChatGPT',
+    sub: 'OpenAI',
+    template: 'who is the best {cat} in {city}?',
+    open: 'https://chatgpt.com/',
+    openLabel: 'Open ChatGPT',
+  },
+  {
+    key: 'gemini',
+    name: 'Google AI / Gemini',
+    sub: 'Google',
+    template: 'recommend a {cat} in {city}',
+    open: 'https://gemini.google.com/app',
+    openLabel: 'Open Gemini',
+  },
+  {
+    key: 'perplexity',
+    name: 'Perplexity',
+    sub: 'Perplexity',
+    template: 'best {cat} {city} reviews',
+    open: 'https://www.perplexity.ai/',
+    openLabel: 'Open Perplexity',
+  },
+] as const;
+
+// Render the generic version of a template for the static HTML.
+const generic = (t: string) => t.replace('{cat}', CAT).replace('{city}', CITY);
+
+const levers = [
+  {
+    n: '01',
+    t: 'Entity clarity',
+    d: 'The engine can tell who you are, where you are, and what you do, without guessing.',
+  },
+  {
+    n: '02',
+    t: 'Answer content',
+    d: 'Somewhere on the web, the exact answer to that question is written down, plainly.',
+  },
+  {
+    n: '03',
+    t: 'Trusted citations',
+    d: 'Sources the engine already trusts mention you: directories, reviews, the press.',
+  },
+  {
+    n: '04',
+    t: 'Freshness',
+    d: 'That information is current, so the engine is willing to repeat it today.',
+  },
+] as const;
+---
+
+<section class="viz" aria-labelledby="viz-heading">
+  <div class="viz__inner">
+    <!-- INTRO: full explanation + method, server-rendered for crawlers and AI engines -->
+    <header class="viz__head">
+      <p class="viz__eyebrow mono">AI visibility self-check</p>
+      <h2 class="viz__title" id="viz-heading">{heading}</h2>
+      <p class="viz__lede">
+        More and more buyers ask ChatGPT, Google AI and Perplexity to recommend a business
+        before they ever open a map or a search page. If the engine does not name you, you are
+        not in that conversation. Here is the honest way to find out where you stand: run three
+        questions yourself, in the engines your customers use, and read the answer.
+      </p>
+      <p class="viz__note">
+        We do not scan you or store anything. You run the check; nothing you type here leaves
+        your browser. Then, if the answer is not your name, we fix it.
+      </p>
+    </header>
+
+    <!-- INPUT ROW: a real, labelled, accessible form. JS reads it to personalise prompts. -->
+    <form class="viz__form" id="viz-form" novalidate>
+      <div class="viz__fields">
+        <div class="field">
+          <label for="viz-biz">Business name</label>
+          <input
+            type="text"
+            id="viz-biz"
+            name="business"
+            autocomplete="organization"
+            placeholder="e.g. Thandi Photography"
+          />
+        </div>
+        <div class="field">
+          <label for="viz-cat">What you do</label>
+          <input
+            type="text"
+            id="viz-cat"
+            name="category"
+            autocomplete="off"
+            placeholder="e.g. wedding photographer"
+          />
+        </div>
+        <div class="field">
+          <label for="viz-city">City</label>
+          <div class="select-wrap">
+            <select id="viz-city" name="city">
+              {cities.map((c) => <option value={c}>{c}</option>)}
+              <option value="__other">Other / elsewhere in SA</option>
+            </select>
+            <span class="select-chevron" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="viz__go">
+        <span>Check my AI visibility</span>
+        <span class="viz__go-arrow" aria-hidden="true">&rarr;</span>
+      </button>
+    </form>
+
+    <!-- A polite live region so the personalisation is announced to screen readers. -->
+    <p class="viz__live mono" id="viz-live" aria-live="polite" role="status"></p>
+
+    <!-- RESULT PANEL: visible by default, with generic placeholders. JS fills the real
+         values on submit. This whole block is in the static HTML so it is crawlable. -->
+    <div class="viz__result" id="viz-result">
+      <h3 class="viz__result-h">Run these 3 questions. See if AI names you.</h3>
+      <p class="viz__result-sub" id="viz-result-sub">
+        Paste each one into the engine, exactly as written. You are looking for one thing:
+        does <strong>your business name</strong> come back in the answer?
+      </p>
+
+      <!-- The three prompt cards, one per engine. -->
+      <ol class="cards">
+        {
+          engines.map((e) => (
+            <li class="card" data-engine={e.key}>
+              <div class="card__top">
+                <span class="card__engine">
+                  <span class="card__dot" aria-hidden="true" />
+                  {e.name}
+                </span>
+                <span class="card__src mono">{e.sub}</span>
+              </div>
+              <p class="card__label mono">Paste this</p>
+              <p class="card__prompt" data-template={e.template}>
+                {generic(e.template)}
+              </p>
+              <div class="card__actions">
+                <button type="button" class="card__copy" data-copy aria-label={`Copy the ${e.name} question`}>
+                  <span class="card__copy-label">Copy</span>
+                </button>
+                <a class="card__open" href={e.open} target="_blank" rel="noopener noreferrer">
+                  {e.openLabel} &nearr;
+                </a>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <!-- SCORECARD: what the answer means. Three states, one line each. -->
+      <div class="score">
+        <p class="score__label mono">What the answer means</p>
+        <ul class="score__list">
+          <li class="score__row score__row--named">
+            <span class="score__tag">Named</span>
+            <span class="score__copy">
+              The engine returns <strong>your business</strong>. You are in the conversation. Now defend it.
+            </span>
+          </li>
+          <li class="score__row score__row--out">
+            <span class="score__tag">Outranked</span>
+            <span class="score__copy">
+              A rival is named and you are not. The answer exists, the engine just does not trust yours yet.
+            </span>
+          </li>
+          <li class="score__row score__row--inv">
+            <span class="score__tag">Invisible</span>
+            <span class="score__copy">
+              You get a vague, generic answer and nobody like you is named. Nobody wrote the answer the engine wants.
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- THE FOUR LEVERS that decide the outcome. A short checklist. -->
+      <div class="levers">
+        <p class="levers__label mono">The 4 levers that decide it</p>
+        <ul class="levers__list">
+          {
+            levers.map((l) => (
+              <li class="lever">
+                <span class="lever__n mono">{l.n}</span>
+                <span class="lever__body">
+                  <span class="lever__t">{l.t}</span>
+                  <span class="lever__d">{l.d}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA: the money line. Honest, house-ruled, Zaiq above all. -->
+    <aside class="viz__cta" aria-label="Get found on AI">
+      <p class="viz__cta-line">
+        Most South African businesses are invisible to AI search. Not because they are small,
+        because nobody wrote the answer the engine wants to quote. That is exactly what we fix.
+      </p>
+      <div class="viz__cta-actions">
+        <a class="viz__cta-btn" href="https://zaiq.co.za" target="_blank" rel="noopener noreferrer">
+          <span>Send us the problem</span>
+          <span aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="viz__cta-soft" href="/guides/get-found-on-ai-search-south-africa">
+          or read: how to get found on AI search
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .viz {
+    --viz-pad: clamp(1.2rem, 3.4vw, 2.4rem);
+    position: relative;
+    max-width: var(--measure-wide, 52rem);
+    margin: 2.6rem auto;
+    color: var(--bone, #f4f1ea);
+    font-family: var(--font-body, system-ui, sans-serif);
+  }
+  .viz__inner {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(620px circle at 88% -8%, var(--lime-wash, rgba(139, 92, 255, 0.14)), transparent 58%),
+      var(--coal, #101013);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius-xl, 20px);
+    padding: var(--viz-pad);
+  }
+  .viz__inner::before {
+    /* a hairline of signal across the very top */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-signal, linear-gradient(100deg, #a884ff, #8b5cff 40%, #e25cff));
+    opacity: 0.9;
+  }
+
+  .mono {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--fs-mono, 0.7rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ---- intro ---- */
+  .viz__head { max-width: 40rem; }
+  .viz__eyebrow {
+    color: var(--lime-bright, #a884ff);
+    margin: 0 0 0.7rem;
+  }
+  .viz__title {
+    font-family: var(--font-display, Georgia, serif);
+    font-weight: 560;
+    font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.7rem;
+    color: var(--bone, #f4f1ea);
+    text-wrap: balance;
+  }
+  .viz__lede {
+    font-size: var(--fs-lede, 1.18rem);
+    line-height: 1.5;
+    color: var(--silver, #cdcac3);
+    margin: 0 0 0.7rem;
+    text-wrap: pretty;
+  }
+  .viz__note {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ash, #908d86);
+    margin: 0;
+  }
+
+  /* ---- form ---- */
+  .viz__form { margin: 1.7rem 0 0; }
+  .viz__fields {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 1fr;
+    gap: 0.8rem;
+  }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+  .field label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ash, #908d86);
+  }
+  .field input,
+  .select-wrap select {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.98rem;
+    color: var(--bone, #f4f1ea);
+    background: var(--smoke, #16161a);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius, 6px);
+    padding: 0.78rem 0.85rem;
+    transition: border-color var(--t-fast, 0.18s) var(--ease, ease), box-shadow var(--t-fast, 0.18s) var(--ease, ease);
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .field input::placeholder { color: var(--faint, #5c5a55); }
+  .field input:hover,
+  .select-wrap select:hover { border-color: var(--line-3, rgba(243, 240, 233, 0.28)); }
+  .field input:focus-visible,
+  .select-wrap select:focus-visible {
+    outline: none;
+    border-color: var(--lime, #8b5cff);
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.22));
+  }
+  .select-wrap { position: relative; }
+  .select-wrap select { padding-right: 2.2rem; cursor: pointer; }
+  .select-chevron {
+    position: absolute;
+    right: 0.85rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid var(--ash, #908d86);
+    border-bottom: 2px solid var(--ash, #908d86);
+    transform: translateY(-65%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  .viz__go {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--lime-ink, #fff);
+    background: var(--lime, #8b5cff);
+    border: 1px solid transparent;
+    border-radius: var(--radius, 6px);
+    padding: 0.95rem 1.4rem;
+    cursor: pointer;
+    transition: transform var(--t-fast, 0.18s) var(--ease, ease), background var(--t-fast, 0.18s),
+      box-shadow var(--t-fast, 0.18s);
+  }
+  .viz__go:hover {
+    background: var(--lime-bright, #a884ff);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-lime, 0 0 0 1px rgba(139, 92, 255, 0.46), 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .viz__go:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.3)), var(--glow-lime, 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .viz__go-arrow { transition: transform var(--t-fast, 0.18s) var(--ease, ease); }
+  .viz__go:hover .viz__go-arrow { transform: translateX(3px); }
+
+  .viz__live { color: var(--lime-bright, #a884ff); margin: 0.8rem 0 0; min-height: 1em; }
+  .viz__live:empty { margin: 0; }
+
+  /* ---- result panel ---- */
+  .viz__result {
+    margin-top: 1.7rem;
+    padding-top: 1.7rem;
+    border-top: 1px solid var(--line, rgba(243, 240, 233, 0.09));
+    scroll-margin-top: 5rem;
+  }
+  .viz__result-h {
+    font-family: var(--font-display, Georgia, serif);
+    font-weight: 560;
+    font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+    line-height: 1.15;
+    margin: 0 0 0.4rem;
+    color: var(--bone, #f4f1ea);
+    text-wrap: balance;
+  }
+  .viz__result-sub {
+    color: var(--silver, #cdcac3);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 0 1.3rem;
+    max-width: 42rem;
+  }
+  .viz__result-sub strong { color: var(--bone, #f4f1ea); }
+
+  /* prompt cards */
+  .cards {
+    list-style: none;
+    margin: 0 0 1.6rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--smoke, #16161a);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius-lg, 13px);
+    padding: 1.05rem 1.05rem 0.95rem;
+    transition: border-color var(--t-fast, 0.18s) var(--ease, ease), transform var(--t-fast, 0.18s) var(--ease, ease);
+  }
+  .card:hover {
+    border-color: var(--lime-line, rgba(139, 92, 255, 0.46));
+    transform: translateY(-2px);
+  }
+  .card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+  .card__engine {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--bone, #f4f1ea);
+  }
+  .card__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--lime, #8b5cff);
+    box-shadow: 0 0 10px -1px var(--lime-glow, rgba(139, 92, 255, 0.62));
+    flex: none;
+  }
+  .card__src { color: var(--faint, #5c5a55); font-size: 0.6rem; }
+  .card__label { color: var(--ash, #908d86); margin: 0 0 0.4rem; font-size: 0.6rem; }
+  .card__prompt {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--lime-bright, #a884ff);
+    background: var(--base, #0a0a0c);
+    border: 1px solid var(--line, rgba(243, 240, 233, 0.09));
+    border-radius: var(--radius, 6px);
+    padding: 0.7rem 0.75rem;
+    margin: 0 0 0.85rem;
+    word-break: break-word;
+    flex: 1 1 auto;
+  }
+  .card__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+  .card__copy {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--bone, #f4f1ea);
+    background: var(--steel, #2a2a31);
+    border: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    border-radius: var(--radius, 6px);
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background var(--t-fast, 0.18s), border-color var(--t-fast, 0.18s), color var(--t-fast, 0.18s);
+  }
+  .card__copy:hover {
+    border-color: var(--lime-line, rgba(139, 92, 255, 0.46));
+    color: var(--lime-bright, #a884ff);
+  }
+  .card__copy:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.3));
+  }
+  .card__copy.is-copied {
+    color: var(--lime-ink, #fff);
+    background: var(--lime-deep, #6f3cff);
+    border-color: var(--lime, #8b5cff);
+  }
+  .card__open {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ash, #908d86);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--t-fast, 0.18s);
+  }
+  .card__open:hover { color: var(--lime-bright, #a884ff); }
+  .card__open:focus-visible {
+    outline: none;
+    color: var(--lime-bright, #a884ff);
+    text-decoration: underline;
+  }
+
+  /* scorecard */
+  .score, .levers {
+    background: var(--base, #0a0a0c);
+    border: 1px solid var(--line, rgba(243, 240, 233, 0.09));
+    border-radius: var(--radius-lg, 13px);
+    padding: 1.1rem 1.2rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .score__label, .levers__label { color: var(--ash, #908d86); margin: 0 0 0.9rem; }
+  .score__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .score__row {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    align-items: start;
+    gap: 0.85rem;
+  }
+  .score__tag {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.35rem 0.4rem;
+    border-radius: var(--radius, 6px);
+    border: 1px solid transparent;
+    align-self: start;
+  }
+  .score__row--named .score__tag {
+    color: var(--lime-ink, #fff);
+    background: var(--lime, #8b5cff);
+  }
+  .score__row--out .score__tag {
+    color: var(--cyan, #e25cff);
+    border-color: rgba(226, 92, 255, 0.42);
+    background: rgba(226, 92, 255, 0.1);
+  }
+  .score__row--inv .score__tag {
+    color: var(--ash, #908d86);
+    border-color: var(--line-2, rgba(243, 240, 233, 0.16));
+    background: var(--smoke, #16161a);
+  }
+  .score__copy { color: var(--silver, #cdcac3); font-size: 0.95rem; line-height: 1.45; }
+  .score__copy strong { color: var(--bone, #f4f1ea); }
+
+  /* levers */
+  .levers__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .lever { display: flex; gap: 0.75rem; align-items: start; }
+  .lever__n {
+    color: var(--lime, #8b5cff);
+    font-size: 0.72rem;
+    padding-top: 0.1rem;
+    flex: none;
+  }
+  .lever__body { display: flex; flex-direction: column; gap: 0.15rem; }
+  .lever__t { font-weight: 600; font-size: 0.95rem; color: var(--bone, #f4f1ea); }
+  .lever__d { font-size: 0.88rem; line-height: 1.45; color: var(--ash, #908d86); }
+
+  /* ---- CTA ---- */
+  .viz__cta {
+    position: relative;
+    overflow: hidden;
+    margin-top: 1.6rem;
+    padding: 1.5rem 1.5rem 1.6rem;
+    background:
+      radial-gradient(520px circle at 0% 120%, var(--lime-wash, rgba(139, 92, 255, 0.14)), transparent 60%),
+      var(--smoke, #16161a);
+    border: 1px solid var(--lime-line, rgba(139, 92, 255, 0.46));
+    border-radius: var(--radius-lg, 13px);
+  }
+  .viz__cta-line {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.32;
+    color: var(--bone, #f4f1ea);
+    margin: 0 0 1.2rem;
+    max-width: 44rem;
+    text-wrap: pretty;
+  }
+  .viz__cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.3rem; }
+  .viz__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--lime-ink, #fff);
+    background: var(--lime, #8b5cff);
+    border-radius: var(--radius, 6px);
+    padding: 0.9rem 1.35rem;
+    transition: transform var(--t-fast, 0.18s) var(--ease, ease), background var(--t-fast, 0.18s),
+      box-shadow var(--t-fast, 0.18s);
+  }
+  .viz__cta-btn:hover {
+    background: var(--lime-bright, #a884ff);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-lime, 0 0 0 1px rgba(139, 92, 255, 0.46), 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .viz__cta-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--lime-wash, rgba(139, 92, 255, 0.3)), var(--glow-lime, 0 0 40px -8px rgba(139, 92, 255, 0.62));
+  }
+  .viz__cta-soft {
+    font-size: 0.9rem;
+    color: var(--silver, #cdcac3);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-2, rgba(243, 240, 233, 0.16));
+    padding-bottom: 1px;
+    transition: color var(--t-fast, 0.18s), border-color var(--t-fast, 0.18s);
+  }
+  .viz__cta-soft:hover { color: var(--lime-bright, #a884ff); border-color: var(--lime-line, rgba(139, 92, 255, 0.46)); }
+  .viz__cta-soft:focus-visible { outline: none; color: var(--lime-bright, #a884ff); border-color: var(--lime, #8b5cff); }
+
+  /* ---- responsive ---- */
+  @media (max-width: 760px) {
+    .viz__fields { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr; }
+    .levers__list { grid-template-columns: 1fr; }
+    .viz__go { width: 100%; justify-content: center; }
+  }
+  @media (max-width: 480px) {
+    .score__row { grid-template-columns: 1fr; gap: 0.35rem; }
+    .score__tag { justify-self: start; min-width: 6.5rem; }
+  }
+
+  /* ---- reduced motion: no transforms / transitions ---- */
+  @media (prefers-reduced-motion: reduce) {
+    .viz *,
+    .viz *::before,
+    .viz *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+    .viz__go:hover,
+    .card:hover,
+    .viz__cta-btn:hover { transform: none; }
+  }
+</style>
+
+<script>
+  // Progressive enhancement only. The page is fully readable and meaningful without
+  // this. Here we: personalise the three prompts from the entered values, wire the
+  // copy buttons, announce updates via aria-live, and scroll to the result. Nothing
+  // is sent anywhere: no fetch, no analytics, no storage.
+  (function () {
+    // Astro bundles this as a deferred module, so currentScript is null at run time;
+    // bind to the tool on the page (one instance per page is the supported case).
+    var root = document.querySelector('.viz');
+    if (!root) return;
+
+    const form = root.querySelector('#viz-form');
+    const bizEl = root.querySelector('#viz-biz');
+    const catEl = root.querySelector('#viz-cat');
+    const cityEl = root.querySelector('#viz-city');
+    const result = root.querySelector('#viz-result');
+    const sub = root.querySelector('#viz-result-sub');
+    const live = root.querySelector('#viz-live');
+    const prompts = Array.from(root.querySelectorAll('.card__prompt'));
+
+    if (!form || !catEl || !cityEl) return;
+
+    // Defaults that keep every prompt grammatical even before any input.
+    const CAT_FALLBACK = 'businesses like yours';
+    const CITY_FALLBACK = 'your city';
+
+    const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
+
+    // Build the value that replaces {city}: a real city, or a sensible "near you".
+    const cityValue = () => {
+      const v = cityEl.value;
+      if (!v || v === '__other') return 'near you';
+      return v;
+    };
+
+    const fillPrompts = () => {
+      const cat = clean(catEl.value) || CAT_FALLBACK;
+      const city = cityValue();
+      for (const node of prompts) {
+        const tpl = node.getAttribute('data-template') || '';
+        node.textContent = tpl.replace('{cat}', cat).replace('{city}', city);
+      }
+      return { cat, city };
+    };
+
+    // Personalise the result sub-line with the business name when we have one.
+    const fillSub = () => {
+      if (!sub) return;
+      const biz = clean(bizEl && bizEl.value);
+      if (biz) {
+        sub.innerHTML =
+          'Paste each one into the engine, exactly as written. You are looking for one thing: ' +
+          'does the answer name <strong></strong>?';
+        const strong = sub.querySelector('strong');
+        if (strong) strong.textContent = biz; // textContent = safe, no HTML injection
+      }
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const { cat, city } = fillPrompts();
+      fillSub();
+
+      if (live) {
+        live.textContent =
+          'Prompts ready for ' + cat + ' in ' + city + '. Copy each and paste it into the engine.';
+      }
+
+      // Bring the (already-visible) result into view.
+      if (result && typeof result.scrollIntoView === 'function') {
+        const reduce =
+          window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        result.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        // Move focus to the result heading for keyboard + screen-reader users.
+        const h = result.querySelector('.viz__result-h');
+        if (h) {
+          h.setAttribute('tabindex', '-1');
+          h.focus({ preventScroll: true });
+        }
+      }
+    });
+
+    // Live-update prompts as the owner types / picks a city (cheap, local-only).
+    catEl.addEventListener('input', fillPrompts);
+    cityEl.addEventListener('change', fillPrompts);
+
+    // Copy buttons. navigator.clipboard with a graceful fallback, plus a tiny
+    // "Copied" confirmation that reverts after a moment.
+    const copyText = async (text) => {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch (_) {
+        /* fall through to the legacy path */
+      }
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch (_) {
+        return false;
+      }
+    };
+
+    for (const btn of Array.from(root.querySelectorAll('[data-copy]'))) {
+      const card = btn.closest('.card');
+      const promptEl = card && card.querySelector('.card__prompt');
+      const labelEl = btn.querySelector('.card__copy-label') || btn;
+      if (!promptEl) continue;
+
+      btn.addEventListener('click', async () => {
+        const ok = await copyText(promptEl.textContent.trim());
+        const original = 'Copy';
+        labelEl.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        btn.classList.toggle('is-copied', ok);
+        if (live) live.textContent = ok ? 'Question copied to your clipboard.' : '';
+        window.setTimeout(() => {
+          labelEl.textContent = original;
+          btn.classList.remove('is-copied');
+        }, 1900);
+      });
+    }
+  })();
+</script>

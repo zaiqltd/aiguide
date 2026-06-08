@@ -1,0 +1,29 @@
+---
+// Sticky in-article table of contents, built from the body's H2s plus the
+// HowTo / FAQ sections. Scrollspy is wired in motion.js.
+interface Props {
+  items: { slug: string; text: string }[];
+  howto?: { name: string } | null;
+  hasFaq?: boolean;
+}
+const { items, howto, hasFaq } = Astro.props;
+const all = [
+  ...items,
+  ...(howto ? [{ slug: 'how-to', text: howto.name }] : []),
+  ...(hasFaq ? [{ slug: 'faq', text: 'Questions people ask' }] : []),
+];
+---
+{
+  all.length > 1 && (
+    <nav class="toc" aria-label="On this page">
+      <p class="toc__label">On this page</p>
+      <ul>
+        {all.map((h) => (
+          <li>
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

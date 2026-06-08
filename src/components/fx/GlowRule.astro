@@ -1,0 +1,55 @@
+---
+/**
+ * GlowRule.astro — a luminous horizontal divider.
+ *
+ * A 1px rule whose color ramps from transparent at the edges to an acid-lime
+ * core, with a soft blurred halo bleeding above and below. Reads like a thin
+ * filament of light laid across the section — the Linear/Vercel section break.
+ *
+ * Unlike the other fx layers this is inline flow content (a real <hr>-style
+ * separator), so it is exposed to assistive tech as a separator rather than
+ * hidden. Static; no motion to guard.
+ */
+interface Props {}
+---
+
+<div class="glowrule" role="separator">
+  <span class="glowrule__halo" aria-hidden="true"></span>
+</div>
+
+<style>
+  .glowrule {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    margin: var(--section, 4.5rem) 0;
+    /* The crisp filament: transparent → lime core → transparent. */
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--lime-line, rgba(200, 255, 50, 0.4)) 35%,
+      var(--lime-bright, #d6ff5c) 50%,
+      var(--lime-line, rgba(200, 255, 50, 0.4)) 65%,
+      transparent 100%
+    );
+  }
+
+  /* The halo: a wider, blurred echo of the core that lifts the line off the
+     page. Centered on the filament, pointer-inert, blended additively. */
+  .glowrule__halo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60%;
+    height: 14px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 50% 50% at 50% 50%,
+      var(--lime-glow, rgba(200, 255, 50, 0.55)) 0%,
+      rgba(200, 255, 50, 0.18) 40%,
+      transparent 75%
+    );
+    filter: blur(6px);
+  }
+</style>

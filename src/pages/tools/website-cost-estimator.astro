@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import AnswerBlock from '../../components/AnswerBlock.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTA from '../../components/CTA.astro';
+import CostEstimator from '../../components/tools/CostEstimator.astro';
+import {
+  graph, websiteNode, organizationNode, breadcrumbNode, webPageNode,
+  webApplicationNode, faqPageNode,
+} from '../../lib/schema';
+
+const path = '/tools/website-cost-estimator';
+const title = 'Website cost estimator (South Africa) · What should your website cost?';
+const description =
+  'A free estimator that gives you an indicative ZAR range for your website, based on the type of site, the features, and who builds it. No sign-up, nothing leaves your browser.';
+const answer =
+  'A website in South Africa costs roughly R3,000 to R150,000 in 2026, depending on the type of site, the features you need, and who builds it. This free estimator gives you an indicative rand range for your exact needs in a few clicks, with no sign-up.';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Website cost estimator', path },
+];
+const faqs = [
+  {
+    q: 'How much should a website cost in South Africa?',
+    a: 'In 2026, a template brochure site is about R3,000 to R15,000, a custom-designed business site R15,000 to R45,000, a standard online store R20,000 to R80,000, and a large or custom build R100,000 or more. On top of that, budget about R100 a year for a .co.za domain and R50 to R500 a month for hosting.',
+  },
+  {
+    q: 'What makes a website more expensive?',
+    a: 'Scope, not page count. Custom design instead of a template, features like online payments, bookings, a blog or CMS and multi-language, and who builds it (a DIY tool, a freelancer, an agency, or a studio) move the price far more than the number of pages.',
+  },
+  {
+    q: 'Is it cheaper to build it myself?',
+    a: 'Upfront, yes. A builder like Wix, Squarespace or Shopify costs R0 to about R500 a month with no build fee. The trade-off is your time, a template look, and weaker search and AI visibility unless you set it up carefully. It suits very early or very simple businesses.',
+  },
+  {
+    q: 'Does this estimate include hosting and ongoing costs?',
+    a: 'The build figure is separate. Add a .co.za domain at about R90 to R150 a year, hosting from R50 to R500 a month, and optional maintenance. Builder platforms roll hosting into their monthly fee.',
+  },
+];
+
+const jsonld = graph(
+  websiteNode(),
+  organizationNode(),
+  breadcrumbNode(path, crumbs),
+  webPageNode({ path, title, description, authorId: 'adam-sacharowitz', datePublished: '2026-06-08' }),
+  webApplicationNode({ path, name: 'Website Cost Estimator', description }),
+  faqPageNode(path, faqs)
+);
+---
+<Base title={title} description={description} path={path} schema={jsonld}>
+  <article class="wrap tool-page">
+    <Breadcrumb crumbs={crumbs} />
+    <p class="kicker">Free tool</p>
+    <h1>What should your website cost?</h1>
+    <AnswerBlock answer={answer} lastVerified="June 2026" />
+
+    <p class="tool-page__lede">
+      There is no single price for a website, and anyone who quotes one without asking what it is for
+      is guessing. Pick what you actually need below and get an honest rand range, based on real 2026
+      South African market rates.
+    </p>
+
+    <CostEstimator />
+
+    <section class="prose tool-page__why">
+      <h2>What drives the price</h2>
+      <p>A website price is set by scope, not pages. Five things decide where you land: template or
+        custom design, the features (payments, bookings, a blog, multi-language), who builds it, how
+        much copy and imagery you supply, and whether you are selling online.</p>
+      <p>For the full breakdown, read
+        <a href="/guides/website-cost-south-africa">how much a website costs in South Africa</a>, or see
+        <a href="/guides/what-digital-work-costs-south-africa">what all digital work costs</a>.</p>
+    </section>
+
+    <FAQ faqs={faqs} />
+    <CTA commercial line="Want a real fixed-price quote, not a guess?" />
+  </article>
+</Base>
+
+<style>
+  .tool-page { padding-top: 2.4rem; max-width: var(--measure-wide); }
+  .tool-page__lede { font-size: var(--fs-lede); color: var(--ash); max-width: 42rem; margin: 0 0 2rem; line-height: 1.55; }
+  .tool-page__why { margin-top: 2.8rem; }
+</style>

@@ -1,0 +1,36 @@
+---
+// Visible FAQ. Text MUST match the FAQPage JSON-LD (built from the same frontmatter array)
+// so engines see one consistent answer.
+interface Props {
+  faqs: { q: string; a: string }[];
+  heading?: string;
+}
+const { faqs, heading = 'Questions people ask' } = Astro.props;
+---
+{
+  faqs.length > 0 && (
+    <section class="faq" id="faq" aria-labelledby="faq-h">
+      <h2 id="faq-h">{heading}</h2>
+      <div class="faq__list">
+        {faqs.map((f) => (
+          <div class="faq__item">
+            <h3 class="faq__q">{f.q}</h3>
+            <p class="faq__a">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .faq { max-width: var(--measure-wide); margin-top: 2.6rem; }
+  .faq__list { border-top: 1px solid var(--hair); }
+  .faq__item { padding: 1.1rem 0; border-bottom: 1px solid var(--hair); }
+  .faq__q {
+    font-size: 1.12rem;
+    margin: 0 0 0.4rem;
+    font-weight: 560;
+  }
+  .faq__a { margin: 0; color: var(--ink); max-width: var(--measure); }
+</style>

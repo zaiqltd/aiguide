@@ -1,0 +1,53 @@
+---
+/*
+  Shimmer.astro — inline text shimmer. A brighter band slowly sweeps across muted text.
+  Ported from MagicUI text-animations/animated-shiny-text (background-clip:text + animated
+  background-position). Vanilla CSS, no deps. Ideal for mono kickers / eyebrow labels on
+  the dark canvas — default reads as muted --ash with a --bone highlight passing through.
+
+  Tokens: --ash (base muted ink), --bone (highlight), --font-mono.
+
+  Props: (none) — wraps its slot.
+*/
+type Props = Record<string, never>;
+---
+<span class="shimmer"><slot /></span>
+
+<style>
+  .shimmer {
+    /* Base color carried by the gradient's flanks; the moving band is brighter. */
+    color: var(--ash);
+    background-image: linear-gradient(
+      100deg,
+      var(--ash) 0%,
+      var(--ash) 38%,
+      var(--bone) 50%,
+      var(--ash) 62%,
+      var(--ash) 100%
+    );
+    /* A band ~3x the text width so the sweep reads as a slow gleam, not a strobe. */
+    background-size: 300% 100%;
+    background-repeat: no-repeat;
+    background-position: 150% 0; /* start off to the right */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-sweep 5s cubic-bezier(0.6, 0.6, 0, 1) infinite;
+  }
+
+  @keyframes shimmer-sweep {
+    to {
+      background-position: -150% 0; /* travel across to the left, then loop */
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer {
+      animation: none;
+      /* Hold a static, evenly-lit muted state — no clipped gradient flicker. */
+      background-image: none;
+      -webkit-text-fill-color: var(--ash);
+      color: var(--ash);
+    }
+  }
+</style>

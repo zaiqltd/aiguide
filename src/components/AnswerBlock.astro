@@ -1,0 +1,46 @@
+---
+// BLUF / self-contained answer unit. The first thing on the page and the thing AI engines
+// lift verbatim. Keep the answer 40-60 words, complete on its own, with a number in it.
+interface Props {
+  answer: string;
+  lastVerified?: string;
+}
+const { answer, lastVerified } = Astro.props;
+---
+<aside class="answer" aria-label="The short answer">
+  <p class="answer__label mono">The short answer</p>
+  <p class="answer__text">{answer}</p>
+  {lastVerified && (
+    <p class="answer__meta mono">Verified {lastVerified} &middot; prices in ZAR</p>
+  )}
+</aside>
+
+<style>
+  .answer {
+    max-width: var(--measure-wide);
+    background: var(--paper);
+    border: 1px solid var(--hair-strong);
+    border-left: 4px solid var(--cadmium);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.5rem 1.4rem;
+    margin: 1.6rem 0 2rem;
+    box-shadow: var(--shadow-card), inset 3px 0 32px -16px var(--lime-glow);
+  }
+  .answer__label {
+    color: var(--cadmium-ink);
+    margin: 0 0 0.5rem;
+  }
+  .answer__text {
+    font-family: var(--font-display);
+    font-size: clamp(1.18rem, 1.7vw, 1.45rem);
+    line-height: 1.4;
+    margin: 0;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .answer__meta {
+    margin: 0.8rem 0 0;
+    color: var(--graphite-soft);
+    font-size: 0.66rem;
+  }
+</style>

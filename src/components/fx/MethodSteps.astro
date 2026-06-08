@@ -1,0 +1,252 @@
+---
+/*
+  MethodSteps.astro — a horizontal 3-step rail visualising the Zaiq method:
+  "Diagnose → Point AI at it → Ship the fix" (tagline: "Different problems. Same move.").
+  Three numbered nodes (01/02/03), each a number in a violet ring with a bold label and a
+  one-line description, connected by a thin line carrying a slow violet pulse that flows
+  along it. Stacks vertically on mobile, where the connector runs top-to-bottom instead.
+
+  Zero-JS: the flowing pulse is a CSS-animated gradient (a bright violet band sweeping across
+  a faint static rail via background-position) — transform/opacity-class work only, no layout.
+  The numbers + labels are real text; the rail + glyphs are decorative (aria-hidden). The
+  ordered list keeps the steps semantically sequential for assistive tech.
+
+  Tokens: --line / --lime-line rail, --lime / --lime-bright / --lime-deep pulse, --lime-glow,
+  --lime-wash ring fill, --coal node face, --bone / --silver / --ash ink, --font-mono,
+  --font-display, --radius-lg, --ease.
+
+  Props:
+    steps?: { label: string; text: string }[]   // defaults to the three Zaiq steps
+*/
+interface Step {
+  label: string;
+  text: string;
+}
+interface Props {
+  steps?: Step[];
+}
+const {
+  steps = [
+    { label: 'Diagnose', text: 'Find the one bottleneck quietly costing you money.' },
+    { label: 'Point AI at it', text: 'Aim the right model at exactly that problem.' },
+    { label: 'Ship the fix', text: 'Put it live, measure it, and hand you the keys.' },
+  ],
+} = Astro.props;
+---
+<ol class="method" aria-label="The Zaiq method, in three steps">
+  {
+    steps.map((step, i) => (
+      <li class="method__step">
+        {/* Connector to the PREVIOUS node — skipped on the first step. Decorative. */}
+        {i > 0 && (
+          <span class="method__rail" aria-hidden="true">
+            <span class="method__flow" />
+          </span>
+        )}
+
+        <span class="method__node">
+          <span class="method__ring" aria-hidden="true" />
+          <span class="method__num">{String(i + 1).padStart(2, '0')}</span>
+        </span>
+
+        <span class="method__label">{step.label}</span>
+        <span class="method__text">{step.text}</span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .method {
+    --node: 3.1rem; /* diameter of the numbered ring */
+    --gap: clamp(0.75rem, 3vw, 2.25rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+    counter-reset: none;
+  }
+
+  .method__step {
+    position: relative;
+    display: grid;
+    grid-template-rows: var(--node) auto auto;
+    justify-items: center;
+    text-align: center;
+    gap: 0.7rem;
+  }
+
+  /* ---- Connector rail (horizontal, desktop) ----
+     Sits at node-centre height and reaches left from this node's centre to the previous
+     node's centre, crossing the column gap. The faint base is --line; the moving --flow band
+     is the violet pulse. */
+  .method__rail {
+    position: absolute;
+    top: calc(var(--node) / 2);
+    right: calc(50% + var(--node) / 2 + 0.35rem);
+    width: calc(100% + var(--gap) - var(--node) - 0.7rem);
+    height: 2px;
+    transform: translateY(-50%);
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  /* The travelling violet highlight. A narrow bright band on a transparent track, swept by
+     animating background-position. Staggered per-rail so the pulse reads as continuous flow
+     down the chain rather than firing in unison. */
+  .method__flow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--lime-deep) 38%,
+      var(--lime-bright) 50%,
+      var(--lime-deep) 62%,
+      transparent 100%
+    );
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    background-position: 120% 0;
+    box-shadow: 0 0 10px -1px var(--lime-glow);
+    animation: method-flow 2.8s var(--ease) infinite;
+  }
+  /* Second connector starts its sweep halfway through, so flow appears to march forward. */
+  .method__step:nth-of-type(3) .method__flow {
+    animation-delay: 1.4s;
+  }
+
+  @keyframes method-flow {
+    0% {
+      background-position: 130% 0;
+    }
+    60%,
+    100% {
+      background-position: -130% 0;
+    }
+  }
+
+  /* ---- The numbered node ---- */
+  .method__node {
+    position: relative;
+    width: var(--node);
+    height: var(--node);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--coal);
+    z-index: 1;
+  }
+  .method__ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--lime-wash);
+    box-shadow:
+      inset 0 0 0 1px var(--lime-line),
+      0 0 24px -6px var(--lime-glow);
+  }
+  .method__num {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--lime-bright);
+  }
+
+  /* ---- Text ---- */
+  .method__label {
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--bone);
+  }
+  .method__text {
+    max-width: 18rem;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ash);
+    text-wrap: pretty;
+  }
+
+  /* ---- Mobile: stack vertically, connector becomes a vertical rail on the left ---- */
+  @media (max-width: 640px) {
+    .method {
+      grid-template-columns: 1fr;
+      gap: 0;
+      justify-items: start;
+    }
+    .method__step {
+      grid-template-columns: var(--node) 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        'node label'
+        'node text';
+      justify-items: start;
+      text-align: left;
+      column-gap: 1rem;
+      padding-bottom: 1.6rem;
+    }
+    .method__step:last-child {
+      padding-bottom: 0;
+    }
+    .method__node {
+      grid-area: node;
+      align-self: start;
+    }
+    .method__label {
+      grid-area: label;
+      align-self: center;
+    }
+    .method__text {
+      grid-area: text;
+    }
+    /* Vertical connector: runs UP from this node into the previous one. */
+    .method__rail {
+      top: auto;
+      right: auto;
+      bottom: calc(100% - var(--node) / 2);
+      left: calc(var(--node) / 2);
+      width: 2px;
+      height: calc(1.6rem + var(--node) / 2 + 0.35rem);
+      transform: translateX(-50%);
+    }
+    .method__flow {
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--lime-deep) 38%,
+        var(--lime-bright) 50%,
+        var(--lime-deep) 62%,
+        transparent 100%
+      );
+      background-size: 100% 250%;
+      background-position: 0 120%;
+      animation-name: method-flow-v;
+    }
+    @keyframes method-flow-v {
+      0% {
+        background-position: 0 130%;
+      }
+      60%,
+      100% {
+        background-position: 0 -130%;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* No travelling pulse; hold a steady, evenly-lit violet rail so the chain still reads. */
+    .method__flow {
+      animation: none !important;
+      background: var(--lime-line);
+      box-shadow: none;
+    }
+  }
+</style>

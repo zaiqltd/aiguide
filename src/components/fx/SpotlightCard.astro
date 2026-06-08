@@ -1,0 +1,188 @@
+---
+/*
+  SpotlightCard.astro — a large, premium feature card that reveals a soft violet radial
+  "spotlight" tracking the pointer, plus a faint violet border-glow on hover. The surface is
+  --coal with a hairline --line border at --radius-xl; the spotlight is painted on a ::before
+  radial-gradient positioned at runtime via --mx/--my and faded by --spot. Restrained on
+  purpose — it should read as expensive light catching the panel, never a gimmick.
+
+  Technique mirrors the house TiltCard/CursorGlow idiom: per-element pointer JS, scoped by the
+  [data-spotlight] attribute so any number of cards coexist; pointer reads are rAF-batched
+  (one write per frame); the gradient + border use transform/opacity-class state only, so
+  there's no layout or paint thrash. Idempotent + re-scanned on astro:page-load.
+
+  Tokens: --coal surface, --line / --line-2 borders, --radius-xl, --shadow-card,
+  --lime-wash / --lime-glow spotlight, --glow-lime for the hover border-bloom, --ease.
+
+  Props:
+    class?: string  // extra classes merged onto the card (e.g. layout / padding utilities)
+*/
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['spotcard', className]} data-spotlight>
+  <div class="spotcard__inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .spotcard {
+    position: relative;
+    border-radius: var(--radius-xl);
+    background: var(--coal);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    isolation: isolate; /* keep the screen-blended spotlight contained to this card */
+    /* Resting state for the JS-driven vars. */
+    --mx: 50%;
+    --my: 0%;
+    --spot: 0; /* spotlight opacity, 0 at rest → 1 while the pointer is inside */
+    transition:
+      border-color 0.4s var(--ease),
+      box-shadow 0.4s var(--ease);
+    will-change: box-shadow;
+  }
+
+  /* Hover lifts the border to the brighter hairline and blooms the token glow ring. The glow
+     is a hard-won single box-shadow token (--glow-lime), so this stays one cheap composite. */
+  .spotcard:hover {
+    border-color: var(--line-2);
+    box-shadow:
+      var(--shadow-card),
+      var(--glow-lime);
+  }
+
+  /* The tracking spotlight. A violet radial centred on the pointer (--mx/--my), screen-blended
+     so it adds light over the dark panel without milky edges. Fades with --spot for a graceful
+     leave. Sits above the surface but below content. */
+  .spotcard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(
+      340px circle at var(--mx) var(--my),
+      var(--lime-glow),
+      var(--lime-wash) 36%,
+      transparent 68%
+    );
+    opacity: calc(var(--spot) * 0.5);
+    transition: opacity 0.45s var(--ease);
+    mix-blend-mode: screen;
+  }
+
+  /* A whisper-thin violet inner edge that brightens with the spotlight — reads as the panel rim
+     catching the light. Painted on ::after as an inset ring so it never bleeds outside --radius-xl. */
+  .spotcard::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    box-shadow: inset 0 0 0 1px var(--lime-line);
+    opacity: calc(var(--spot) * 0.35);
+    transition: opacity 0.45s var(--ease);
+  }
+
+  .spotcard__inner {
+    position: relative;
+    z-index: 2; /* content above both decorative planes */
+    border-radius: inherit;
+    height: 100%;
+  }
+
+  /* Motion-sensitive users: drop the pointer tracking entirely. Keep a calm, static top glow on
+     hover so the card still feels alive without anything chasing the cursor. */
+  @media (prefers-reduced-motion: reduce) {
+    .spotcard {
+      transition: border-color 0.3s var(--ease);
+    }
+    .spotcard::before {
+      background: radial-gradient(
+        420px circle at 50% 0%,
+        var(--lime-wash),
+        transparent 70%
+      );
+      transition: opacity 0.3s var(--ease);
+    }
+    .spotcard::after {
+      transition: opacity 0.3s var(--ease);
+    }
+  }
+</style>
+
+<script>
+  // Per-element spotlight tracker. Idempotent + multi-instance safe: every [data-spotlight]
+  // gets its own listeners keyed by a WeakSet, so astro:page-load re-runs never double-bind.
+  // One rAF-batched style write per frame. Pointer position is normalised against the card's
+  // own rect, so nested/offset layouts stay accurate.
+  (() => {
+    const bound = new WeakSet<HTMLElement>();
+    const prefersReduced =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const init = (el: HTMLElement) => {
+      if (bound.has(el)) return;
+      bound.add(el);
+
+      // Under reduced motion the CSS handles a static hover glow; no pointer wiring needed.
+      if (prefersReduced) return;
+
+      let raf = 0;
+      let nextX = 0;
+      let nextY = 0;
+
+      const apply = () => {
+        raf = 0;
+        const rect = el.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        const px = ((nextX - rect.left) / rect.width) * 100;
+        const py = ((nextY - rect.top) / rect.height) * 100;
+        el.style.setProperty('--mx', `${px}%`);
+        el.style.setProperty('--my', `${py}%`);
+      };
+
+      const onMove = (e: PointerEvent) => {
+        nextX = e.clientX;
+        nextY = e.clientY;
+        if (!raf) raf = requestAnimationFrame(apply);
+      };
+
+      const onEnter = () => el.style.setProperty('--spot', '1');
+
+      const reset = () => {
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+        el.style.setProperty('--spot', '0');
+      };
+
+      el.addEventListener('pointerenter', onEnter);
+      el.addEventListener('pointermove', onMove, { passive: true });
+      el.addEventListener('pointerleave', reset);
+      el.addEventListener('pointercancel', reset);
+      // Safety: a pointer that leaves the window mid-hover can skip pointerleave.
+      window.addEventListener('blur', reset);
+    };
+
+    const run = () =>
+      document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach(init);
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+    // Astro View Transitions: re-scan after client-side swaps.
+    document.addEventListener('astro:page-load', run);
+  })();
+</script>

@@ -1,0 +1,174 @@
+---
+/*
+  CursorGlow.astro — a fixed, full-viewport, pointer-events:none ambient glow that trails the
+  cursor. A single soft radial VIOLET wash is positioned via --gx/--gy CSS vars; a
+  requestAnimationFrame loop lerps the glow toward the real pointer so it lags slightly for a
+  premium, weighty feel (never rubber-bandy). Mount ONCE near the page root.
+
+  Self-disables on: touch / no-hover devices (no pointer to follow) and prefers-reduced-motion
+  (the loop never starts; the layer stays hidden). Decorative + aria-hidden. transform/opacity
+  only — no layout, no paint thrash. Idempotent: a data attribute guards against double-mount
+  if the component is ever placed twice or re-run on astro:page-load.
+
+  Tokens: --lime-glow / --lime (the violet signal). Pairs with the --base #0a0a0c canvas.
+
+  Props:
+    size?:    number   // glow diameter in px (default 520)
+    opacity?: number   // peak layer opacity 0..1 (default 0.5) — keep low so it's ambient
+*/
+interface Props {
+  size?: number;
+  opacity?: number;
+}
+const { size = 520, opacity = 0.5 } = Astro.props;
+---
+<div
+  class="cursorglow"
+  data-cursor-glow
+  aria-hidden="true"
+  style={`--cg-size:${size}px;--cg-opacity:${opacity}`}
+>
+</div>
+
+<style>
+  .cursorglow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Resting position: centre, so the first frame doesn't jump from a corner. */
+    --gx: 50vw;
+    --gy: 50vh;
+    opacity: 0; /* faded in by JS once the pointer first moves */
+    transition: opacity 0.6s var(--ease, ease);
+    /* Promote to its own layer; we only ever touch the gradient position + opacity. */
+    will-change: transform;
+    contain: strict;
+  }
+
+  /* The glow itself — a soft violet radial that melts into the near-black canvas. The
+     screen blend keeps it additive over dark surfaces without milky grey edges. */
+  .cursorglow::before {
+    content: '';
+    position: absolute;
+    left: var(--gx);
+    top: var(--gy);
+    width: var(--cg-size);
+    height: var(--cg-size);
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      var(--lime-glow, rgba(139, 92, 255, 0.62)),
+      rgba(139, 92, 255, 0.16) 40%,
+      transparent 70%
+    );
+    mix-blend-mode: screen;
+    will-change: left, top;
+  }
+
+  /* Active state set by JS when a real (fine) pointer is present. */
+  .cursorglow[data-active='true'] {
+    opacity: var(--cg-opacity);
+  }
+
+  /* No glow for motion-sensitive users — the layer is never shown and the loop never runs. */
+  @media (prefers-reduced-motion: reduce) {
+    .cursorglow {
+      display: none !important;
+    }
+  }
+
+  /* No hover capability (touch / pen-only) → nothing to follow; keep it out of the tree. */
+  @media (hover: none), (pointer: coarse) {
+    .cursorglow {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Single-instance ambient cursor glow. Lerps a glow point toward the pointer each frame so
+  // it trails with weight. Bails entirely on reduced-motion or non-hover devices, and guards
+  // against double-binding (the layer is meant to be mounted once, but stay safe on re-runs).
+  (() => {
+    const prefersReduced =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover =
+      window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (prefersReduced || !canHover) return;
+
+    const bound = new WeakSet<HTMLElement>();
+
+    const init = (el: HTMLElement) => {
+      if (bound.has(el)) return;
+      bound.add(el);
+
+      // Current (rendered) glow position + target (last pointer position). Start centred.
+      let curX = window.innerWidth / 2;
+      let curY = window.innerHeight / 2;
+      let tgtX = curX;
+      let tgtY = curY;
+      let started = false; // becomes true on first real move → fades the layer in
+      let raf = 0;
+
+      const LERP = 0.16; // smoothing factor: lower = laggier/heavier trail
+
+      const frame = () => {
+        // Ease the rendered point a fraction of the remaining distance each frame.
+        curX += (tgtX - curX) * LERP;
+        curY += (tgtY - curY) * LERP;
+        el.style.setProperty('--gx', `${curX}px`);
+        el.style.setProperty('--gy', `${curY}px`);
+
+        const dx = tgtX - curX;
+        const dy = tgtY - curY;
+        // Keep looping while settling; idle once it has effectively caught up (saves battery).
+        if (dx * dx + dy * dy > 0.05) {
+          raf = requestAnimationFrame(frame);
+        } else {
+          raf = 0;
+        }
+      };
+
+      const kick = () => {
+        if (!raf) raf = requestAnimationFrame(frame);
+      };
+
+      const onMove = (e: PointerEvent) => {
+        tgtX = e.clientX;
+        tgtY = e.clientY;
+        if (!started) {
+          started = true;
+          el.setAttribute('data-active', 'true');
+        }
+        kick();
+      };
+
+      // Hide while the pointer is off-window; re-show on return.
+      const onOut = (e: PointerEvent) => {
+        if (e.relatedTarget === null) el.setAttribute('data-active', 'false');
+      };
+      const onOver = () => {
+        if (started) el.setAttribute('data-active', 'true');
+      };
+
+      window.addEventListener('pointermove', onMove, { passive: true });
+      document.addEventListener('pointerout', onOut);
+      document.addEventListener('pointerover', onOver);
+    };
+
+    const run = () => {
+      const el = document.querySelector<HTMLElement>('[data-cursor-glow]');
+      if (el) init(el);
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+    // Astro View Transitions: a fresh layer may mount after a swap.
+    document.addEventListener('astro:page-load', run);
+  })();
+</script>

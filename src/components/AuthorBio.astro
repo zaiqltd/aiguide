@@ -1,0 +1,35 @@
+---
+// Bottom-of-article author card. Reinforces the entity + carries the sameAs social links.
+interface Props {
+  authorId: string;
+  name: string;
+  jobTitle: string;
+  short: string;
+  sameAs?: string[];
+}
+const { authorId, name, jobTitle, short, sameAs = [] } = Astro.props;
+const initials = name.split(' ').map((x) => x[0]).join('');
+const tone = authorId.includes('chad') ? 'chad' : 'adam';
+const labelFor = (u: string) => {
+  const h = u.replace(/^https?:\/\/(www\.)?/, '').split('/')[0];
+  if (h.includes('linkedin')) return 'LinkedIn';
+  if (h.includes('about.me')) return 'about.me';
+  if (h.includes('github')) return 'GitHub';
+  if (h.includes('x.com') || h.includes('twitter')) return 'X';
+  return h;
+};
+---
+<aside class="authorbio">
+  <a class={`avatar avatar--lg avatar--${tone}`} href={`/authors/${authorId}`} aria-hidden="true" tabindex="-1">{initials}</a>
+  <div>
+    <p class="authorbio__role">{jobTitle}</p>
+    <p class="authorbio__name"><a href={`/authors/${authorId}`}>{name}</a></p>
+    <p class="authorbio__text">{short} Building <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>, an AI engineering studio in Johannesburg.</p>
+    {sameAs.length > 0 && (
+      <p class="social">
+        {sameAs.map((u) => <a href={u} rel="me noopener" target="_blank">{labelFor(u)}</a>)}
+        <a href={`/authors/${authorId}`}>More guides &rarr;</a>
+      </p>
+    )}
+  </div>
+</aside>

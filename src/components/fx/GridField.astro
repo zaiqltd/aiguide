@@ -1,0 +1,72 @@
+---
+/**
+ * GridField.astro — full-bleed structural background.
+ *
+ * A fine grid drawn entirely with CSS gradients (no SVG, no JS): faint white
+ * lines on the near-black canvas, an optional radial vignette that darkens the
+ * edges so content floats, and an optional centered lime glow for hero focus.
+ *
+ * Ported from Magic UI grid-pattern / dot-pattern + the radial-fade mask idiom
+ * to pure background-image layers. Static and effectively free to paint.
+ */
+interface Props {
+  /** Centered acid-lime radial glow behind the grid. Default true. */
+  glow?: boolean;
+  /** Radial vignette mask that fades the grid toward the edges. Default true. */
+  fade?: boolean;
+}
+const { glow = true, fade = true } = Astro.props;
+const classes = ['gridfield', fade && 'gridfield--fade', glow && 'gridfield--glow']
+  .filter(Boolean)
+  .join(' ');
+---
+
+<div class={classes} aria-hidden="true"></div>
+
+<style>
+  .gridfield {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    /* Two crossed line-gradients = a 1px grid at 56px pitch.
+       --line ≈ rgba(243,240,233,0.09); kept faint so it reads as texture. */
+    background-image:
+      linear-gradient(to right, var(--line, rgba(243, 240, 233, 0.09)) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line, rgba(243, 240, 233, 0.09)) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: center center;
+  }
+
+  /* Vignette: a radial alpha mask so the grid is crisp in the middle and
+     dissolves to nothing at the corners. Masking (not a dark overlay) means
+     it composites correctly over any backdrop. */
+  .gridfield--fade {
+    -webkit-mask-image: radial-gradient(
+      ellipse 78% 70% at 50% 42%,
+      #000 0%,
+      rgba(0, 0, 0, 0.55) 58%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 78% 70% at 50% 42%,
+      #000 0%,
+      rgba(0, 0, 0, 0.55) 58%,
+      transparent 100%
+    );
+  }
+
+  /* Centered lime breath drawn on the ::before so it layers under the lines
+     and isn't clipped by the grid's mask. */
+  .gridfield--glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 50% 42% at 50% 40%,
+      var(--lime-wash, rgba(200, 255, 50, 0.12)) 0%,
+      rgba(200, 255, 50, 0.05) 42%,
+      transparent 72%
+    );
+  }
+</style>

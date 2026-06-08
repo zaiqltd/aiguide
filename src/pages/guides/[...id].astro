@@ -1,0 +1,50 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Guide from '../../layouts/Guide.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', ({ data }) => !data.draft);
+  return guides.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const author = await getEntry('authors', entry.data.author);
+if (!author) throw new Error(`Unknown author "${entry.data.author}" in guide "${entry.id}"`);
+
+const path = `/guides/${entry.id}`;
+const all = await getCollection('guides', ({ data }) => !data.draft);
+
+let children: { name: string; path: string }[] = [];
+if (entry.data.isHub) {
+  children = all
+    .filter((g) => g.data.cluster === entry.data.cluster && !g.data.isHub)
+    .sort((a, b) => (a.data.datePublished < b.data.datePublished ? 1 : -1))
+    .map((g) => ({ name: g.data.title, path: `/guides/${g.id}` }));
+}
+
+// Related: same cluster first (excluding self + hubs), then fill from elsewhere.
+const sameCluster = all.filter((g) => g.id !== entry.id && g.data.cluster === entry.data.cluster && !g.data.isHub);
+const others = all.filter((g) => g.id !== entry.id && g.data.cluster !== entry.data.cluster && !g.data.isHub);
+const related = [...sameCluster, ...others].slice(0, 3).map((g) => ({
+  title: g.data.title,
+  clusterLabel: g.data.clusterLabel,
+  path: `/guides/${g.id}`,
+}));
+
+const authorData = {
+  id: author.id,
+  name: author.data.name,
+  jobTitle: author.data.jobTitle,
+  short: author.data.short,
+  affiliation: author.data.affiliation,
+  award: author.data.award,
+  knowsAbout: author.data.knowsAbout,
+  image: author.data.image,
+  sameAs: author.data.sameAs,
+};
+---
+<Guide data={entry.data} path={path} author={authorData} spokes={children} headings={headings} related={related}>
+  <Content />
+</Guide>

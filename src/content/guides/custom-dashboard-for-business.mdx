@@ -1,0 +1,170 @@
+---
+title: How to build a custom dashboard for your business
+description: A step-by-step 2026 guide to building a custom business dashboard in South Africa. When a dashboard is worth it, build versus off-the-shelf, what it costs in rand, and how to do it right.
+answer: >-
+  Build a custom dashboard by deciding the few numbers a decision depends on, connecting their data
+  sources, and putting them on one live screen that updates itself. Off-the-shelf tools like Looker
+  Studio or Power BI cost R0 to about R350 a month; a built-for-you dashboard in South Africa
+  typically costs R8,000 to R60,000.
+cluster: build
+clusterLabel: "Build & automate"
+clusterPath: /guides/automate-your-south-african-business
+author: adam-sacharowitz
+datePublished: "2026-06-08"
+lastVerified: June 2026
+intent: commercial
+draft: false
+keywords:
+  - custom dashboard for business
+  - business dashboard cost south africa
+  - power bi vs looker studio south africa
+  - kpi dashboard south africa
+  - build a dashboard south africa
+faqs:
+  - q: What is a business dashboard?
+    a: >-
+      A business dashboard is a single screen that shows the few numbers a decision depends on, sales,
+      cash, leads, stock, updated automatically from your real systems. Instead of rebuilding the same
+      spreadsheet every week, you open one live view that is always current. A good dashboard answers
+      "how are we doing right now" at a glance.
+  - q: How much does a custom dashboard cost in South Africa?
+    a: >-
+      Using a tool like Looker Studio or Power BI yourself costs R0 to about R350 a month. A
+      built-for-you dashboard typically costs R8,000 to R60,000 once-off in 2026, set by how many data
+      sources it connects and how custom the logic is. A fully custom dashboard app with live
+      integrations and user logins can run higher.
+  - q: Should I build a custom dashboard or use an off-the-shelf tool?
+    a: >-
+      Start off-the-shelf. Looker Studio (free) and Power BI cover most needs and connect to common
+      tools. Build custom only when your data lives in systems those tools cannot reach, when you need
+      specific logic or live calculations they cannot do, or when the dashboard is something customers
+      or staff log into. The honest default is the free tool first.
+  - q: What tools can I use to build a dashboard myself?
+    a: >-
+      Looker Studio (free, connects to Google products, ads, sheets, and databases), Microsoft Power
+      BI (strong if you use Excel and Microsoft 365), and built-in dashboards inside Xero, Shopify, and
+      most CRMs. For a quick view, a well-structured Google Sheet connected to your data is a perfectly
+      respectable starting dashboard.
+  - q: How do I decide what to put on a dashboard?
+    a: >-
+      Start from the decision, not the data. Ask what you would change if a number moved, then put only
+      those numbers on the screen. A dashboard with five numbers you act on beats one with fifty you
+      ignore. Everything that does not drive a decision is clutter that hides the things that do.
+  - q: Can a dashboard update by itself in real time?
+    a: >-
+      Yes. Connected to live data sources, a dashboard refreshes on its own, hourly, daily, or in real
+      time depending on the source. The point of a good dashboard is that no one has to update it: it
+      pulls from your accounting, sales, and CRM tools automatically so it is current every time you
+      open it.
+howto:
+  name: How to build a custom dashboard for a South African business
+  description: Decide the numbers that matter, connect the data, and put them on one live, self-updating screen.
+  steps:
+    - name: Start from the decision, not the data
+      text: >-
+        Write down the decisions you make regularly: where to spend, what to chase, what to restock.
+        For each, name the number you would watch. Those numbers, and only those, belong on the
+        dashboard. Starting from the decision keeps the screen short and useful instead of a wall of
+        charts no one reads.
+    - name: Find where each number lives
+      text: >-
+        List the source of every metric: sales in Shopify or your POS, cash in Xero, leads in your CRM,
+        traffic in analytics. Knowing exactly where each number comes from tells you what the dashboard
+        has to connect to and whether an off-the-shelf tool can reach it.
+    - name: Pick the tool that fits
+      text: >-
+        If your data sits in Google products, ads, or sheets, use Looker Studio (free). If you live in
+        Excel and Microsoft 365, use Power BI. If sources are spread across systems those tools cannot
+        reach, or you need custom logic or logins, that is the case for a built dashboard.
+    - name: Connect the data sources
+      text: >-
+        Wire each source in, through the tool's built-in connectors, an export, or a connector like
+        Zapier or Make for apps that do not link natively. The goal is that the dashboard pulls the
+        numbers itself so nobody is copying figures by hand, which is where errors and stale data creep
+        in.
+    - name: Design for a five-second read
+      text: >-
+        Lay it out so the most important number is biggest and at the top, with trend and context
+        beside it (versus last month, versus target). Use plain charts, not decoration. A dashboard you
+        understand in five seconds gets used daily; a cluttered one gets ignored.
+    - name: Automate the refresh and the alerts
+      text: >-
+        Set the data to refresh on a schedule so the view is always current, and add an alert for the
+        numbers that need action, like cash below a threshold or leads dropping. Now the dashboard works
+        for you: it updates itself and taps you on the shoulder only when something needs you.
+---
+import CostTable from '../../components/CostTable.astro';
+import Callout from '../../components/Callout.astro';
+
+Most businesses already have their numbers. The problem is they are scattered across Xero, a POS, a
+CRM, and three spreadsheets, and pulling them together eats a morning every week. A dashboard fixes
+that: the few numbers a decision depends on, on one screen, updating themselves. Here is when it is
+worth building, when an off-the-shelf tool is plenty, and what each costs in South Africa.
+
+## A dashboard is about decisions, not data
+
+The trap is building a beautiful screen full of numbers nobody acts on. A useful dashboard starts
+from the other end: what decisions do you make, and which number would change your mind? Five numbers
+you act on beat fifty you ignore. Everything that does not drive a decision is clutter hiding the
+things that do.
+
+<Callout variant="note">
+Before you build anything, write the decisions down. "Should I spend more on ads?" needs cost per
+lead and conversion rate. "Can I afford to hire?" needs cash runway and recurring revenue. The
+decision names the metric. The metric earns its place on the screen.
+</Callout>
+
+## What it costs in South Africa
+
+<CostTable
+  caption="Typical business dashboard costs, South Africa (ZAR, 2026)"
+  head={['Approach', 'Typical cost', 'Best for']}
+  rows={[
+    ['Google Sheet connected to your data', 'R0', 'A quick first view, simple metrics'],
+    ['Looker Studio', 'R0', 'Google products, ads, sheets, and databases'],
+    ['Microsoft Power BI', 'R0 to about R350 / user / month', 'Excel and Microsoft 365 businesses'],
+    ['Built-for-you dashboard (standard)', 'R8,000 to R30,000', 'Several sources connected, custom layout and logic'],
+    ['Custom dashboard app (live, with logins)', 'R30,000 to R150,000+', 'Customer- or staff-facing, real-time, bespoke logic'],
+  ]}
+  note="Most businesses are well served by Looker Studio or Power BI. A built dashboard is worth it when data lives across systems the free tools cannot reach, or when it is something people log into."
+/>
+
+## Build or off-the-shelf?
+
+The honest default is off-the-shelf first. Looker Studio is free and connects to a lot. Power BI is
+strong if you are a Microsoft business. Build custom only when one of these is true:
+
+- **Your data is trapped.** It lives in systems the standard tools cannot connect to, so something has
+  to pull it out reliably.
+- **The logic is specific.** You need live calculations, blended metrics, or rules the off-the-shelf
+  tools cannot express.
+- **People log into it.** A dashboard your customers or staff use as a product is an app, not a
+  report, and is built like one.
+
+<Callout variant="take">
+Try the free tool first, genuinely. Most "we need a custom dashboard" conversations end with Looker
+Studio doing the job for nothing. Pay to build only the part the free tools provably cannot do. That
+is the honest order, and it is the one we recommend even though we are the ones who build the custom
+version.
+</Callout>
+
+## Where it goes wrong
+
+- **Too many numbers.** A cluttered dashboard is ignored. Cut to what drives a decision.
+- **Manual updates.** If someone has to refresh it by hand, it goes stale and dies. Connect the data
+  so it updates itself.
+- **Pretty over useful.** Decoration is not insight. The biggest number should be the most important
+  one, with context beside it.
+- **No alert.** A dashboard you have to remember to check is half a tool. Add an alert for the numbers
+  that need action so it comes to you.
+
+Building dashboards that pull a business's real numbers into one live, self-updating view is core to
+what we ship at [Zaiq](https://zaiq.co.za). Several of our shipped builds, from an autonomous
+newsroom that prices live data to internal command screens, are dashboards at heart: real sources in,
+one clear view out.
+
+## Keep going
+
+- Back to the overview: [what to automate first in your South African business](/guides/automate-your-south-african-business)
+- Feed the dashboard better data: [automate invoicing](/guides/automate-invoicing-small-business) and [lead follow-up](/guides/automate-lead-follow-up)
+- If the dashboard is customer-facing, see [WordPress vs custom vs no-code](/guides/wordpress-vs-custom-vs-no-code)

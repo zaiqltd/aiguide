@@ -1,0 +1,144 @@
+---
+title: "WhatsApp chatbots for South African business: what they cost and what they do"
+description: What a WhatsApp chatbot actually costs in South Africa in 2026, in rand, what it can and cannot do, the Meta and provider fees, and how to tell a useful build from a leaky one.
+answer: >-
+  A WhatsApp chatbot for a South African business typically costs R5,000 to R40,000 to build, plus a
+  platform fee of about R300 to R3,000 a month, plus Meta's per-conversation charges. A simple FAQ and
+  booking bot sits at the low end; one that takes payment and syncs to your systems is higher. The
+  value is reply speed, in minutes not hours.
+cluster: ai-business
+clusterLabel: "AI for SA business"
+clusterPath: /guides/ai-for-south-african-business
+author: adam-sacharowitz
+datePublished: "2026-06-08"
+lastVerified: June 2026
+intent: commercial
+isHub: false
+keywords:
+  - whatsapp chatbot south africa
+  - whatsapp chatbot cost south africa
+  - whatsapp business automation south africa
+  - whatsapp ai assistant south africa
+  - whatsapp bot price
+draft: false
+faqs:
+  - q: How much does a WhatsApp chatbot cost in South Africa?
+    a: >-
+      A simple FAQ and booking bot costs R5,000 to R15,000 to build, an AI-powered assistant that
+      understands free text R15,000 to R40,000, and a custom bot wired into your CRM, payments and stock
+      R40,000 or more. On top, budget R300 to R3,000 a month for the platform plus Meta's per-conversation fees.
+  - q: What are Meta's WhatsApp charges in South Africa?
+    a: >-
+      Meta bills per 24-hour conversation, not per message, and the rate depends on the category. As of
+      2025 Meta moved utility conversations inside the 24-hour service window to free, while marketing
+      conversations are still charged per conversation. Always confirm the current rate card with your
+      provider, because Meta revises it.
+  - q: What can a WhatsApp chatbot actually do for my business?
+    a: >-
+      Answer common questions instantly, qualify and capture leads, book appointments, send reminders
+      and order updates, take payments, and hand off to a human when it should. The biggest win is speed:
+      replying in five minutes instead of thirty makes you about 100x more likely to reach a lead (MIT, InsideSales).
+  - q: Do I need the WhatsApp Business API or just the app?
+    a: >-
+      The free WhatsApp Business app suits a one-person operation answering manually. For a real chatbot,
+      automation and more than one agent, you need the WhatsApp Business Platform (the API), which you
+      access through an approved provider. The provider fee is the monthly cost in the tables below.
+  - q: Is a WhatsApp chatbot POPIA compliant?
+    a: >-
+      It can be, if built correctly. You need consent to message people, a clear purpose, and care about
+      where the conversation data is stored and which AI model sees it. Do not pipe customer personal
+      information into a public AI tool. A properly built bot keeps a processing record and a human escape hatch.
+  - q: Will a chatbot annoy my customers?
+    a: >-
+      Only a bad one. Customers dislike a bot that loops, cannot understand them, or hides the human. A
+      good build answers fast, admits when it cannot help, and hands to a person cleanly. Done right it
+      raises satisfaction because nobody waits, which is the whole point of the channel.
+  - q: How long does it take to build a WhatsApp chatbot?
+    a: >-
+      A template FAQ and booking bot can go live in days. An AI assistant that understands free text and
+      connects to your systems takes one to three weeks depending on integrations. AI-assisted builds
+      compress the work, so a useful first version in days is realistic for a focused scope.
+---
+import CostTable from '../../components/CostTable.astro';
+import Callout from '../../components/Callout.astro';
+
+WhatsApp is where South Africans actually talk to businesses, so it is the highest-leverage place to put
+AI to work. The honest version of the cost question has three layers: the build, the monthly platform
+fee, and Meta's per-conversation charges. Here is what each one is in rand, and how to tell a useful bot
+from a leaky one.
+
+## What a WhatsApp chatbot does
+
+A chatbot on WhatsApp can answer the questions you get asked fifty times a week, qualify and capture
+leads, book appointments, send reminders and order updates, take payment, and hand off to a human the
+moment it should. The headline benefit is not novelty, it is speed. Responding to a lead in five minutes
+instead of thirty makes you about **100x more likely to reach them** (MIT, InsideSales, HBR). A bot that
+replies in seconds, at 2am, on the channel your customer already uses, is pure upside if it is built well.
+
+## What it costs to build
+
+<CostTable
+  caption="Indicative 2026 WhatsApp chatbot build prices, South Africa (ZAR)"
+  head={['Type of bot', 'Typical build price', 'Best for']}
+  rows={[
+    ['Simple FAQ and booking flow (menu-based)', 'R5,000 to R15,000', 'Common questions, simple bookings, after-hours cover'],
+    ['AI assistant (understands free text)', 'R15,000 to R40,000', 'Natural conversations, lead qualifying, varied questions'],
+    ['Custom bot wired to CRM, payments, stock', 'R40,000 to R120,000+', 'Bookings, payment, order tracking, full integration'],
+  ]}
+  note="Build prices reflect typical South African rates in 2026. Scope and integrations drive the number, not message volume."
+/>
+
+## What you pay every month
+
+The build is once. Two things run forever: the platform that hosts the bot, and Meta's conversation
+charges. Budget both up front.
+
+<CostTable
+  caption="Typical ongoing WhatsApp chatbot costs, South Africa (ZAR)"
+  head={['Item', 'Typical cost', 'Notes']}
+  rows={[
+    ['Provider / platform fee', 'R300 to R3,000 / month', 'Access to the WhatsApp Business Platform plus the bot tooling'],
+    ['Meta marketing conversations', 'Per conversation', 'Charged per 24-hour conversation; rate varies, confirm current card'],
+    ['Meta utility / service replies', 'Often free in 24h window', 'Meta moved many utility/service messages to free in 2025; verify'],
+    ['AI model usage (if AI-powered)', 'R0 to R1,500 / month', 'Scales with conversation volume and which model answers'],
+    ['Maintenance and updates', 'R500 to R5,000 / month', 'Optional; for changing flows, new products, new integrations'],
+  ]}
+  note="Meta revises its WhatsApp pricing periodically. Always confirm the live per-conversation rate with your provider before launch."
+/>
+
+<Callout variant="note">
+There are two separate bills people confuse. Your provider (the platform that runs the bot) charges a
+monthly fee. Meta charges separately, per 24-hour conversation, based on the category. A quote that hides
+the Meta charges is not a real quote. Ask for both, in rand, before you start.
+</Callout>
+
+## The cost that is not on the invoice
+
+The expensive WhatsApp bot is the one nobody uses or, worse, the one that drives customers away. A bot
+that loops, misunderstands, or traps people away from a human will cost you leads no spreadsheet captures.
+The cheapest build is rarely the cheapest outcome. Price the bot on whether it actually resolves the
+conversation and hands off cleanly, not on the lowest build fee.
+
+## What to insist on before you pay
+
+- **A defined outcome.** "Books appointments and answers our top 20 questions," not "a WhatsApp bot."
+- **A human escape hatch.** Every flow must reach a person in one step when the bot cannot help.
+- **Both bills quoted in rand.** Provider fee and Meta charges, separately, before work starts.
+- **POPIA built in.** Consent to message, a clear purpose, and no customer personal data fed into a
+  public AI tool. See our [guide to AI and POPIA](/guides/ai-popia-data-safety).
+- **Ownership.** You keep the number, the flows and the conversation data.
+
+## Where Zaiq fits
+
+We build WhatsApp assistants as one of the fastest-paying AI fixes for a South African business, on a
+fixed price in rand against a defined outcome, with the human hand-off and POPIA handled from day one.
+We do not sell AI; we solve the problem and AI is how. Bring us the bottleneck (slow replies, missed
+after-hours leads, a front desk drowning in the same five questions) and we will tell you straight what
+it takes. Start at [zaiq.co.za/work](https://zaiq.co.za/work).
+
+## Related guides
+
+- [AI for South African business: the practical 2026 guide](/guides/ai-for-south-african-business) (the hub)
+- [AI automation for South African small business: where to start](/guides/ai-automation-small-business-south-africa)
+- [AI and POPIA: is your data safe with AI tools?](/guides/ai-popia-data-safety)
+- See the live offer at [zaiq.co.za](https://zaiq.co.za)

@@ -1,0 +1,328 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { graph, websiteNode, organizationNode } from '../lib/schema';
+import ConstellationHero from '../components/fx/ConstellationHero.astro';
+import Aurora from '../components/fx/Aurora.astro';
+import SpotlightCard from '../components/fx/SpotlightCard.astro';
+import GradText from '../components/fx/GradText.astro';
+import MagneticButton from '../components/fx/MagneticButton.astro';
+import GlowRule from '../components/fx/GlowRule.astro';
+import BeamCard from '../components/fx/BeamCard.astro';
+import AskAI from '../components/fx/AskAI.astro';
+import MethodSteps from '../components/fx/MethodSteps.astro';
+
+const guides = await getCollection('guides', ({ data }) => !data.draft);
+const byDateDesc = (a: any, b: any) => (a.data.datePublished < b.data.datePublished ? 1 : -1);
+const hubs = guides.filter((g) => g.data.isHub);
+const recent = guides.filter((g) => !g.data.isHub).sort(byDateDesc).slice(0, 6);
+const authors = await getCollection('authors');
+
+const CLUSTER_IMG: Record<string, string> = {
+  'ai-business': '/images/ai-search-visibility-south-africa.webp',
+  costs: '/images/cost-of-digital-work-south-africa.webp',
+  build: '/images/business-automation-south-africa.webp',
+  frontier: '/images/ai-benchmarks-2026.webp',
+};
+const hubOrder = ['ai-business', 'costs', 'build', 'frontier'];
+const hubsSorted = hubs
+  .filter((g) => hubOrder.includes(g.data.cluster))
+  .sort((a, b) => hubOrder.indexOf(a.data.cluster) - hubOrder.indexOf(b.data.cluster));
+const indexPage = guides.find((g) => g.data.cluster === 'research');
+
+const QUESTIONS = [
+  'How much does a website cost in South Africa?',
+  'Does ChatGPT recommend my business?',
+  'Which CRM for a small business?',
+  'Is AI actually worth it?',
+  'How do I automate invoicing?',
+  'What does SEO cost in rand?',
+  'Can AI answer my leads at 2am?',
+];
+
+const jsonld = graph(websiteNode(), organizationNode());
+const initials = (n: string) => n.split(' ').map((x) => x[0]).join('');
+const tone = (id: string) => (id.includes('chad') ? 'chad' : 'adam');
+---
+<Base
+  title="AI Guide · Straight answers about AI for South African business"
+  description="No hype. What AI actually does for an SA business, what it costs in rand, and how to get found by AI search. Written by the engineers behind Zaiq."
+  path="/"
+  schema={jsonld}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <ConstellationHero density={1.1} opacity={0.6} />
+    <Aurora opacity={0.12} />
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="kicker reveal">AI Guide &middot; South Africa</p>
+        <h1 class="hero__h1 reveal" data-d="1">
+          Straight answers about what AI <GradText animate>actually does</GradText> for a South African business.
+        </h1>
+        <p class="hero__lede reveal" data-d="2">
+          No hype and no decks. What it costs in rand, what genuinely works, and how to get your
+          business found by AI search. Written by two engineers who build exactly this for a living.
+        </p>
+        <div class="hero__cta reveal" data-d="3">
+          <MagneticButton href="/guides/what-digital-work-costs-south-africa" label="Start with what it costs" variant="fill" />
+          <MagneticButton href="/guides/ai-for-south-african-business" label="AI for SA business" variant="ghost" />
+        </div>
+        <p class="hero__by reveal" data-d="4">
+          <span class="chip chip--live">Live</span>
+          by the founders of <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>, an AI engineering studio
+        </p>
+      </div>
+      <div class="hero__art reveal" data-d="2">
+        <img
+          src="/images/hero-ai-south-african-business.webp"
+          alt="Editorial illustration of AI and South African business as a luminous violet network of connected ideas"
+          width="1600" height="900" loading="eager" fetchpriority="high"
+        />
+      </div>
+    </div>
+
+    <div class="wrap hero__stats">
+      <div class="stat reveal">
+        <p class="stat__n"><span data-count="70" data-decimals="0">0</span><span class="unit">%+</span></p>
+        <p class="stat__l">of verified real-world software issues AI now resolves, up from a third in 2024 (SWE-bench)</p>
+      </div>
+      <div class="stat reveal" data-d="1">
+        <p class="stat__n"><span data-count="58.5" data-decimals="1">0</span><span class="unit">%</span></p>
+        <p class="stat__l">of searches now end without a click. If AI does not name you, the buyer never learns you exist (SparkToro)</p>
+      </div>
+      <div class="stat reveal" data-d="2">
+        <p class="stat__n"><span data-count="84" data-decimals="0">0</span><span class="unit">%</span></p>
+        <p class="stat__l">of South African organisations cannot find the skilled people they need (Xpatweb 2025)</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><GlowRule /></div>
+
+  <!-- 01 · ASK-AI SHOWPIECE -->
+  <section class="wrap block">
+    <header class="block__head reveal">
+      <p class="s-eyebrow"><span class="s-num">01</span> When South Africa asks AI</p>
+      <h2 class="block__h">Your customers ask AI now. <GradText>This is the answer it gives.</GradText></h2>
+      <p class="block__sub">More than half of searches end without a click. We write the pages so that when a buyer asks, your business is the answer the engine quotes.</p>
+    </header>
+    <div class="askrow reveal" data-d="1">
+      <AskAI
+        engine="ChatGPT"
+        question="who can build a WhatsApp chatbot in South Africa?"
+        answer="A few South African studios build these. An AI engineering studio like Zaiq ships a working WhatsApp booking bot on a fixed price, usually in days."
+        highlight="Zaiq"
+        cite="aiguide.co.za"
+      />
+      <AskAI
+        engine="Perplexity"
+        question="how much does a website cost in South Africa?"
+        answer="A small business website in South Africa costs about R8,000 to R45,000 in 2026, depending on whether it is a template, custom, or ecommerce build."
+        highlight="R8,000 to R45,000"
+        cite="aiguide.co.za"
+      />
+    </div>
+  </section>
+
+  <!-- CHECK CTA -->
+  <section class="wrap block reveal">
+    <SpotlightCard class="checkcard">
+      <div class="checkcard__in">
+        <div class="checkcard__copy">
+          <p class="s-eyebrow"><span class="s-num">&#8599;</span> Free tool</p>
+          <h2 class="block__h">Is your business invisible to AI? Find out in 60 seconds.</h2>
+          <p class="checkcard__sub">Type your business and get the exact questions to ask ChatGPT, Google AI and Perplexity, then see whether they name you. No sign-up. Nothing leaves your browser.</p>
+        </div>
+        <div class="checkcard__cta">
+          <MagneticButton href="/tools/ai-visibility-check" label="Check my AI visibility" variant="fill" />
+        </div>
+      </div>
+    </SpotlightCard>
+  </section>
+
+  <div class="wrap"><GlowRule /></div>
+
+  <!-- MARQUEE -->
+  <section class="qband" aria-label="Questions South African businesses ask">
+    <p class="qband__label mono">The questions we answer</p>
+    <div class="marquee">
+      <div class="marquee__track">{QUESTIONS.map((q) => <span class="marquee__item">{q}</span>)}</div>
+      <div class="marquee__track" aria-hidden="true">{QUESTIONS.map((q) => <span class="marquee__item">{q}</span>)}</div>
+    </div>
+  </section>
+
+  <!-- 02 · BENTO -->
+  <section class="wrap block">
+    <header class="block__head reveal">
+      <p class="s-eyebrow"><span class="s-num">02</span> Start here</p>
+      <h2 class="block__h">Four guides, one for each job.</h2>
+      <p class="block__sub">Each hub answers the questions that lead to it. Pick the one that matches what you are trying to do.</p>
+    </header>
+    <ul class="bento">
+      {hubsSorted.map((g, i) => (
+        <li class={`bento__cell mcard reveal ${i === 0 ? 'bento__cell--lg' : ''}`} data-d={String(i % 4)}>
+          <a href={`/guides/${g.id}`}>
+            {CLUSTER_IMG[g.data.cluster] && (
+              <span class="bento__img">
+                <img src={CLUSTER_IMG[g.data.cluster]} alt={`${g.data.clusterLabel} illustration`} width="1200" height="800" loading="lazy" />
+              </span>
+            )}
+            <span class="bento__body">
+              <span class="card__cluster">{g.data.clusterLabel}</span>
+              <span class="card__title">{g.data.title}</span>
+              <span class="card__desc">{g.data.description}</span>
+              <span class="card__go">Read the guide &rarr;</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {recent.length > 0 && (
+    <section class="wrap block">
+      <header class="block__head reveal">
+        <p class="s-eyebrow"><span class="s-num">03</span> Latest answers</p>
+        <h2 class="block__h">The newest pages.</h2>
+        <p class="block__sub">Each one built to be the answer an AI engine quotes, with prices in rand and a real source beside every claim.</p>
+      </header>
+      <ul class="cards cards--auto">
+        {recent.map((g, i) => (
+          <li class="card reveal" data-d={String(i % 4)}>
+            <a href={`/guides/${g.id}`}>
+              <span class="card__cluster">{g.data.clusterLabel}</span>
+              <span class="card__title">{g.data.title}</span>
+              <span class="card__desc">{g.data.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <div class="wrap"><GlowRule /></div>
+
+  <!-- 04 · METHOD -->
+  <section class="wrap block reveal">
+    <header class="block__head">
+      <p class="s-eyebrow"><span class="s-num">04</span> How we work</p>
+      <h2 class="block__h">Different problems. <GradText>Same move.</GradText></h2>
+      <p class="block__sub">We answer the questions because we ship the answers. The method does not change, only the problem does.</p>
+    </header>
+    <MethodSteps />
+    <div class="method-cta"><MagneticButton href="/about" label="About the guide" variant="ghost" /></div>
+  </section>
+
+  {indexPage && (
+    <section class="wrap block reveal">
+      <a class="research-strip mcard" href={`/guides/${indexPage.id}`}>
+        <div>
+          <p class="s-eyebrow"><span class="s-num">&#9733;</span> Original research</p>
+          <h2 class="research-strip__h">{indexPage.data.title}</h2>
+          <p class="research-strip__sub">{indexPage.data.description}</p>
+        </div>
+        <span class="research-strip__go mono">Read the Index &rarr;</span>
+      </a>
+    </section>
+  )}
+
+  <!-- WHO -->
+  <section class="wrap block who reveal">
+    <BeamCard duration={9} class="who__beam">
+      <div class="who__inner">
+        <div class="who__copy">
+          <h2 class="block__h">Who writes this</h2>
+          <p class="who__lede">
+            Two University of the Witwatersrand engineering students going all-in on AI, and the people
+            behind <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>, an AI engineering studio in Johannesburg.
+          </p>
+        </div>
+        <ul class="who__list">
+          {authors.map((a) => (
+            <li>
+              <a href={`/authors/${a.id}`} class="who__card mcard">
+                <span class={`avatar avatar--md avatar--${tone(a.id)}`} aria-hidden="true">{initials(a.data.name)}</span>
+                <span>
+                  <strong>{a.data.name}</strong>
+                  <span class="who__role">{a.data.short}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </BeamCard>
+  </section>
+</Base>
+
+<style>
+  .hero { position: relative; overflow: hidden; padding-top: clamp(2.5rem, 6vh, 4.5rem); padding-bottom: clamp(2.5rem, 5vh, 3.5rem); }
+  .hero__grid { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 4.5vw, 4rem); align-items: center; }
+  .hero__h1 { font-size: clamp(2.4rem, 4.7vw, 4.4rem); line-height: 1.05; letter-spacing: -0.022em; max-width: 15ch; margin: 0 0 0.55em; color: var(--bone); }
+  .hero__lede { font-size: var(--fs-lede); color: var(--ash); max-width: 34rem; margin: 0 0 2rem; line-height: 1.5; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.7rem; }
+  .hero__by { display: flex; align-items: center; gap: 0.7rem; color: var(--ash); font-size: 0.95rem; }
+  .hero__art { display: flex; }
+  .hero__art img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--radius-xl); border: 1px solid var(--line-2); box-shadow: var(--shadow-lift); background: var(--void); }
+  .hero__stats { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; margin-top: clamp(2.5rem, 5vh, 3.5rem); padding-top: 2.2rem; border-top: 1px solid var(--line); }
+  @media (max-width: 880px) {
+    .hero__grid { grid-template-columns: 1fr; }
+    .hero__art { order: -1; max-width: 32rem; }
+    .hero__stats { grid-template-columns: 1fr; gap: 1.8rem; }
+  }
+
+  .s-eyebrow { font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ash); margin: 0 0 1rem; display: flex; align-items: center; gap: 0.7rem; }
+  .s-num { color: var(--lime); }
+
+  .qband { margin-top: var(--section); padding: 2.4rem 0; border-block: 1px solid var(--line); background: var(--coal); }
+  .qband__label { text-align: center; color: var(--ash); margin: 0 0 1.3rem; }
+
+  .block { margin-top: var(--section); }
+  .block__head { margin-bottom: 2rem; max-width: 46rem; }
+  .block__h { font-size: var(--fs-h2); margin: 0; }
+  .block__sub { color: var(--ash); margin: 0.7rem 0 0; max-width: 42rem; font-size: 1.05rem; }
+
+  .askrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: 1.4rem; align-items: start; }
+  .askrow :global(.askai) { max-width: none; }
+
+  .checkcard { display: block; }
+  .checkcard__in { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; padding: clamp(1.6rem, 4vw, 2.8rem); }
+  .checkcard__copy .block__h { max-width: 32rem; }
+  .checkcard__sub { color: var(--ash); margin: 0.8rem 0 0; max-width: 38rem; font-size: 1.05rem; }
+  .checkcard__cta { flex-shrink: 0; }
+  @media (max-width: 760px) { .checkcard__in { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  .bento { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.3rem; }
+  .bento__cell { border-radius: var(--radius-lg); }
+  .bento__cell--lg { grid-row: span 2; }
+  .bento__cell a { display: flex; flex-direction: column; height: 100%; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--smoke); text-decoration: none; overflow: hidden; transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast); }
+  .bento__cell a:hover { border-color: var(--lime-line); transform: translateY(-3px); box-shadow: var(--glow-lime); }
+  .bento__img { display: block; border-bottom: 1px solid var(--line); background: var(--void); }
+  .bento__img img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .bento__cell--lg .bento__img img { aspect-ratio: 16 / 10; }
+  .bento__body { display: grid; gap: 0.4rem; padding: 1.5rem 1.6rem 1.7rem; }
+  .bento__body .card__title { font-size: 1.5rem; }
+  @media (max-width: 720px) { .bento { grid-template-columns: 1fr; } .bento__cell--lg { grid-row: auto; } }
+
+  .cards--auto { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
+
+  .method-cta { margin-top: 2.4rem; }
+
+  .research-strip { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.6rem, 4vw, 2.4rem); border: 1px solid var(--line-2); border-radius: var(--radius-xl); background: var(--coal); text-decoration: none; transition: border-color var(--t-fast), transform var(--t-fast); }
+  .research-strip:hover { border-color: var(--lime-line); transform: translateY(-2px); }
+  .research-strip__h { font-size: var(--fs-h2); margin: 0; color: var(--bone); max-width: 34rem; }
+  .research-strip__sub { color: var(--ash); margin: 0.6rem 0 0; max-width: 42rem; }
+  .research-strip__go { color: var(--lime); flex-shrink: 0; }
+  @media (max-width: 720px) { .research-strip { flex-direction: column; align-items: flex-start; gap: 1rem; } }
+
+  .who__beam { display: block; }
+  .who__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; padding: clamp(1.7rem, 4vw, 2.8rem); }
+  .who__lede { color: var(--ash); font-size: var(--fs-lede); max-width: 32rem; margin: 0.6rem 0 0; }
+  .who__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
+  .who__card { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--coal); text-decoration: none; color: var(--bone); transition: border-color var(--t-fast), transform var(--t-fast); }
+  .who__card:hover { border-color: var(--lime-line); transform: translateX(3px); }
+  .who__card strong { font-family: var(--font-display); font-size: 1.15rem; display: block; color: var(--bone); }
+  .who__role { color: var(--ash); font-size: 0.9rem; }
+  @media (max-width: 760px) { .who__inner { grid-template-columns: 1fr; gap: 1.6rem; } }
+</style>

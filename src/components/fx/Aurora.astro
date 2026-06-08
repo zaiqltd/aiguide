@@ -1,0 +1,113 @@
+---
+/**
+ * Aurora.astro — ambient atmosphere layer.
+ *
+ * 3 large, heavily-blurred radial blobs (lime + cyan + a deep-lime breath)
+ * drifting slowly over transparency. Sits behind hero content as a fixed
+ * `-z-index` layer; purely decorative; never intercepts pointer events.
+ *
+ * Ported from the Magic UI "aurora"/gradient-glow technique to vanilla CSS:
+ * transform + opacity only (GPU-composited, no layout thrash).
+ */
+interface Props {
+  /** Overall layer opacity. Keep it whisper-quiet on near-black. Default 0.18. */
+  opacity?: number;
+}
+const { opacity = 0.18 } = Astro.props;
+---
+
+<div class="aurora" aria-hidden="true" style={`--aurora-opacity:${opacity}`}>
+  <span class="aurora__blob aurora__blob--lime"></span>
+  <span class="aurora__blob aurora__blob--cyan"></span>
+  <span class="aurora__blob aurora__blob--deep"></span>
+</div>
+
+<style>
+  .aurora {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: var(--aurora-opacity, 0.18);
+    /* Promote to its own layer so blurred children stay cheap to animate. */
+    contain: strict;
+    will-change: opacity;
+  }
+
+  .aurora__blob {
+    position: absolute;
+    border-radius: 50%;
+    /* The heavy blur is what reads as "aurora" rather than "circle". */
+    filter: blur(100px);
+    /* Soft-edged radial so blobs melt into the void with no hard rim. */
+    will-change: transform;
+  }
+
+  .aurora__blob--lime {
+    top: -12%;
+    left: -6%;
+    width: 46vw;
+    height: 46vw;
+    min-width: 380px;
+    min-height: 380px;
+    background: radial-gradient(
+      circle at 50% 50%,
+      var(--lime, #c8ff32) 0%,
+      rgba(200, 255, 50, 0.45) 38%,
+      transparent 70%
+    );
+    animation: aurora-drift-a 26s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) infinite alternate;
+  }
+
+  .aurora__blob--cyan {
+    top: 8%;
+    right: -10%;
+    width: 42vw;
+    height: 42vw;
+    min-width: 340px;
+    min-height: 340px;
+    background: radial-gradient(
+      circle at 50% 50%,
+      var(--cyan, #58f7d6) 0%,
+      rgba(88, 247, 214, 0.4) 40%,
+      transparent 72%
+    );
+    animation: aurora-drift-b 30s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) infinite alternate;
+  }
+
+  .aurora__blob--deep {
+    bottom: -18%;
+    left: 28%;
+    width: 50vw;
+    height: 50vw;
+    min-width: 420px;
+    min-height: 420px;
+    background: radial-gradient(
+      circle at 50% 50%,
+      var(--lime-deep, #9fe000) 0%,
+      rgba(159, 224, 0, 0.32) 42%,
+      transparent 74%
+    );
+    animation: aurora-drift-c 34s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) infinite alternate;
+  }
+
+  @keyframes aurora-drift-a {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(8%, 10%, 0) scale(1.18); }
+  }
+  @keyframes aurora-drift-b {
+    0%   { transform: translate3d(0, 0, 0) scale(1.1); }
+    100% { transform: translate3d(-10%, 6%, 0) scale(0.92); }
+  }
+  @keyframes aurora-drift-c {
+    0%   { transform: translate3d(0, 0, 0) scale(0.95); }
+    100% { transform: translate3d(-6%, -12%, 0) scale(1.2); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aurora__blob {
+      animation: none !important;
+    }
+  }
+</style>

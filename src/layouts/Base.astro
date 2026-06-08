@@ -1,0 +1,144 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/newsreader';
+import '@fontsource/ibm-plex-mono';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import { SITE, NAV, CTA } from '../lib/site';
+import SchemaGraph from '../components/SchemaGraph.astro';
+import CursorGlow from '../components/fx/CursorGlow.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogImage?: string;
+  schema?: string;
+  noindex?: boolean;
+  article?: boolean;
+}
+const { title, description, path, ogImage, schema, noindex = false, article = false } = Astro.props;
+// Normalise to a single trailing-slash convention so canonical, OG and the sitemap all agree
+// (prevents duplicate-URL signals). Root stays "/".
+const canonicalPath = path === '/' ? '/' : path.replace(/\/+$/, '') + '/';
+const canonical = new URL(canonicalPath, SITE.url).href;
+const fullTitle = title.includes(SITE.name) ? title : `${title} · ${SITE.name}`;
+const ogImageUrl = new URL(ogImage || '/images/og-aiguide-south-africa.png', SITE.url).href;
+---
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#EFE9DD" />
+    <meta name="author" content="Chad Etkind, Adam Sacharowitz" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/images/zaiq-logo.png" />
+    <link rel="apple-touch-icon" href="/images/zaiq-logo.png" />
+
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_ZA" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {schema && <SchemaGraph json={schema} />}
+
+    {/* Plausible Analytics. outbound-links auto-tracks clicks to zaiq.co.za as conversions.
+        Add aiguide.co.za in the Plausible CA ETKIND account at launch. Never GA4. */}
+    <script is:inline defer data-domain="aiguide.co.za" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="read-bar" aria-hidden="true"></div>
+    <CursorGlow size={560} opacity={0.4} />
+    <style is:global>.cursorglow { z-index: 3; }</style>
+
+    <header class="site-head">
+      <div class="wrap site-head__row">
+        <a href="/" class="brand">
+          <span class="brand__dot" aria-hidden="true"></span>
+          <span class="brand__word">AI&nbsp;Guide</span>
+          <span class="brand__by">by Zaiq</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
+          <a class="site-nav__cta" href={CTA.href} rel="noopener">{CTA.label}</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap foot-grid">
+        <div class="foot__lead">
+          <div class="foot__brand">
+            <img src="/images/zaiq-logo.png" alt="Zaiq logo" width="30" height="30" />
+            <strong>AI Guide</strong>
+          </div>
+          <p>
+            The practical AI guide for South African business. Written by
+            <a href="/authors/chad-etkind">Chad Etkind</a> and
+            <a href="/authors/adam-sacharowitz">Adam Sacharowitz</a>, the engineers behind
+            <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>. Plain English, prices in rand,
+            POPIA-aware. Different problems, same move.
+          </p>
+          <p style="margin-top:1.2rem;">
+            <a class="btn btn--cad" href={CTA.href} rel="noopener">{CTA.label} &rarr;</a>
+          </p>
+        </div>
+        <div class="foot__col">
+          <p class="foot__h">Guides</p>
+          <ul>
+            <li><a href="/guides/ai-for-south-african-business">AI for SA business</a></li>
+            <li><a href="/guides/what-digital-work-costs-south-africa">What it costs</a></li>
+            <li><a href="/guides/automate-your-south-african-business">Build &amp; automate</a></li>
+            <li><a href="/guides/ai-in-2026-south-africa">What is true about AI</a></li>
+            <li><a href="/guides/sa-ai-visibility-index">The SA AI Index</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <p class="foot__h">Free tools</p>
+          <ul>
+            <li><a href="/tools/ai-visibility-check">AI visibility check</a></li>
+            <li><a href="/tools/website-cost-estimator">Website cost estimator</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <p class="foot__h">The studio</p>
+          <ul>
+            <li><a href="https://zaiq.co.za" rel="noopener">Zaiq.co.za</a></li>
+            <li><a href="https://zaiq.co.za/work" rel="noopener">The work</a></li>
+            <li><a href="/about">About this guide</a></li>
+            <li><a href="/authors/chad-etkind">Chad Etkind</a></li>
+            <li><a href="/authors/adam-sacharowitz">Adam Sacharowitz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap foot__base mono">
+        <span>&copy; 2026 AI Guide &middot; an instrument by Zaiq</span>
+        <span>Johannesburg, South Africa</span>
+      </div>
+    </footer>
+
+    <script>
+      import '../scripts/motion.js';
+    </script>
+  </body>
+</html>

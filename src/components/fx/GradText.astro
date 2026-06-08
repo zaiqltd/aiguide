@@ -1,0 +1,54 @@
+---
+/*
+  GradText.astro — inline wrapper that clips the lime->cyan "signal" gradient onto its text.
+  Ported from MagicUI text-animations/aurora-text (linear-gradient + background-clip:text,
+  optional animated background-position). Vanilla CSS, no deps. Use sparingly for hero
+  emphasis words; the gradient is the brand signal (--lime-bright -> --lime -> --cyan).
+
+  Tokens: --lime-bright, --lime, --cyan (mirrors --grad-signal in tokens.css).
+
+  Props:
+    animate?: boolean  // slow drift of the gradient for a living "aurora" feel (default false)
+*/
+interface Props {
+  animate?: boolean;
+}
+const { animate = false } = Astro.props;
+---
+<span class:list={['gradtext', { 'is-animated': animate }]}>
+  <slot />
+</span>
+
+<style>
+  .gradtext {
+    /* The signal gradient. Sized at 200% so an animated sweep has room to drift. */
+    background-image: linear-gradient(
+      100deg,
+      var(--lime-bright) 0%,
+      var(--lime) 42%,
+      var(--cyan) 100%
+    );
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .gradtext.is-animated {
+    animation: gradtext-drift 8s linear infinite alternate;
+  }
+
+  @keyframes gradtext-drift {
+    to {
+      background-position: 100% center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradtext.is-animated {
+      animation: none; /* gradient stays, motion stops */
+    }
+  }
+</style>

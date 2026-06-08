@@ -1,0 +1,342 @@
+---
+/*
+  ConstellationHero.astro — a lightweight <canvas> particle constellation, meant to sit as the
+  BACKGROUND layer of a hero (absolute, inset:0, behind content, pointer-events:none). Violet
+  nodes drift slowly across the canvas and, whenever two pass close enough, a thin violet line
+  is drawn between them — the network "wires up" near the cursor and dissolves as nodes spread.
+  Kept deliberately faint (low alpha) so headline text stays perfectly readable on top.
+
+  Performance is treated as sacred (this ships on SEO/AEO content pages):
+    • Node count is CAPPED — min(area/22000, DPR-aware budget), hard max ~70. Big screens don't
+      explode; the line pass is the expensive part (O(n²)) so n is what we govern.
+    • ONE shared requestAnimationFrame loop. No per-node timers.
+    • devicePixelRatio is honoured for crispness but CLAMPED to 2 (retina doesn't 4× the work).
+    • The loop PAUSES when the canvas scrolls offscreen (IntersectionObserver) and when the tab
+      is hidden (visibilitychange) — zero CPU when nobody's looking.
+    • prefers-reduced-motion → render exactly ONE static frame, then stop. No animation at all.
+    • Resize is debounced; we re-fit the backing store and recompute the cap.
+    • Optional pointer parallax is cheap (a throttled translate of the whole field) and degrades
+      to nothing on touch / no-hover devices.
+
+  Decorative + aria-hidden. Colours come from the design tokens (violet --lime* family) read off
+  :root at runtime so a re-skin needs no edit here.
+
+  Props:
+    density?: number  // 0.4..2 multiplier on the auto node budget (default 1). >1 = busier.
+    opacity?: number  // 0..1 master layer opacity (default 0.5). Keep low for readability.
+*/
+interface Props {
+  density?: number;
+  opacity?: number;
+}
+const { density = 1, opacity = 0.5 } = Astro.props;
+// Clamp here so a bad prop can never make the field opaque enough to fight the headline.
+const safeDensity = Math.max(0.4, Math.min(2, density));
+const safeOpacity = Math.max(0, Math.min(1, opacity));
+---
+
+<div
+  class="constellation"
+  data-constellation
+  data-density={safeDensity}
+  aria-hidden="true"
+  style={`--ch-opacity:${safeOpacity}`}
+>
+  <canvas class="constellation__canvas" data-constellation-canvas></canvas>
+</div>
+
+<style>
+  .constellation {
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* behind hero content */
+    pointer-events: none;
+    overflow: hidden;
+    opacity: var(--ch-opacity);
+    /* The field is nudged by pointer parallax via this var; translate only (cheap, no layout). */
+    --ch-px: 0px;
+    --ch-py: 0px;
+  }
+
+  .constellation__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* A hair of overscan + transform so the parallax shift never reveals a hard edge. */
+    transform: translate3d(var(--ch-px), var(--ch-py), 0);
+    transition: transform 0.5s var(--ease, ease-out);
+    will-change: transform;
+  }
+
+  /* Motion-sensitive users still get the (single, static) frame the JS paints, but never any
+     parallax drift. The JS also refuses to start its loop under this query. */
+  @media (prefers-reduced-motion: reduce) {
+    .constellation__canvas {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // ── ConstellationHero runtime ──────────────────────────────────────────────────────────────
+  // Multi-instance safe: each [data-constellation] gets its own field + rAF, keyed by a WeakSet
+  // so astro:page-load re-runs never double-bind. A single loop per instance; paused offscreen
+  // and on document.hidden; one static frame under prefers-reduced-motion.
+  (() => {
+    const prefersReduced =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    const bound = new WeakSet<HTMLElement>();
+
+    type Node = { x: number; y: number; vx: number; vy: number; r: number };
+
+    // Resolve the violet tokens once per instance (fall back to literals if a var is missing).
+    const readColors = (host: HTMLElement) => {
+      const cs = getComputedStyle(host);
+      const node = (cs.getPropertyValue('--lime') || '#8b5cff').trim() || '#8b5cff';
+      const line = (cs.getPropertyValue('--lime-line') || 'rgba(139,92,255,0.46)').trim();
+      return { node, line };
+    };
+
+    const init = (host: HTMLElement) => {
+      if (bound.has(host)) return;
+      bound.add(host);
+
+      const canvas = host.querySelector<HTMLCanvasElement>('[data-constellation-canvas]');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      if (!ctx) return;
+
+      const density = Math.max(0.4, Math.min(2, parseFloat(host.dataset.density || '1') || 1));
+      const { node: nodeColor, line: lineColor } = readColors(host);
+
+      // Tunables — conservative on purpose. LINK_DIST is the connect radius in CSS px.
+      const LINK_DIST = 132;
+      const LINK_DIST_SQ = LINK_DIST * LINK_DIST;
+      const HARD_MAX = 70; // absolute ceiling on node count → O(n²) line pass stays bounded
+      const SPEED = 0.16; // px/frame drift (slow, premium)
+      const NODE_ALPHA = 0.5; // per-node fill alpha; layer --ch-opacity scales the whole thing
+
+      let dpr = 1;
+      let cssW = 0;
+      let cssH = 0;
+      let nodes: Node[] = [];
+      let raf = 0;
+      let running = false;
+      let visible = true; // IntersectionObserver state
+      let resizeTimer = 0;
+
+      const rand = (min: number, max: number) => Math.random() * (max - min) + min;
+
+      // Compute the capped node count for the current area + DPR + density.
+      const targetCount = () => {
+        const area = cssW * cssH;
+        // Base budget by area; trimmed on high-DPR phones so retina doesn't inflate the count.
+        const areaBudget = area / 22000;
+        const dprTrim = dpr >= 2 ? 0.82 : 1;
+        const n = Math.round(areaBudget * density * dprTrim);
+        return Math.max(8, Math.min(HARD_MAX, n));
+      };
+
+      const makeNode = (): Node => ({
+        x: rand(0, cssW),
+        y: rand(0, cssH),
+        vx: rand(-SPEED, SPEED),
+        vy: rand(-SPEED, SPEED),
+        r: rand(0.7, 1.7),
+      });
+
+      const buildNodes = () => {
+        const n = targetCount();
+        nodes = Array.from({ length: n }, makeNode);
+      };
+
+      // Size the backing store to the element box × clamped DPR. Rebuild the field so node
+      // count tracks the new area. Returns false if the box has no size yet (e.g. display:none).
+      const fit = () => {
+        const rect = host.getBoundingClientRect();
+        if (!rect.width || !rect.height) return false;
+        dpr = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+        cssW = rect.width;
+        cssH = rect.height;
+        canvas.width = Math.round(cssW * dpr);
+        canvas.height = Math.round(cssH * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // draw in CSS px; backing store is DPR-scaled
+        buildNodes();
+        return true;
+      };
+
+      const draw = () => {
+        ctx.clearRect(0, 0, cssW, cssH);
+
+        // Lines first so nodes sit on top. Single O(n²) sweep over the capped set.
+        ctx.lineWidth = 1;
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dsq = dx * dx + dy * dy;
+            if (dsq < LINK_DIST_SQ) {
+              // Fade the link with distance: bright when nodes hug, gone at the threshold.
+              const t = 1 - dsq / LINK_DIST_SQ;
+              ctx.globalAlpha = t * t * 0.55; // ease-in so far links are very faint
+              ctx.strokeStyle = lineColor;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Nodes.
+        ctx.globalAlpha = NODE_ALPHA;
+        ctx.fillStyle = nodeColor;
+        for (let i = 0; i < nodes.length; i++) {
+          const p = nodes[i];
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      };
+
+      const step = () => {
+        for (let i = 0; i < nodes.length; i++) {
+          const p = nodes[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          // Soft wrap with a small margin so nodes glide off one edge and back on the opposite,
+          // keeping the field continuous (no popping at the borders).
+          const m = 24;
+          if (p.x < -m) p.x = cssW + m;
+          else if (p.x > cssW + m) p.x = -m;
+          if (p.y < -m) p.y = cssH + m;
+          else if (p.y > cssH + m) p.y = -m;
+        }
+        draw();
+      };
+
+      const frame = () => {
+        if (!running) return;
+        step();
+        raf = requestAnimationFrame(frame);
+      };
+
+      const start = () => {
+        if (running || prefersReduced) return;
+        if (!visible || document.hidden) return;
+        if (!cssW || !cssH) return;
+        running = true;
+        raf = requestAnimationFrame(frame);
+      };
+
+      const stop = () => {
+        running = false;
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      };
+
+      // ── Lifecycle wiring ────────────────────────────────────────────────────────────────────
+
+      // Pause/resume as the hero scrolls in and out of view → no work for an offscreen canvas.
+      let io: IntersectionObserver | null = null;
+      if ('IntersectionObserver' in window) {
+        io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              visible = e.isIntersecting;
+              if (visible) start();
+              else stop();
+            }
+          },
+          { threshold: 0 }
+        );
+        io.observe(host);
+      }
+
+      // Tab visibility: stop spending frames in a backgrounded tab.
+      const onVisibility = () => {
+        if (document.hidden) stop();
+        else start();
+      };
+      document.addEventListener('visibilitychange', onVisibility);
+
+      // Debounced resize: refit the backing store + recompute the cap, then repaint.
+      const onResize = () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => {
+          const ok = fit();
+          if (!ok) return;
+          if (prefersReduced) draw(); // static mode: just repaint one frame
+          else if (!running) draw(); // paused (offscreen/hidden): keep the frozen frame fresh
+        }, 160);
+      };
+      window.addEventListener('resize', onResize, { passive: true });
+
+      // Optional pointer parallax: nudge the whole field a few px toward the cursor. Throttled
+      // to one update per rAF and skipped entirely on touch / reduced-motion. Purely transform.
+      if (canHover && !prefersReduced) {
+        let pTick = 0;
+        const onPointer = (e: PointerEvent) => {
+          if (pTick) return;
+          pTick = requestAnimationFrame(() => {
+            pTick = 0;
+            const rect = host.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+            const nx = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
+            const ny = (e.clientY - rect.top) / rect.height - 0.5;
+            const SHIFT = 14; // px of travel at the edges — subtle
+            host.style.setProperty('--ch-px', `${(-nx * SHIFT).toFixed(2)}px`);
+            host.style.setProperty('--ch-py', `${(-ny * SHIFT).toFixed(2)}px`);
+          });
+        };
+        window.addEventListener('pointermove', onPointer, { passive: true });
+      }
+
+      // ── Boot ────────────────────────────────────────────────────────────────────────────────
+      const boot = () => {
+        const ok = fit();
+        if (!ok) {
+          // Box not laid out yet (rare): retry once on the next frame.
+          requestAnimationFrame(() => {
+            if (fit()) {
+              if (prefersReduced) draw();
+              else start();
+            }
+          });
+          return;
+        }
+        if (prefersReduced) {
+          draw(); // exactly one frame, no loop
+        } else {
+          start(); // IO/visibility gates inside start() decide if it actually runs
+        }
+      };
+
+      boot();
+    };
+
+    const run = () =>
+      document.querySelectorAll<HTMLElement>('[data-constellation]').forEach(init);
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+    // Astro View Transitions: a fresh hero may mount after a client-side swap.
+    document.addEventListener('astro:page-load', run);
+  })();
+</script>

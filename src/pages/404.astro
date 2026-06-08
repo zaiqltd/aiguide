@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { NAV } from '../lib/site';
+import { graph, websiteNode, organizationNode } from '../lib/schema';
+const jsonld = graph(websiteNode(), organizationNode());
+---
+<Base
+  title="Page not found"
+  description="That page does not exist. Find what you were looking for in the AI Guide for South African business."
+  path="/404"
+  schema={jsonld}
+  noindex
+>
+  <section class="wrap nf">
+    <p class="kicker">404</p>
+    <h1 class="nf__h">That page is invisible. <span class="grad-text">Your business should not be.</span></h1>
+    <p class="nf__lede">
+      We could not find that page. It may have moved. Here is where most people are headed.
+    </p>
+    <ul class="nf__links">
+      {NAV.map((n) => <li><a href={n.href}>{n.label} &rarr;</a></li>)}
+      <li><a href="/tools/ai-visibility-check">Free AI visibility check &rarr;</a></li>
+      <li><a href="/">Back to the home page &rarr;</a></li>
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .nf { padding-top: clamp(4rem, 12vh, 8rem); padding-bottom: var(--section); max-width: 46rem; }
+  .nf__h { font-size: var(--fs-hero); margin: 0 0 0.6em; }
+  .nf__lede { font-size: var(--fs-lede); color: var(--ash); margin: 0 0 2rem; }
+  .nf__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7rem; }
+  .nf__links a { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--silver); text-decoration: none; }
+  .nf__links a:hover { color: var(--lime); }
+</style>

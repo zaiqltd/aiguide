@@ -1,0 +1,70 @@
+---
+// The one CTA. Soft by default; `commercial` leads with Zaiq harder. See AIGUIDE-STRATEGY.md §2.
+import { CTA } from '../lib/site';
+interface Props {
+  commercial?: boolean;
+  line?: string;
+}
+const { commercial = false, line } = Astro.props;
+const headline = line
+  ? line
+  : commercial
+    ? 'This is the exact problem we built Zaiq to solve.'
+    : 'Stuck on this one?';
+---
+<aside class="cta">
+  <p class="cta__line">{headline}</p>
+  <p class="cta__sub">
+    {commercial
+      ? 'Two engineers, AI, fixed price, live in days. Send us the problem and we quote for free.'
+      : 'We are two engineers who point AI at exactly this kind of problem. Send it over, we quote for free.'}
+  </p>
+  <a class="cta__btn" href={CTA.href} rel="noopener">{CTA.label} &rarr;</a>
+  <p class="cta__re mono">{CTA.sub}</p>
+</aside>
+
+<style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    max-width: var(--measure-wide);
+    margin: 2.8rem 0 1rem;
+    padding: 1.8rem 1.7rem 2rem;
+    background: var(--coal);
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius-lg);
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(640px circle at 100% 0%, var(--lime-wash), transparent 55%);
+  }
+  .cta > * { position: relative; z-index: 1; }
+  .cta__line {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    line-height: 1.18;
+    margin: 0 0 0.5rem;
+    color: var(--bone);
+    text-wrap: balance;
+  }
+  .cta__sub { margin: 0 0 1.2rem; color: var(--ash); max-width: var(--measure); }
+  .cta__btn {
+    display: inline-block;
+    background: var(--lime);
+    color: var(--lime-ink) !important;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--radius);
+    transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background 0.15s var(--ease);
+  }
+  .cta__btn:hover { background: var(--lime-bright); transform: translateY(-2px); box-shadow: var(--glow-lime); }
+  .cta__re { margin: 0.9rem 0 0; color: var(--ash); font-size: 0.66rem; }
+</style>

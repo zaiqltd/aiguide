@@ -1,0 +1,123 @@
+---
+/*
+  BeamCard.astro — premium dark card with a continuous "border beam".
+  Ported from MagicUI special-effects/border-beam (which uses framer-motion + offset-path).
+  Vanilla technique: a single bright lime arc lives in a rotating conic-gradient that is
+  MASKED to the 1px border ring only (intersect of padding-box + border-box masks), so the
+  light appears to travel around the perimeter forever. Pure CSS — no JS, no deps.
+
+  Tokens (from src/styles/tokens.css): --smoke surface, --line border, --radius-lg,
+  --lime / --lime-bright beam, --lime-glow for the bloom.
+
+  Props:
+    duration?: number  // seconds for one full lap of the beam (default 8)
+    class?:    string  // extra classes merged onto the card
+*/
+interface Props {
+  duration?: number;
+  class?: string;
+}
+const { duration = 8, class: className = '' } = Astro.props;
+const style = `--beam-duration:${duration}s;`;
+---
+<div class:list={['beamcard', className]} style={style}>
+  <span class="beamcard__beam" aria-hidden="true"></span>
+  <div class="beamcard__inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  /* Animatable custom property for a smooth, GPU-friendly border rotation.
+     @property lets the angle interpolate instead of snapping. */
+  @property --beam-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  .beamcard {
+    position: relative;
+    border-radius: var(--radius-lg);
+    background: var(--smoke);
+    /* The base resting border. The beam rides ON TOP of this ring. */
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    isolation: isolate;
+  }
+
+  /* The traveling light. An absolutely-positioned ring the exact size of the card,
+     painted with a conic-gradient whose bright wedge rotates, then masked so ONLY the
+     1px border band is visible. */
+  .beamcard__beam {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px; /* = ring thickness */
+    pointer-events: none;
+    z-index: 1;
+    /* Mostly transparent, with one short bright lime arc that sweeps around. */
+    background: conic-gradient(
+      from var(--beam-angle),
+      transparent 0deg,
+      transparent 64deg,
+      var(--lime) 80deg,
+      var(--lime-bright) 86deg,
+      var(--lime) 92deg,
+      transparent 108deg,
+      transparent 360deg
+    );
+    /* Show paint only on the border ring: full box minus the padding-box interior. */
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    animation: beamcard-spin var(--beam-duration) linear infinite;
+  }
+
+  /* A soft lime bloom that co-rotates a touch behind the beam for an "expensive" glow.
+     Heavily blurred + low opacity so it reads as ambient light, never a hard edge. */
+  .beamcard__beam::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--beam-angle),
+      transparent 40deg,
+      var(--lime-glow) 86deg,
+      transparent 132deg,
+      transparent 360deg
+    );
+    filter: blur(7px);
+    opacity: 0.5;
+    /* No mask here — the blur + low opacity keep it as a faint halo around the corner. */
+  }
+
+  .beamcard__inner {
+    position: relative;
+    z-index: 2; /* content above the beam ring */
+    border-radius: inherit;
+  }
+
+  @keyframes beamcard-spin {
+    to {
+      --beam-angle: 360deg;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .beamcard__beam {
+      animation: none;
+      /* Hold a static, calm lime presence on the top-left corner instead of motion. */
+      --beam-angle: 312deg;
+    }
+    .beamcard__beam::after {
+      opacity: 0.32;
+    }
+  }
+</style>

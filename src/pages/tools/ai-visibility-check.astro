@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import AnswerBlock from '../../components/AnswerBlock.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTA from '../../components/CTA.astro';
+import VisibilityCheck from '../../components/tools/VisibilityCheck.astro';
+import {
+  graph, websiteNode, organizationNode, breadcrumbNode, webPageNode,
+  webApplicationNode, faqPageNode,
+} from '../../lib/schema';
+
+const path = '/tools/ai-visibility-check';
+const title = 'Is your business invisible to AI? Free AI visibility check (South Africa)';
+const description =
+  'A free 60-second tool that generates the exact prompts to test whether ChatGPT, Google AI and Perplexity recommend your South African business, and what to do if they do not.';
+const answer =
+  'To check whether AI recommends your business, ask ChatGPT, Google AI and Perplexity the questions your buyers ask, such as "who is the best [your service] in [your city]?". If your business is not in the answer, you are invisible to a fast-growing slice of buyers. This free tool generates the exact prompts to test, in about 60 seconds.';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Free AI visibility check', path },
+];
+const faqs = [
+  {
+    q: 'How do I check if ChatGPT recommends my business?',
+    a: 'Ask ChatGPT the question a buyer would ask, like "who is the best [your service] in [your city]?", then see whether your business is named. Repeat it on Google AI and Perplexity. If a competitor appears and you do not, you are outranked. If no specific business appears, the category is still up for grabs. This tool builds the exact prompts for you.',
+  },
+  {
+    q: 'Why is my business invisible to AI search?',
+    a: 'Usually not because you are small, but because nobody has written the clear, structured answer the engine wants to quote, and your business identity is inconsistent across the web. AI engines name businesses they can clearly identify and that are described in content they trust. Fix the identity and the answer content and you become quotable.',
+  },
+  {
+    q: 'Does this tool send my business details anywhere?',
+    a: 'No. Everything happens in your browser. Nothing you type is sent to us or anyone else. The tool simply builds the prompts you can paste into the AI engines yourself.',
+  },
+  {
+    q: 'How do I get my business recommended by AI?',
+    a: 'Make your business identity consistent everywhere, publish content that directly answers your buyers questions, earn mentions on sources the engines trust, and keep it fresh. Our full walkthrough covers each step. It is the same work we do for clients at Zaiq.',
+  },
+];
+
+const jsonld = graph(
+  websiteNode(),
+  organizationNode(),
+  breadcrumbNode(path, crumbs),
+  webPageNode({ path, title, description, authorId: 'chad-etkind', datePublished: '2026-06-08' }),
+  webApplicationNode({ path, name: 'AI Visibility Check', description }),
+  faqPageNode(path, faqs)
+);
+---
+<Base title={title} description={description} path={path} schema={jsonld}>
+  <article class="wrap tool-page">
+    <Breadcrumb crumbs={crumbs} />
+    <p class="kicker">Free tool</p>
+    <h1>Is your business invisible to AI?</h1>
+    <AnswerBlock answer={answer} lastVerified="June 2026" />
+
+    <p class="tool-page__lede">
+      Buyers have started asking ChatGPT, Google AI and Perplexity who to use, the same way they used
+      to Google. The difference is brutal: Google gives ten links, the engine gives one short, confident
+      answer. If you are not in it, you do not get a second look. Run the check below.
+    </p>
+
+    <VisibilityCheck />
+
+    <section class="prose tool-page__why">
+      <h2>What decides whether AI names you</h2>
+      <p>Four levers move your business into the answer. Most local businesses do none of them, which is
+        why the engines name the same few competitors every time. It is not a popularity contest. It is
+        an engineering problem, and it is winnable.</p>
+      <ul>
+        <li><strong>Entity clarity.</strong> The engine can confidently identify your business as one thing: one consistent name, description and details everywhere, with structured data on your site.</li>
+        <li><strong>Answer content.</strong> You have published the answer to the question being asked, leading with a clear, quotable response.</li>
+        <li><strong>Trusted citations.</strong> Sources the engine already trusts mention you: press, directories, credible third-party content.</li>
+        <li><strong>Freshness.</strong> The information is current. Engines down-rank stale answers.</li>
+      </ul>
+      <p>For the full method, read
+        <a href="/guides/get-found-on-ai-search-south-africa">how to get your business found on AI search</a>.</p>
+    </section>
+
+    <FAQ faqs={faqs} />
+    <CTA commercial line="Invisible to AI? That is exactly what we fix." />
+  </article>
+</Base>
+
+<style>
+  .tool-page { padding-top: 2.4rem; max-width: var(--measure-wide); }
+  .tool-page__lede { font-size: var(--fs-lede); color: var(--ash); max-width: 42rem; margin: 0 0 2rem; line-height: 1.55; }
+  .tool-page__why { margin-top: 2.8rem; }
+</style>
