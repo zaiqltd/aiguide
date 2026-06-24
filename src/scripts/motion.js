@@ -118,12 +118,37 @@ function toc() {
   map.forEach((_, sec) => io.observe(sec));
 }
 
+/* Mobile menu: the hamburger toggles the primary nav as a dropdown.
+   Progressive enhancement, the links are reachable with JS off (the header
+   bar wraps on small screens). */
+function navMenu() {
+  const btn = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  const set = (open) => {
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    nav.classList.toggle('is-open', open);
+  };
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    set(btn.getAttribute('aria-expanded') !== 'true');
+  });
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !btn.contains(e.target)) set(false);
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 720) set(false); });
+}
+
 const init = () => {
   reveals();
   counters();
   magicCards();
   scrollChrome();
   toc();
+  navMenu();
 };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 else init();

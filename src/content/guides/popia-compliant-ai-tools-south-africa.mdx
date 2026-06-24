@@ -1,0 +1,141 @@
+---
+title: "POPIA-compliant AI tools for South African business"
+description: A plain guide to POPIA-compliant AI tools in South Africa. What to demand from a vendor, free vs enterprise tiers, the realistic options, and how to vet before you sign up.
+answer: >-
+  No AI tool is "POPIA-certified", so compliance comes from how you set it up. A defensible setup needs a
+  signed data-processing agreement with the vendor as your operator, no training on your inputs, configurable
+  retention and deletion, access control, a lawful section 72 cross-border basis, and a processing record you
+  keep. Realistic options run from consumer tools with personal data stripped out to enterprise tiers with a
+  DPA to private deployments.
+cluster: ai-business
+clusterLabel: "AI for SA business"
+clusterPath: /guides/ai-for-south-african-business
+author: chad-etkind
+datePublished: "2026-06-09"
+lastVerified: June 2026
+intent: commercial
+isHub: false
+keywords:
+  - popia compliant ai tools
+  - popia compliant ai south africa
+  - enterprise ai alternatives popia
+  - safe ai tools for business south africa
+  - chatgpt enterprise popia
+  - microsoft copilot popia
+draft: false
+faqs:
+  - q: What makes an AI tool POPIA-compliant?
+    a: >-
+      There is no POPIA certification, so it is the setup, not the logo. A defensible one has a signed data
+      processing agreement making the vendor your operator (s19), a commitment not to train on your inputs,
+      configurable retention and deletion, access control, a lawful cross-border basis under section 72, and a
+      record of what the tool processes. Get those and the tool is on solid ground.
+  - q: Is free ChatGPT or ChatGPT Enterprise better for POPIA?
+    a: >-
+      Enterprise, for any work touching personal information. As of 2026, consumer ChatGPT may train on your
+      conversations by default unless you turn it off, while ChatGPT Team, Enterprise and the API do not train
+      on business data by default and offer a DPA with limited, configurable retention. Verify the current
+      terms of the specific plan, as they change.
+  - q: What is a Data Processing Addendum (DPA) and do I need one?
+    a: >-
+      A DPA is the contract that makes the vendor your operator under POPIA and sets out security, retention,
+      sub-processors and transfer safeguards (s19, s72). If a tool processes any personal information on your
+      behalf, especially across borders, you need one. Without a DPA the vendor is not bound as your operator
+      and you carry the exposure as the responsible party.
+  - q: Are Microsoft Copilot and Gemini for Business POPIA-compliant?
+    a: >-
+      Their business and enterprise tiers are built for this. As of 2026, Microsoft Copilot and Google Gemini
+      offer business tiers with a DPA and commitments not to train on enterprise data. The exact terms vary by
+      tier and change, so do not assume the free version behaves the same. Confirm the DPA, training stance and
+      retention for the specific plan you buy.
+  - q: Do I have to keep AI data inside South Africa?
+    a: >-
+      No. POPIA does not require data to stay in the country. Section 72 lets personal information leave South
+      Africa if the recipient is bound by substantially similar protection, the data subject consents, or it is
+      necessary for a contract with or for them. A US AI vendor processing your data is a transborder flow, and
+      a DPA with adequate-protection terms is how you meet section 72.
+  - q: Can a small business afford a POPIA-compliant AI setup?
+    a: >-
+      Yes. The cheapest defensible route costs nothing extra: use consumer tools but strip personal information
+      out before you ask. Beyond that, paid Team or API tiers with a DPA and training off are within reach of
+      most businesses, and you only need private deployments for genuinely sensitive work. Compliance is mostly
+      discipline plus the right tier, not a big spend.
+---
+import Callout from '../../components/Callout.astro';
+
+You can have the speed of AI without handing your customers' personal information to a black box. The
+difference is almost entirely the tool you choose and how you set it up. There is no such thing as a
+"POPIA-certified" AI, so compliance is something you assemble, not something you buy off a badge. Here is
+what a defensible setup actually looks like, and the realistic options for a South African business.
+
+## What "POPIA-compliant" actually means for an AI tool
+
+POPIA never names a tool as approved. Compliance comes from the contract and the controls around the tool,
+so demand all of the following before personal information goes anywhere near it.
+
+| What to demand | Why it matters under POPIA |
+| --- | --- |
+| A signed DPA, with the vendor as your operator | s19: an operator may process only on your instructions and must keep the data secure. The DPA is what binds them. |
+| No training on your inputs | Stops your customers' data being absorbed into a model you cannot control or delete from. |
+| Configurable retention and deletion | You decide how long data is kept and can have it removed, which the security and minimality duties expect. |
+| Access control | s19 reasonable security: only the right people and systems should reach the data. |
+| A defensible cross-border basis | s72: a US or offshore vendor is a transborder flow, lawful only with adequate-protection terms (usually via the DPA), consent, or contractual necessity. |
+| A processing record you keep | Accountability: be able to show what the tool touches, why, and on what basis. |
+
+## Free vs Enterprise: the difference that matters
+
+The gap between the free tab and the paid tier is not features, it is what happens to your data. Consumer
+tiers are built for individuals and may use what you type to improve the model by default. Business tiers
+are built for organisations bound by laws like POPIA, so they switch that off and put a contract behind it.
+
+<Callout variant="fact">
+As of 2026, consumer ChatGPT may train on your conversations by default unless you turn it off or use
+Temporary Chat, while ChatGPT Team, Enterprise and the API do not train on business data by default and
+offer a DPA with limited, configurable retention. Microsoft Copilot and Google Gemini offer the same kind
+of business tiers with DPAs and no-training commitments. Exact terms vary by tier and change, so verify the
+specific plan's current terms before you rely on it.
+</Callout>
+
+## The realistic options for a SA business
+
+You do not have to pick one tool for everything. Match the tier to the sensitivity of the work.
+
+| Option | Best for | The POPIA catch |
+| --- | --- | --- |
+| Consumer tools, personal data stripped out | Drafting, brainstorming, general questions with no real personal information | Discipline-dependent: one pasted ID number breaks it. De-identify so it cannot be re-identified (s6); reversible pseudonymisation does not count. |
+| ChatGPT Team / Enterprise or the API, training off, DPA in place | Day-to-day work that touches customer data | You must actually sign the DPA and confirm training is off and retention is set. Verify the plan's current terms. |
+| Microsoft Copilot or Google Gemini business tiers | Businesses already on Microsoft 365 or Google Workspace | Use the business or enterprise tier with its DPA, not the free version. Terms vary by tier and change. |
+| Private or locally-hosted open models | The most sensitive work: health, financial, legal, large personal datasets | More setup and cost, but the data never leaves your control, which sidesteps the s72 transborder question entirely. |
+
+Tiers, plan names and terms change often. Treat the table as the shape of the decision, not a frozen
+spec, and verify the current terms of whatever you actually buy.
+
+## What to check before you sign up
+
+Before you put any customer data into a new tool, do a short vendor vet. It takes minutes and saves a lot.
+
+1. **Read the data terms.** Find what the vendor does with your inputs, in their own words, not a summary.
+2. **Confirm no training.** Make sure the plan does not learn from your data by default, and that it stays off.
+3. **Get the DPA.** Without it, the vendor is not your operator under POPIA and you carry the risk alone.
+4. **Check retention.** Know how long data is kept and whether you can shorten that or delete on demand.
+5. **Check sub-processors and location.** See who else touches the data and where it sits, so your s72 basis holds.
+
+## Where Zaiq fits
+
+We are an AI engineering studio in South Africa, and building the compliant setup is part of the job, not a
+bolt-on. We pick the right tier for the work, get the DPA in place, keep personal information out of public
+tools, stand up private deployments for the sensitive cases, and leave you with a clean processing record
+you can show. We do not sell AI; we solve the problem and AI is how, safely. Bring us the use case at
+[zaiq.co.za/work](https://zaiq.co.za/work) and we will tell you straight what a POPIA-safe setup looks like
+for it.
+
+This is general guidance, not legal advice. For a high-risk or consequential processing decision, confirm
+with a POPIA practitioner.
+
+## Related guides
+
+- [Can you put customer data into ChatGPT in South Africa?](/guides/can-you-put-customer-data-in-chatgpt-south-africa)
+- [Is it legal to use AI for SARS and tax data in South Africa?](/guides/is-it-legal-to-use-ai-for-sars-tax-data-south-africa)
+- [How to anonymise data before using AI](/guides/how-to-anonymise-data-before-using-ai)
+- [AI and POPIA: is your data safe with AI tools?](/guides/ai-popia-data-safety)
+- [AI for South African business](/guides/ai-for-south-african-business)

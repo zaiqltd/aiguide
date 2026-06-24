@@ -1,0 +1,118 @@
+---
+title: "Can you put customer data into ChatGPT in South Africa?"
+description: A plain guide to whether you can put customer data into ChatGPT in South Africa, what POPIA requires, and the safe ways to use AI without breaking the law.
+answer: >-
+  Generally no, not the consumer ChatGPT, for customer personal information. Typing it in is processing
+  under POPIA, and it crosses to OpenAI's US servers, a transborder flow under section 72. The safe routes
+  are: de-identify first, or use ChatGPT Enterprise or the API with a DPA and training off, or a private
+  deployment.
+cluster: ai-business
+clusterLabel: "AI for SA business"
+clusterPath: /guides/ai-for-south-african-business
+author: chad-etkind
+datePublished: "2026-06-09"
+lastVerified: June 2026
+intent: informational
+isHub: false
+keywords:
+  - can i put customer data in chatgpt
+  - paste client data into chatgpt popia
+  - is chatgpt popia compliant south africa
+  - customer data ai south africa
+  - chatgpt cross border data transfer
+  - is chatgpt enterprise popia compliant
+draft: false
+faqs:
+  - q: Can I paste client tax returns into ChatGPT without breaking POPIA?
+    a: >-
+      Not into the consumer version, as a rule. A tax return is full of personal information, and pasting it
+      in is processing under POPIA plus a transborder flow to OpenAI's US servers under section 72, which most
+      small businesses have no lawful basis for. Either de-identify it first, or use an Enterprise or API setup
+      with a DPA and training switched off.
+  - q: Does POPIA apply to ChatGPT and other AI tools?
+    a: >-
+      Yes. POPIA governs how you process personal information regardless of the tool, so it applies to ChatGPT
+      exactly as it applies to a spreadsheet. Typing a customer's details into ChatGPT is processing, and the
+      Act's rules apply. Using AI does not create an exemption. If personal information goes in, POPIA is in play.
+  - q: Is ChatGPT Enterprise POPIA-compliant?
+    a: >-
+      Enterprise is the more defensible path, not an automatic tick. As of 2026, ChatGPT Team and Enterprise and
+      the API do not train on business data by default and offer a Data Processing Addendum with configurable
+      retention. It is still a transborder flow needing a section 72 basis, but a DPA plus safeguards helps you
+      meet the adequate-protection requirement. Check OpenAI's current terms.
+  - q: Is using ChatGPT a cross-border transfer of data?
+    a: >-
+      Yes, when you put personal information in. OpenAI processes on US servers, so sending personal information
+      to ChatGPT is a transborder flow under POPIA section 72. You may only do it if a section 72 basis applies,
+      such as a binding agreement giving adequate protection, the data subject's consent, or necessity to perform
+      a contract for them. Most small businesses have none of these.
+  - q: What counts as personal information under POPIA?
+    a: >-
+      It is broad: a person's name, ID number, contact details and financial information all count. POPIA also
+      defines special personal information under section 26, such as health, religion, biometrics and criminal
+      behaviour, which carries extra restrictions. If what you are about to paste can identify a living person,
+      treat it as personal information and keep it out of public ChatGPT.
+  - q: What are the penalties for a POPIA breach?
+    a: >-
+      POPIA provides for administrative fines of up to R10 million, and offences can carry imprisonment of up to
+      ten years. The Information Regulator issues enforcement notices, and ignoring one is itself an offence.
+      Beyond the fine, you carry the reputational and trust cost of leaking customer data, which is usually the
+      larger bill in practice.
+  - q: Can I use AI if I remove the names and ID numbers first?
+    a: >-
+      It depends on how thoroughly you do it. Under POPIA section 6, data de-identified so it cannot be
+      re-identified falls outside the Act, so true de-identification lets you use AI freely. But reversible
+      masking, where you could put the names back, is pseudonymisation, and that stays personal information.
+      Remove enough that no one could re-identify the person.
+---
+import Callout from '../../components/Callout.astro';
+
+The fear is the right one: you want ChatGPT's speed without handing a customer's personal information to a US server you do not control. The honest answer is that for the consumer version, with real customer data, the answer is generally no. But there are safe, defensible ways to use AI on the same work. Here is the plain version.
+
+## Why ChatGPT is a POPIA problem (two reasons)
+
+There are two separate problems, and both bite at once when you paste customer data in.
+
+First, **typing customer information into ChatGPT is processing** under POPIA (the Protection of Personal Information Act, Act 4 of 2013). Processing is essentially any handling of personal information, and that includes feeding it into a tool. The moment a name, ID number or financial detail goes in, the Act's rules apply, the same as they would for a spreadsheet or a CRM.
+
+Second, **it leaves the country.** OpenAI processes on US servers, so sending personal information to ChatGPT is a transborder (cross-border) flow under section 72. You may only transfer personal information out of South Africa if a section 72 basis applies: the recipient is bound by a law, binding rules or agreement giving adequate, substantially similar protection; or the data subject consents; or it is necessary to perform or conclude a contract with or for them; or it is for their benefit and consent is not reasonably practicable. Most small businesses pasting into consumer ChatGPT have none of these.
+
+## What actually happens to what you type
+
+This is the part people underestimate. As of 2026 (and you should verify OpenAI's current data terms, because these change), **consumer ChatGPT, the free and Plus versions, may use your conversations to train its models by default** unless you turn that off in settings or use a Temporary Chat. So the customer detail you pasted to "just ask it something" can end up improving the model and sitting somewhere you cannot reach or delete. You have lost control of where the data lives, which is the opposite of what section 19 asks of you: to secure personal information with appropriate, reasonable technical and organisational measures.
+
+## The three ways to use AI safely
+
+You do not have to give up AI. You have to choose the route that fits the sensitivity of the data.
+
+| Safe route | What it means | When to use it |
+| --- | --- | --- |
+| De-identify first | Strip the data so the person cannot be re-identified, then ask | Quick, everyday questions where the AI does not need the identity |
+| Enterprise or the API with a DPA | ChatGPT Team or Enterprise, or the API, with training off and a signed Data Processing Addendum | Ongoing business use that genuinely needs the real data |
+| Private or local deployment | A model that runs in an environment you control, data never leaves | Sensitive or special personal information, or high-volume work |
+
+<Callout variant="take">
+The blunt version: do not paste a customer's name, ID number or financial information into the free or Plus version of ChatGPT. Treat it as if it will be stored and used to train a model, because by default it may be. If the work needs the real data, use Enterprise or the API with a DPA and training off, or a private deployment, or strip the personal details first.
+</Callout>
+
+## What counts as personal information
+
+If you are not sure whether something is "personal information," the safe default is to assume it is. POPIA defines it broadly: a person's name, ID number, contact details and financial information all count. There is also a higher-risk tier, **special personal information** under section 26, covering health, religion, biometrics and criminal behaviour, which carries extra restrictions. Health records, in particular, should never go near a public AI tool. If what you are about to paste could identify a living person, keep it out of consumer ChatGPT.
+
+## Who's responsible if it leaks
+
+Here is the part businesses miss. Under POPIA you are the **responsible party**, the one who decides why and how the data is processed, and that accountability does not transfer to OpenAI or any AI vendor. If you choose to paste customer data into a tool with weak data handling and it leaks, that is your exposure, not the vendor's. The Information Regulator can issue enforcement notices, and the Act provides for administrative fines of up to R10 million and, for offences, imprisonment of up to ten years. The fix is not to avoid AI. It is to choose the route deliberately and keep personal data on a tight leash.
+
+## Where Zaiq fits
+
+We are an AI engineering studio in South Africa, and we build AI that handles POPIA from day one: private or Enterprise deployments for sensitive work, customer personal information kept out of public tools, a Data Processing Addendum where one is needed, a human in the loop where the law wants one, and a clean record of what the system processes and why. We do not sell AI; we solve the problem and AI is how, safely. If you want ChatGPT's speed without the data risk, bring us the problem at [zaiq.co.za/work](https://zaiq.co.za/work) and we will tell you straight what safe looks like for your case.
+
+This is general guidance, not legal advice. For a high-risk or consequential processing decision, confirm with a POPIA practitioner.
+
+## Related guides
+
+- [Is it legal to use AI for SARS and tax data in South Africa?](/guides/is-it-legal-to-use-ai-for-sars-tax-data-south-africa)
+- [POPIA-compliant AI tools for South African business](/guides/popia-compliant-ai-tools-south-africa)
+- [How to anonymise data before using AI](/guides/how-to-anonymise-data-before-using-ai)
+- [AI and POPIA: is your data safe with AI tools?](/guides/ai-popia-data-safety)
+- [AI for South African business](/guides/ai-for-south-african-business) (the hub)

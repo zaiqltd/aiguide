@@ -1,0 +1,138 @@
+---
+title: "Is it legal to use AI for SARS and tax data in South Africa?"
+description: Is it legal to use AI for SARS and tax data in South Africa? What POPIA, the Tax Administration Act and professional confidentiality require, and the safe way to do it.
+answer: >-
+  Three laws apply: POPIA, the Tax Administration Act's secrecy duties, and a tax practitioner's
+  professional confidentiality. Pasting a client's tax return into public ChatGPT risks all three.
+  The compliant path is to de-identify the data first, or use an Enterprise or API tool with a
+  data processing agreement and a record of what you process.
+cluster: ai-business
+clusterLabel: "AI for SA business"
+clusterPath: /guides/ai-for-south-african-business
+author: chad-etkind
+datePublished: "2026-06-09"
+lastVerified: June 2026
+intent: informational
+isHub: false
+keywords:
+  - is it legal to use ai for sars data
+  - chatgpt tax data south africa
+  - ai tax practitioner popia
+  - using ai with financial data south africa
+  - sars confidentiality ai
+  - ai bookkeeping south africa
+draft: false
+faqs:
+  - q: Can a tax practitioner use ChatGPT with client data?
+    a: >-
+      Not the public consumer version with identifiable client data. A practitioner owes professional
+      confidentiality to clients and is bound by POPIA, and a leak is both a POPIA matter and a
+      professional-conduct matter. De-identify the data first, or use an Enterprise or API tool with a
+      data processing agreement and training switched off. When in doubt, do not paste the return.
+  - q: Does SARS allow using AI tools for tax data?
+    a: >-
+      There is no public SARS rule that permits, or specifically bans, putting client tax data into AI
+      tools. SARS itself is bound by taxpayer secrecy under the Tax Administration Act. For a business or
+      practitioner, the duties that bite day-to-day are POPIA and professional confidentiality, and those
+      apply regardless of which tool you use.
+  - q: Is sending tax data to ChatGPT a cross-border transfer?
+    a: >-
+      Usually yes. A US-based AI service processes your data outside South Africa, which is a transborder
+      flow under POPIA section 72. That is only allowed with adequate-protection terms, the person's
+      consent, or where it is necessary for the contract. A consumer chatbot with no such terms does not
+      satisfy section 72 for a client's personal information.
+  - q: What law covers tax and financial data in South Africa?
+    a: >-
+      Three layers. POPIA (Act 4 of 2013) governs the personal information inside a return. The Tax
+      Administration Act of 2011 imposes taxpayer secrecy on SARS officials. And tax practitioners owe
+      clients professional confidentiality through their Recognised Controlling Body and SARS
+      registration. Tax data sits under all three at once.
+  - q: How can accountants use AI safely?
+    a: >-
+      De-identify first so the data cannot be re-identified, which under POPIA takes it outside the Act.
+      Where you need real data, use an Enterprise or API tool with a data processing agreement and
+      training switched off, keep a record of what you process and why, secure it with reasonable
+      measures under section 19, and keep a human reviewing the output.
+  - q: What are the risks of using AI for bookkeeping?
+    a: >-
+      A client's books hold personal and financial information, so pasting them into a public AI tool can
+      breach POPIA, count as a cross-border transfer under section 72, and may be retained or used to
+      train the model. POPIA enforcement can reach fines and the Regulator can issue enforcement notices,
+      and for a practitioner it is also a professional-conduct exposure.
+  - q: Does using AI break taxpayer confidentiality?
+    a: >-
+      It can. The Tax Administration Act binds SARS to secrecy; your own duties are POPIA plus the
+      professional confidentiality you owe clients. Feeding identifiable tax data into a tool that
+      retains or trains on it can breach that confidentiality. De-identifying the data, or using a
+      private tool with a data processing agreement, keeps the duty intact.
+---
+import Callout from '../../components/Callout.astro';
+
+The appeal is obvious: AI is genuinely good at summarising messy financials, reconciling figures and drafting the boring parts of a return. The catch is just as real. Tax data is some of the most sensitive information you hold, and a return is a dossier of personal detail. Here is the plain version of what the law allows and how to do it safely.
+
+## The three laws that apply
+
+Tax data does not sit under one rule. It sits under three at once, and you have to satisfy all of them.
+
+| Law | What it covers | Why it matters for AI |
+| --- | --- | --- |
+| POPIA (Act 4 of 2013) | The personal information inside the return: ID number, income, banking, often special personal information | Typing a return into an AI tool is processing personal information, so the Act's duties apply in full |
+| Tax Administration Act (2011) | Taxpayer secrecy on SARS officials regarding taxpayer information (Chapter 6) | SARS is bound by secrecy on its side; for you, the day-to-day duties are POPIA plus confidentiality |
+| Professional confidentiality | Tax practitioners registered with a Recognised Controlling Body and with SARS owe clients confidentiality | A data leak is both a POPIA matter and a professional-conduct matter |
+
+## Why pasting a tax return into ChatGPT is risky
+
+A tax return is full of personal information: ID number, income, banking details, often special personal information. Three things go wrong when it lands in a public chatbot.
+
+- **It is personal information under POPIA.** Processing it means the Act's duties apply, including security under section 19.
+- **It is a cross-border transfer.** A US-based AI service processes the data outside South Africa, which is a transborder flow under section 72, allowed only with adequate-protection terms, consent, or contractual necessity.
+- **The tool may retain or train on it.** Consumer tools can store inputs and use them to improve the model, putting the data somewhere you cannot control.
+
+<Callout variant="take">
+The consumer chatbot is the wrong place for a client's tax data, full stop. Not because AI is dangerous, but because the public app gives you no data processing agreement, no control over retention, and a cross-border transfer with nothing under section 72 to make it lawful. The fix is not to avoid AI. It is to use the right deployment.
+</Callout>
+
+## What SARS actually says (and doesn't)
+
+It is worth being honest here, because there is a lot of confident nonsense online. There is no public SARS rule that "permits" putting client tax data into public AI tools, and no public SARS ruling or guidance note that specifically bans it either. SARS is itself bound by taxpayer secrecy under the Tax Administration Act, on its own handling of taxpayer information.
+
+So do not look for a SARS policy to lean on, in either direction. Your obligations come from POPIA and from the professional confidentiality you owe your clients, and those apply regardless of what any tool's marketing says. Treat the absence of a SARS rule as a reason to be careful, not a green light.
+
+## The compliant way to use AI on financial data
+
+You can use AI on financial work and stay defensible. The pattern is consistent.
+
+1. **De-identify first.** Under POPIA, data de-identified so it cannot be re-identified falls outside the Act. Strip the name, ID number and account numbers before you ask. Note that reversible masking does not count: if it can be undone, it is still personal information.
+2. **Or use an Enterprise or API tool with a data processing agreement.** Where you need the real data, use a deployment that offers a DPA, limited retention, and training switched off, rather than the consumer app.
+3. **Keep a processing record.** POPIA's accountability duty means you should be able to show what AI touches, why, and under what terms.
+4. **Keep a human reviewing the output.** AI drafts; a person checks. This protects accuracy and keeps you accountable for the result.
+
+<Callout variant="note">
+On the tooling, as of 2026 (verify current terms before you rely on this): consumer ChatGPT may train on your conversations by default unless you turn it off or use Temporary Chat, while ChatGPT Team, Enterprise and the API do not train on business data by default and offer a data processing agreement with limited retention. That difference is exactly why the consumer app is the wrong home for client tax data.
+</Callout>
+
+## For accountants and tax practitioners specifically
+
+For a registered practitioner, confidentiality is not a nice-to-have, it is a professional obligation that runs through your Recognised Controlling Body and your SARS registration. That raises the stakes: a leak of client data is a POPIA matter and a professional-conduct matter at the same time, and POPIA enforcement can reach fines while the Information Regulator can issue enforcement notices.
+
+Practical guardrails for a practice:
+
+- **A written rule that identifiable client data never goes into a public AI tool.** Make it explicit so a junior does not "just ask ChatGPT".
+- **A de-identification habit** for anything you do run through AI, with masking that cannot be reversed.
+- **One sanctioned tool** with a data processing agreement, rather than whatever each person happens to use.
+- **A short processing record** so you can show a client, or the Regulator, what you do and why.
+- **Human review on every output** that informs a client's filing or position.
+
+## Where Zaiq fits
+
+We are an AI engineering studio in South Africa, and we build AI workflows for financial and tax work with the data handled safely: private or Enterprise deployments rather than the consumer app, de-identification built into the pipeline, a data processing agreement in place, a clean record of what the system touches, and a human in the loop on the output. We do not sell AI for its own sake; we solve the problem and AI is how, safely. If you want the speed on your books and returns without the confidentiality risk, bring us the problem at [zaiq.co.za/work](https://zaiq.co.za/work) and we will tell you straight what safe looks like for your practice.
+
+This is general guidance, not legal or tax advice. For a specific compliance decision, confirm with a POPIA practitioner or your Recognised Controlling Body.
+
+## Related guides
+
+- [Can you put customer data into ChatGPT in South Africa?](/guides/can-you-put-customer-data-in-chatgpt-south-africa)
+- [How to anonymise data before using AI](/guides/how-to-anonymise-data-before-using-ai)
+- [POPIA-compliant AI tools for South African business](/guides/popia-compliant-ai-tools-south-africa)
+- [AI and POPIA: is your data safe with AI tools?](/guides/ai-popia-data-safety)
+- [Accounting software in South Africa](/guides/accounting-software-south-africa)

@@ -239,7 +239,8 @@ export function webApplicationNode(a: WebAppInput): Json {
     inLanguage: SITE.lang,
     isPartOf: { '@id': WEBSITE_ID },
     publisher: { '@id': ORG_ID },
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'ZAR' },
+    // Free in-browser tool: no commercial Offer (and we never fabricate an aggregateRating).
+    // Omitting both keeps the WebApplication valid without claiming a rating we don't have.
   });
 }
 

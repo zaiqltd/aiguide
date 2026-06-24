@@ -18,9 +18,10 @@ interface Props {
   article?: boolean;
 }
 const { title, description, path, ogImage, schema, noindex = false, article = false } = Astro.props;
-// Normalise to a single trailing-slash convention so canonical, OG and the sitemap all agree
-// (prevents duplicate-URL signals). Root stays "/".
-const canonicalPath = path === '/' ? '/' : path.replace(/\/+$/, '') + '/';
+// Canonical convention = NO trailing slash. Vercel serves /foo as 200 and 308-redirects /foo/,
+// and the schema @id URLs + internal links already use no-slash, so this makes every URL signal
+// agree (canonical, OG, sitemap, schema) and kills the duplicate/redirect-canonical issue. Root stays "/".
+const canonicalPath = path === '/' ? '/' : path.replace(/\/+$/, '');
 const canonical = new URL(canonicalPath, SITE.url).href;
 const fullTitle = title.includes(SITE.name) ? title : `${title} · ${SITE.name}`;
 const ogImageUrl = new URL(ogImage || '/images/og-aiguide-south-africa.png', SITE.url).href;
@@ -74,10 +75,13 @@ const ogImageUrl = new URL(ogImage || '/images/og-aiguide-south-africa.png', SIT
           <span class="brand__word">AI&nbsp;Guide</span>
           <span class="brand__by">by Zaiq</span>
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
           {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
           <a class="site-nav__cta" href={CTA.href} rel="noopener">{CTA.label}</a>
         </nav>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+        </button>
       </div>
     </header>
 

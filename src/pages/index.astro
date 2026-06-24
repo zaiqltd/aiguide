@@ -161,7 +161,7 @@ const tone = (id: string) => (id.includes('chad') ? 'chad' : 'adam');
     </header>
     <ul class="bento">
       {hubsSorted.map((g, i) => (
-        <li class={`bento__cell mcard reveal ${i === 0 ? 'bento__cell--lg' : ''}`} data-d={String(i % 4)}>
+        <li class="bento__cell mcard reveal" data-d={String(i % 4)}>
           <a href={`/guides/${g.id}`}>
             {CLUSTER_IMG[g.data.cluster] && (
               <span class="bento__img">
@@ -293,17 +293,17 @@ const tone = (id: string) => (id.includes('chad') ? 'chad' : 'adam');
   .checkcard__cta { flex-shrink: 0; }
   @media (max-width: 760px) { .checkcard__in { grid-template-columns: 1fr; gap: 1.5rem; } }
 
+  /* Clean 2x2 grid. Every card is a flex column whose image grows to fill the cell, so all four
+     are equal height with no dead space (and rows stay even regardless of description length). */
   .bento { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.3rem; }
   .bento__cell { border-radius: var(--radius-lg); }
-  .bento__cell--lg { grid-row: span 2; }
   .bento__cell a { display: flex; flex-direction: column; height: 100%; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--smoke); text-decoration: none; overflow: hidden; transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast); }
   .bento__cell a:hover { border-color: var(--lime-line); transform: translateY(-3px); box-shadow: var(--glow-lime); }
-  .bento__img { display: block; border-bottom: 1px solid var(--line); background: var(--void); }
-  .bento__img img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
-  .bento__cell--lg .bento__img img { aspect-ratio: 16 / 10; }
-  .bento__body { display: grid; gap: 0.4rem; padding: 1.5rem 1.6rem 1.7rem; }
-  .bento__body .card__title { font-size: 1.5rem; }
-  @media (max-width: 720px) { .bento { grid-template-columns: 1fr; } .bento__cell--lg { grid-row: auto; } }
+  .bento__img { flex: 1 1 auto; min-height: 0; display: block; border-bottom: 1px solid var(--line); background: var(--void); overflow: hidden; }
+  .bento__img img { width: 100%; height: 100%; object-fit: cover; min-height: 13rem; display: block; }
+  .bento__body { display: grid; gap: 0.4rem; padding: 1.4rem 1.5rem 1.6rem; }
+  .bento__body .card__title { font-size: 1.4rem; }
+  @media (max-width: 720px) { .bento { grid-template-columns: 1fr; } .bento__img img { min-height: 11rem; } }
 
   .cards--auto { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
 

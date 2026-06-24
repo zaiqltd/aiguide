@@ -1,0 +1,162 @@
+---
+title: "Hiring a developer in South Africa: contracts and IP"
+description: "How to hire a developer in South Africa and actually own the code. Why a contract matters, who owns the code by default, and the clauses to insist on."
+answer: >-
+  By default the freelance developer owns the copyright in the code under the Copyright Act 98 of 1978,
+  and paying them does not transfer it, as South Africa has no US-style work-for-hire for commissioned
+  software. You own it only with a written, signed IP assignment, plus a contract covering handover,
+  scope, and abandonment.
+cluster: build
+clusterLabel: "Build & automate"
+clusterPath: /guides/automate-your-south-african-business
+author: chad-etkind
+datePublished: "2026-06-09"
+lastVerified: June 2026
+intent: commercial
+isHub: false
+keywords:
+  - hiring a developer south africa
+  - who owns the code freelancer
+  - software development contract south africa
+  - ip ownership developer south africa
+  - freelance developer contract
+draft: false
+faqs:
+  - q: Who owns the code if I hire a South African freelancer without a contract?
+    a: >-
+      The freelancer does. Under the Copyright Act 98 of 1978 the author, the person who creates the
+      work, is the first owner of the copyright, and a computer program is a protected work. With no
+      written assignment, an independent contractor keeps the copyright in the code they wrote, even
+      though you commissioned and paid for it. You hold a copy, not the rights.
+  - q: Does paying a developer transfer the copyright in South Africa?
+    a: >-
+      No. Payment buys the work, not the copyright. South Africa has no automatic US-style "work made
+      for hire" for commissioned software, so the developer stays the owner unless the copyright is
+      assigned to you in writing and signed by them. An IP-assignment clause in the contract is what
+      actually moves ownership across.
+  - q: What must a software development contract include?
+    a: >-
+      At a minimum: IP assignment on creation or full payment, plus a moral-rights waiver; scope,
+      deliverables and acceptance with milestones; source-code and documentation handover; warranties
+      that the work is original and non-infringing; confidentiality; a reasonable non-compete or
+      non-solicit; payment milestones with holdbacks; termination and remedies; indemnity; and South
+      African governing law.
+  - q: Can a freelance developer reuse or resell my code?
+    a: >-
+      If they still own the copyright, potentially yes, which is the risk of having no assignment. Once
+      the copyright is assigned to you in writing under the Copyright Act 98 of 1978, they cannot reuse
+      or resell it without your permission. Pair the assignment with a warranty of original work and a
+      disclosure clause for any open-source or pre-existing code they bring in.
+  - q: What happens if my developer disappears mid-project?
+    a: >-
+      Without the right contract, you can be left with no source code, no rights, and no remedy.
+      Protect against it up front: stage payments with holdbacks so you are never far ahead, require
+      source-code and documentation handover at each milestone, and spell out termination and remedies.
+      For high-value builds, source-code escrow gives you a copy if the developer vanishes.
+  - q: Do I need an NDA with a developer?
+    a: >-
+      Usually yes. A developer often sees customer data, business logic and plans, so a confidentiality
+      or NDA term is standard in a software development agreement. If they touch personal information,
+      POPIA applies on top, so handle that data lawfully and securely. Keep the confidentiality
+      obligation running after the project ends, not only during it.
+  - q: Does it matter if the developer is an employee or an independent contractor?
+    a: >-
+      It matters a lot. Under the Copyright Act 98 of 1978 an employee's work created in the course of
+      employment belongs to the employer, while an independent contractor owns their work by default
+      and must assign it. Keep a contractor a genuine independent contractor: misclassifying one as a
+      de-facto employee carries labour and tax consequences.
+---
+import Callout from '../../components/Callout.astro';
+
+The thing that catches South African business owners out is simple: paying for software does not mean you
+own it. You can commission a developer, pay every invoice, ship the product, and still not hold the
+copyright in the code. Ownership in South Africa turns on the contract, not the payment. Here is the plain
+version of what the law says and what your agreement must do about it.
+
+## Who legally owns the code
+
+South African copyright is governed by the **Copyright Act 98 of 1978**, and a computer program is a
+protected category of work. The rule that matters is this: the **author**, the person who creates the
+work, is the first owner of the copyright. So a freelancer or independent contractor owns the copyright in
+the code they write by default. The exception runs the other way for staff: an **employee's** work created
+in the course of employment belongs to the **employer**. Get that distinction right before anything else,
+because it decides who starts out holding the rights.
+
+<Callout variant="fact">
+Under the Copyright Act 98 of 1978 the author of a work is the first owner of its copyright. For
+commissioned software that author is the developer, not the business that paid for it. A freelancer owns
+the code by default; an employee's work belongs to the employer. Ownership follows the Act, not the
+invoice.
+</Callout>
+
+## Why paying isn't enough
+
+This is the gap most people fall into. South Africa has **no automatic US-style "work made for hire"** for
+commissioned software, so paying a developer does not move the copyright to you. The commissioned-work
+exceptions that do exist in the Act, for things like photographs, portraits, engravings, films and sound
+recordings, do not cover custom software. To own the code you need a **written assignment of copyright,
+signed by the developer** as the assignor, because the Act requires an assignment to be in writing and
+signed. In a contract, that is the IP-assignment clause. Without it, you have paid for a copy and left the
+rights behind.
+
+## What typically goes wrong
+
+When the contract is thin or missing, the same problems recur:
+
+- **IP disputes**, where the developer reuses or resells code you thought was yours, because they still own it.
+- **Abandonment mid-project**, leaving you with no working source and no remedy.
+- **Scope creep**, where "just one more thing" has no agreed boundary or price.
+- **No source-code handover**, so you hold a running product but not the code behind it.
+- **Undisclosed open-source or third-party code**, baked in under licences you never agreed to.
+
+<Callout variant="take">
+A contract is not paperwork you tolerate, it is the only thing standing between you and someone else
+owning your product. The cheapest moment to fix ownership, handover and abandonment is before a line of
+code is written. The most expensive moment is after the developer has gone quiet.
+</Callout>
+
+## What your contract must say
+
+A solid Software Development Agreement does the protective work for you. These are the clauses to insist on.
+
+| Clause | What it protects | Why it matters |
+| --- | --- | --- |
+| IP assignment (on creation or full payment) + moral-rights waiver | Ownership of the copyright | Without a written, signed assignment the developer keeps the code under the Copyright Act 98 of 1978 |
+| Scope, deliverables, acceptance + milestones | What is being built | Kills scope creep and gives you a clear yardstick for "done" |
+| Source-code + documentation handover | The actual code and how it works | A running product is useless if you cannot maintain or move it |
+| Warranties (original work, non-infringing, fit for purpose) | Quality and clean provenance | The developer stands behind the work being theirs to give |
+| Confidentiality / NDA | Your data, logic and plans | Keeps sensitive business information from leaking or being reused |
+| Reasonable non-compete / non-solicit | Your position and your people | Stops the developer turning your build straight into a rival's |
+| Payment milestones with holdbacks | Your money | You never pay far ahead of delivered, accepted work |
+| Termination + remedies | Your exit | A clean way out, and consequences, if it goes wrong |
+| Indemnity | Your downside | The developer covers you against third-party IP-infringement claims |
+| South African governing law | The whole agreement | Disputes are decided under the law the contract is written for |
+
+## Protecting yourself in practice
+
+The contract sets the rules; a few habits make them real.
+
+- **Stage payments with holdbacks** so you are never paying ahead of delivered, accepted work, which also softens the blow if the developer walks.
+- **Use source-code escrow** for high-value builds, so an independent party holds a copy you can recover if the developer disappears.
+- **Require disclosure of open-source or pre-existing IP**, with clear licensing, so nothing unexpected is baked into your product.
+- **Apply POPIA** if the developer handles personal data, and handle that data lawfully and securely throughout.
+- **Keep it a genuine independent-contractor relationship.** Misclassifying a contractor as a de-facto employee carries labour and tax consequences, so either keep the relationship a true independent-contractor one or employ the person properly.
+
+## Where Zaiq fits
+
+We are an AI engineering studio in South Africa, and we make this part boring on purpose. You own the IP
+from day one, the source code and documentation are handed over, and the price is fixed, so the contract
+questions above are answered before we start. There is no abandonment risk, because you are dealing with a
+studio, not a freelancer who might go quiet. We do not sell AI; we solve the problem and AI is how. If you
+want the build without the ownership headache, bring us the problem at
+[zaiq.co.za/work](https://zaiq.co.za/work) and we will tell you straight how it will work.
+
+This is general guidance, not legal advice. For your specific contract, confirm with a South African IP or
+commercial lawyer.
+
+## Related guides
+
+- [Two engineers and AI vs an agency: the new economics](/guides/two-engineers-vs-agency)
+- [Freelance developer vetting checklist](/guides/freelance-developer-vetting-checklist)
+- [How much does custom software cost in South Africa?](/guides/software-development-cost-south-africa)
+- [Automate your South African business](/guides/automate-your-south-african-business)

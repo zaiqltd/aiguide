@@ -1,0 +1,198 @@
+---
+title: "How to anonymise data before using AI (POPIA-safe, step by step)"
+description: How to anonymise data before using AI in South Africa. The POPIA-safe steps to strip identifiers, generalise quasi-identifiers, and check re-identification risk.
+answer: >-
+  De-identifying data so it cannot be re-identified takes it outside POPIA's scope (s6); reversible
+  masking, swapping a name for "Customer 12", does not and stays personal information. Strip the direct
+  identifiers, generalise the quasi-identifiers, then check whether anyone could still work out who it
+  is before the data goes near an AI tool.
+cluster: ai-business
+clusterLabel: "AI for SA business"
+clusterPath: /guides/ai-for-south-african-business
+author: chad-etkind
+datePublished: "2026-06-09"
+lastVerified: June 2026
+intent: informational
+isHub: false
+keywords:
+  - how to anonymise data before using ai
+  - de-identify data popia
+  - anonymise customer data chatgpt
+  - pseudonymisation vs anonymisation popia
+  - remove personal data before ai
+draft: false
+faqs:
+  - q: What's the difference between anonymising and pseudonymising data?
+    a: >-
+      Anonymising means de-identifying data so it cannot be re-identified at all, which under POPIA s6
+      takes it outside the Act. Pseudonymising is reversible: you swap a name for "Customer 12" but keep
+      a key that maps it back. That key means the data still identifies a person, so it remains personal
+      information and POPIA still applies.
+  - q: Does de-identified data fall under POPIA?
+    a: >-
+      Genuinely de-identified data does not. POPIA s6 says the Act does not apply to personal information
+      that has been de-identified to the extent that it cannot be re-identified. The catch is "to the
+      extent that it cannot be re-identified": if someone could realistically reverse it, it is not truly
+      de-identified and the Act still applies.
+  - q: Is removing the name enough to anonymise data?
+    a: >-
+      No. The name is only one direct identifier, and POPIA's definition of de-identification (s1) covers
+      anything that can be used or manipulated to identify a person. Quasi-identifiers like date of birth,
+      suburb and a rare job title can pinpoint someone in combination, so you have to address those too,
+      not just delete the name.
+  - q: Can anonymised data be used in ChatGPT freely?
+    a: >-
+      If the data is truly de-identified so it cannot be re-identified, it is outside POPIA (s6) and far
+      safer to use. The discipline is making sure it really is anonymised first: direct identifiers gone,
+      quasi-identifiers generalised, re-identification risk checked. If any real personal detail remains,
+      treat it as personal information and keep it out of the public tool.
+  - q: What are quasi-identifiers?
+    a: >-
+      Quasi-identifiers are fields that do not name a person on their own but can identify them in
+      combination, such as date of birth plus suburb plus gender, or a rare job title in a small town.
+      POPIA's de-identification standard means you have to blunt these, usually by generalising them, not
+      just remove the obvious direct identifiers.
+  - q: How do I anonymise financial data for AI?
+    a: >-
+      Strip the direct identifiers first: name, ID number, account and policy numbers, contact details.
+      Then generalise the quasi-identifiers, exact amounts to bands, full dates to months, branch to
+      region, so a record cannot be tied back to one client. If you must keep a key to the real person,
+      store it separately and offline, and never paste it into the AI tool.
+howto:
+  name: Anonymise data before using an AI tool
+  description: Strip identifying detail so the data falls outside POPIA before you put it into ChatGPT or any AI tool.
+  steps:
+    - name: List the identifiers
+      text: >-
+        Find every field that could identify a person: name, ID number, account or policy numbers,
+        email, phone, address, and combinations of these that together point to one individual.
+    - name: Remove direct identifiers
+      text: >-
+        Delete or replace the obvious ones, name, ID number, contact details and account numbers, before
+        anything goes near the AI tool. These are the fields that name a person outright.
+    - name: Generalise quasi-identifiers
+      text: >-
+        Blunt the indirect ones: exact date of birth to an age band, full address to a suburb or region,
+        rare job titles to broad categories. In combination these can identify someone, so widen them.
+    - name: Check re-identification risk
+      text: >-
+        Ask whether someone could still work out who this is from what is left, especially in a small
+        town or a niche dataset where one record stands out. If the answer is yes, generalise further.
+    - name: Keep any key separate
+      text: >-
+        If you must keep a mapping back to the real person, store it separately and offline. Never paste
+        that key into the AI tool, because it is what turns de-identified data back into personal information.
+    - name: Record what you did
+      text: >-
+        Note what you removed and why, so you can show your de-identification was reasonable. A short
+        record is what evidences that the data was genuinely taken outside POPIA's scope.
+---
+import Callout from '../../components/Callout.astro';
+
+The cleanest way to use AI safely is to make sure the data is not personal information any more. POPIA
+governs personal information, so if you strip the identifying detail out of a dataset before you ask an
+AI tool anything, you have stepped outside the part of the law that creates most of the risk. The work is
+not complicated, but it is more than deleting the name. Here is the POPIA-safe way to do it.
+
+## Why this works (the POPIA shortcut)
+
+POPIA (the Protection of Personal Information Act, Act 4 of 2013) only applies to personal information.
+Section 6 says the Act does not apply to information that has been de-identified to the extent that it
+cannot be re-identified. So if you genuinely de-identify a dataset, it falls outside POPIA's scope and you
+can put it to work, including in an AI tool, without the same obligations. That is the shortcut: do not
+fight to use personal data safely when you can remove the personal element entirely.
+
+<Callout variant="fact">
+POPIA s6: the Act does not apply to personal information that has been de-identified to the extent that it
+cannot be re-identified. Genuine, irreversible de-identification takes the data out of POPIA's scope, which
+is exactly what makes it safe to put into a public AI tool. The whole job is making the de-identification real.
+</Callout>
+
+## Anonymise vs pseudonymise: the difference that matters
+
+These two get used interchangeably, and the gap between them is where businesses get caught.
+
+Truly anonymised data is irreversible. The identifying detail is gone and cannot be reconstructed, so
+under s6 it is outside POPIA. Pseudonymised data is reversible: you swap a customer's name for "Customer
+12" but keep a key somewhere that maps it back to the real person. That key means the data still
+identifies someone, so it remains personal information and POPIA still applies in full. POPIA's own
+definition of de-identification (s1) is strict: you must delete the information that identifies the data
+subject, or that can be used or manipulated to identify them, or that links to other identifying
+information. Swapping in a label while holding the key does not meet that test.
+
+## The step-by-step
+
+Work through it in order; each step removes a layer of identifiability.
+
+**List the identifiers.** Go through the dataset and find every field that could identify a person, on
+its own or in combination: name, ID number, account or policy numbers, email, phone, physical address.
+Combinations count, not just single fields.
+
+**Remove direct identifiers.** Delete or replace the obvious ones, name, ID number, contact details,
+account numbers, before anything goes near the AI tool. These name a person outright, so they go first.
+
+**Generalise quasi-identifiers.** Blunt the indirect fields that can identify someone in combination:
+exact date of birth becomes an age band, full address becomes a suburb or region, a rare job title becomes
+a broad category. This is the step that separates real de-identification from a stripped name.
+
+**Check re-identification risk.** Look at what is left and ask whether someone could still work out who it
+is, especially in a small town or a niche dataset where one record is unusual. If yes, generalise more.
+
+**Keep any key separate.** If you have to retain a mapping back to the real person, store it separately and
+offline, and never paste it into the AI tool. The moment the key meets the data, it is personal
+information again.
+
+**Record what you did.** Note what you removed and why. A short record lets you show your
+de-identification was reasonable if anyone asks.
+
+## Direct vs quasi-identifiers
+
+The mistake is treating only the first column. POPIA's de-identification standard means you have to handle
+both.
+
+| Type | Examples | How to treat it |
+| --- | --- | --- |
+| Direct identifier | Name, ID number, passport number, email, phone, account or policy number | Delete or replace before the data leaves your system |
+| Quasi-identifier | Date of birth, suburb or postal code, gender, employer, job title, race | Generalise: age band, region, broad category, so no combination is unique |
+| Linking field | A reference number that ties back to another identifying record or key | Remove it, or hold the key separately and offline, never with the data |
+
+## Checking re-identification risk
+
+De-identification is judged on whether the data can realistically be re-identified, not on whether you
+deleted a checklist of fields. The risk rises sharply in small populations and unique combinations. A
+record reading "42-year-old female attorney in a town of 3,000" may name exactly one person even with no
+name attached. The same combination in Johannesburg points to thousands and is far safer. So the test is
+contextual: in a large, common dataset, modest generalisation may be enough; in a small or unusual one,
+you generalise harder, or you do not use that data in a public tool at all. "Reasonable" de-identification,
+in POPIA's terms, means it cannot realistically be reversed.
+
+## When anonymising isn't enough
+
+Sometimes you genuinely need the real personal data, because the task is about a specific, named person:
+drafting a reply to a named customer, working a real claim, acting on one client's account. You cannot
+de-identify that and still do the job. Anonymisation is not the answer here. The route is a private or
+Enterprise AI deployment with a data processing agreement (DPA) in place and model training switched off,
+a proper responsible-party and operator arrangement under POPIA, so the personal information is handled
+under contract rather than typed into a public tool. (Bear in mind that while data is still personal
+information, sending it to a US-hosted AI tool is also a transborder flow under s72, which is another
+reason removing the personal element matters when you can.)
+
+## Where Zaiq fits
+
+Zaiq is an AI engineering studio in South Africa, and we build de-identification and safe-AI workflows in
+from the start: automatic stripping of personal detail before anything reaches a model, private
+deployments for the cases where you genuinely need the real data, and a clean processing record so you can
+show what happened and why. We do not sell AI; we solve the problem and AI is how, safely. If you want the
+speed of AI without putting customer data at risk, bring us the problem at
+[zaiq.co.za/work](https://zaiq.co.za/work) and we will tell you straight what safe looks like for your case.
+
+This is general guidance, not legal advice. For a high-risk or consequential processing decision, confirm
+with a POPIA practitioner.
+
+## Related guides
+
+- [Can you put customer data into ChatGPT in South Africa?](/guides/can-you-put-customer-data-in-chatgpt-south-africa)
+- [POPIA-compliant AI tools for South African business](/guides/popia-compliant-ai-tools-south-africa)
+- [Is it legal to use AI for SARS and tax data in South Africa?](/guides/is-it-legal-to-use-ai-for-sars-tax-data-south-africa)
+- [AI and POPIA: is your data safe with AI tools?](/guides/ai-popia-data-safety)
+- [AI for South African business](/guides/ai-for-south-african-business)

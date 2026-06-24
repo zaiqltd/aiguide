@@ -99,7 +99,27 @@ h3 { font-size: var(--fs-h3); margin-top: 1.7em; color: var(--bone); }
 .site-nav a:hover { color: var(--bone); }
 .site-nav__cta { background: var(--lime); color: var(--lime-ink) !important; padding: 0.55rem 0.9rem; border-radius: var(--radius); transition: box-shadow var(--t-fast), transform var(--t-fast); }
 .site-nav__cta:hover { box-shadow: var(--glow-lime); transform: translateY(-1px); color: var(--lime-ink) !important; }
-@media (max-width: 720px) { .site-nav a:not(.site-nav__cta) { display: none; } }
+/* Hamburger toggle. Hidden on desktop; shown on phones (JS only). */
+.nav-toggle { display: none; appearance: none; -webkit-appearance: none; width: 2.5rem; height: 2.5rem; padding: 0; align-items: center; justify-content: center; cursor: pointer; color: var(--bone); background: transparent; border: 1px solid var(--line); border-radius: var(--radius); }
+.nav-toggle__bars, .nav-toggle__bars::before, .nav-toggle__bars::after { display: block; width: 1.15rem; height: 2px; background: currentColor; border-radius: 2px; transition: transform var(--t-fast), opacity var(--t-fast); }
+.nav-toggle__bars { position: relative; }
+.nav-toggle__bars::before { content: ""; position: absolute; left: 0; top: -0.36rem; }
+.nav-toggle__bars::after { content: ""; position: absolute; left: 0; top: 0.36rem; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: translateY(0.36rem) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { transform: translateY(-0.36rem) rotate(-45deg); }
+
+/* On phones the inline links collapse into a dropdown the hamburger opens.
+   (They used to be display:none here with no toggle, so the menu was simply
+   gone on mobile.) With JS off, the bar wraps so links stay reachable. */
+@media (max-width: 720px) {
+  .js .nav-toggle { display: inline-flex; }
+  .js .site-nav { position: absolute; inset-inline: 0; top: 100%; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 0.35rem 1.25rem 0.95rem; background: color-mix(in srgb, var(--base) 95%, transparent); backdrop-filter: saturate(1.3) blur(12px); border-bottom: 1px solid var(--line); }
+  .js .site-nav.is-open { display: flex; }
+  .js .site-nav a:not(.site-nav__cta) { padding: 0.9rem 0.2rem; border-bottom: 1px solid var(--line); }
+  .js .site-nav__cta { margin-top: 0.85rem; text-align: center; padding: 0.7rem 0.9rem; }
+  .site-head__row { flex-wrap: wrap; row-gap: 0.5rem; }
+}
 
 /* ---- Buttons ---- */
 .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; padding: 0.85rem 1.25rem; border-radius: var(--radius); border: 1px solid transparent; cursor: pointer; transition: transform var(--t-fast) var(--ease), background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast); }

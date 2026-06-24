@@ -1,0 +1,41 @@
+# AI Guide (aiguide.co.za)
+
+> The practical AI guide for South African business, written by Chad Etkind and Adam Sacharowitz, the engineers behind Zaiq (https://zaiq.co.za). Plain-English, rand-priced, POPIA-aware answers about what AI actually does for an SA business, what digital work costs, and how to get found by AI search. No hype.
+
+## Start here
+- [AI for South African business: the practical 2026 guide](https://aiguide.co.za/guides/ai-for-south-african-business): The main hub — what AI does for an SA business, where to start, what works.
+- [What digital work costs in South Africa (2026)](https://aiguide.co.za/guides/what-digital-work-costs-south-africa): One honest rand reference for websites, SEO, ads, apps, CRM, and POS.
+- [Automate your South African business: what to fix first](https://aiguide.co.za/guides/automate-your-south-african-business): What to automate first and the typical rand cost of each fix.
+
+## AI, POPIA and data safety
+- [Can you put customer data into ChatGPT in South Africa?](https://aiguide.co.za/guides/can-you-put-customer-data-in-chatgpt-south-africa): Whether it is allowed under POPIA, and the safe ways to use AI.
+- [POPIA-compliant AI tools for South African business](https://aiguide.co.za/guides/popia-compliant-ai-tools-south-africa): What makes an AI tool POPIA-compliant and the realistic options.
+- [Is it legal to use AI for SARS and tax data in South Africa?](https://aiguide.co.za/guides/is-it-legal-to-use-ai-for-sars-tax-data-south-africa): POPIA, the Tax Administration Act, and professional confidentiality.
+- [How to anonymise data before using AI](https://aiguide.co.za/guides/how-to-anonymise-data-before-using-ai): Step-by-step de-identification so data falls outside POPIA.
+- [AI and POPIA: is your data safe with AI tools?](https://aiguide.co.za/guides/ai-popia-data-safety): What the law requires and the practical rules.
+
+## What it costs (2026, in rand)
+- [How much does a website cost in South Africa?](https://aiguide.co.za/guides/website-cost-south-africa)
+- [WhatsApp chatbots: what they cost and what they do](https://aiguide.co.za/guides/whatsapp-chatbot-cost-south-africa)
+- [How much does digital marketing cost in South Africa?](https://aiguide.co.za/guides/digital-marketing-cost-south-africa)
+- [How much does SEO cost in South Africa?](https://aiguide.co.za/guides/seo-cost-south-africa)
+- [Google Ads pricing in South Africa](https://aiguide.co.za/guides/google-ads-cost-south-africa)
+- [How much does custom software cost in South Africa?](https://aiguide.co.za/guides/software-development-cost-south-africa)
+- [How much does it cost to build an app in South Africa?](https://aiguide.co.za/guides/app-development-cost-south-africa)
+
+## Get found by AI search (GEO/AEO)
+- [How to get your business found on AI search](https://aiguide.co.za/guides/get-found-on-ai-search-south-africa)
+- [What is generative engine optimization (GEO/AEO)?](https://aiguide.co.za/guides/what-is-generative-engine-optimization)
+- [How to write content AI engines will cite](https://aiguide.co.za/guides/how-to-write-content-ai-will-cite)
+- [Does ChatGPT recommend your business?](https://aiguide.co.za/guides/does-chatgpt-recommend-your-business)
+- [The South African AI Visibility Index](https://aiguide.co.za/guides/sa-ai-visibility-index)
+
+## Free tools
+- [AI visibility check](https://aiguide.co.za/tools/ai-visibility-check): Test whether ChatGPT, Google AI and Perplexity recommend your SA business.
+- [Website cost estimator](https://aiguide.co.za/tools/website-cost-estimator): An indicative ZAR range for your website.
+
+## About
+- [About AI Guide](https://aiguide.co.za/about): Why this guide exists and how it is written.
+- [Chad Etkind](https://aiguide.co.za/authors/chad-etkind): Co-founder of Zaiq.
+- [Adam Sacharowitz](https://aiguide.co.za/authors/adam-sacharowitz): Co-founder of Zaiq.
+- [Zaiq](https://zaiq.co.za): The AI engineering studio behind this guide — two engineers who point AI at a business problem and ship a fix in days.
