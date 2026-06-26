@@ -19,8 +19,8 @@ export const SITE = {
 // schema already live on zaiq.co.za (ai-problem-solver-venture/site/index.html:17-29).
 export const ZAIQ = {
   name: 'Zaiq',
-  url: 'https://zaiq.co.za',
-  id: 'https://zaiq.co.za/#organization',
+  url: 'https://zaiq.ai',
+  id: 'https://zaiq.ai/#org',
   description:
     'AI engineering studio in South Africa. We diagnose any business problem, point AI at it, and ship the working fix: automation, web, SEO and AI visibility, custom software, dashboards, and data.',
   slogan: 'Bring the problem. We engineer the fix.',
@@ -75,6 +75,6 @@ export const NEWSLETTER = {
 export const CTA = {
   label: 'Send us the problem',
   // Wire to the real Zaiq WhatsApp / contact funnel once confirmed.
-  href: 'https://zaiq.co.za/#contact',
+  href: 'https://zaiq.ai/#contact',
   sub: 'We look and quote for free. No obligation.',
 } as const;

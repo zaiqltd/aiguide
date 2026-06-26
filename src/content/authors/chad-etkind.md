@@ -16,7 +16,7 @@ sameAs:
   - https://about.me/chadetkind
 ---
 
-Chad Etkind is co-founder of [Zaiq](https://zaiq.co.za), an AI engineering studio in Johannesburg.
+Chad Etkind is co-founder of [Zaiq](https://zaiq.ai), an AI engineering studio in Johannesburg.
 He made the Golden Key at Wits, top of his class, then went all-in on AI in his third year of
 Electrical and Information Engineering. Not a fallback, a bet: a frontier model ships every few
 weeks, and a course outline is locked years before you write the exam.

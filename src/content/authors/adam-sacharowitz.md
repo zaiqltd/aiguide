@@ -15,7 +15,7 @@ sameAs:
   - https://about.me/adamsacharowitz
 ---
 
-Adam Sacharowitz is co-founder of [Zaiq](https://zaiq.co.za), an AI engineering studio in
+Adam Sacharowitz is co-founder of [Zaiq](https://zaiq.ai), an AI engineering studio in
 Johannesburg. He went all-in on AI in his third year of Electrical and Information Engineering at
 Wits, because a new model lands every few weeks and resets what is possible, and you cannot learn
 that on a timetable.

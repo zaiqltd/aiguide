@@ -24,7 +24,7 @@ const labelFor = (u: string) => {
   <div>
     <p class="authorbio__role">{jobTitle}</p>
     <p class="authorbio__name"><a href={`/authors/${authorId}`}>{name}</a></p>
-    <p class="authorbio__text">{short} Building <a href="https://zaiq.co.za" rel="noopener">Zaiq</a>, an AI engineering studio in Johannesburg.</p>
+    <p class="authorbio__text">{short} Building <a href="https://zaiq.ai" rel="noopener">Zaiq</a>, an AI engineering studio in Johannesburg.</p>
     {sameAs.length > 0 && (
       <p class="social">
         {sameAs.map((u) => <a href={u} rel="me noopener" target="_blank">{labelFor(u)}</a>)}
