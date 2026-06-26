@@ -1,0 +1,42 @@
+---
+// Renders one daily AI brief (data from src/data/ai-news/<date>.json, produced by
+// scripts/ai-news.mjs). Used by /ai-news (latest) and /ai-news/[date] (permalinks).
+interface Item { headline: string; what: string; soWhat?: string; sourceName?: string; sourceUrl: string; }
+interface Brief { date: string; dateHuman: string; title: string; summary: string; items: Item[]; sources?: { name: string; url: string }[]; }
+const { brief, heading = 'h2' } = Astro.props as { brief: Brief; heading?: 'h1' | 'h2' };
+const H = heading;
+const host = (u: string) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
+---
+<article class="brief">
+  <H class="brief__h">{heading === 'h2' ? <a href={`/ai-news/${brief.date}`} class="brief__h-link">{brief.title}</a> : brief.title}</H>
+  <p class="brief__meta mono">Updated {brief.dateHuman}. Compiled automatically from the cited sources, each claim linked.</p>
+  {brief.summary && <p class="brief__summary">{brief.summary}</p>}
+  <ol class="brief__items">
+    {brief.items.map((it) => (
+      <li class="brief__item">
+        <h3 class="brief__item-h">{it.headline}</h3>
+        <p class="brief__what">{it.what}</p>
+        {it.soWhat && <p class="brief__sowhat"><span>For a South African business:</span> {it.soWhat}</p>}
+        <a class="brief__src" href={it.sourceUrl} target="_blank" rel="noopener nofollow">{it.sourceName || host(it.sourceUrl)} &#8599;</a>
+      </li>
+    ))}
+  </ol>
+</article>
+
+<style>
+  .brief { max-width: var(--measure-wide); }
+  .brief__h { font-family: var(--font-display); font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.1; letter-spacing: -0.01em; }
+  .brief__h-link { color: var(--ink); text-decoration: none; }
+  .brief__h-link:hover { text-decoration: underline; text-decoration-color: var(--cadmium); }
+  .brief__meta { font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cadmium-ink); margin-top: 0.6rem; }
+  .brief__summary { font-size: var(--fs-lede); color: var(--graphite); margin-top: 1.1rem; max-width: 44rem; }
+  .brief__items { list-style: none; counter-reset: b; padding: 0; margin: 2rem 0 0; display: grid; gap: 1rem; }
+  .brief__item { counter-increment: b; position: relative; padding: 1.2rem 1.3rem 1.1rem; border: 1px solid var(--hair); border-left: 3px solid var(--cadmium); border-radius: var(--radius-lg); background: var(--paper-raised); }
+  .brief__item-h { font-family: var(--font-display); font-size: 1.18rem; line-height: 1.25; margin: 0; }
+  .brief__item-h::before { content: counter(b, decimal-leading-zero); font-family: var(--font-mono); font-size: 0.72rem; color: var(--cadmium-ink); margin-right: 0.6rem; }
+  .brief__what { color: var(--ink); margin-top: 0.5rem; }
+  .brief__sowhat { margin-top: 0.55rem; color: var(--graphite); font-size: 0.95rem; }
+  .brief__sowhat span { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cadmium-ink); display: inline; margin-right: 0.35rem; }
+  .brief__src { display: inline-block; margin-top: 0.65rem; font-family: var(--font-mono); font-size: 0.74rem; color: var(--graphite); text-decoration: none; border-bottom: 1px solid var(--hair); }
+  .brief__src:hover { color: var(--ink); border-bottom-color: var(--ink); }
+</style>

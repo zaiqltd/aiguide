@@ -55,6 +55,7 @@ export const REPEATED_FACTS = [
 ] as const;
 
 export const NAV = [
+  { href: '/ai-news', label: 'AI News' },
   { href: '/guides/ai-for-south-african-business', label: 'AI for SA business' },
   { href: '/guides/what-digital-work-costs-south-africa', label: 'What it costs' },
   { href: '/guides/automate-your-south-african-business', label: 'Build & automate' },

@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BriefView from '../../components/BriefView.astro';
+import CTA from '../../components/CTA.astro';
+import { SITE } from '../../lib/site';
+import { graph, websiteNode, organizationNode, breadcrumbNode } from '../../lib/schema';
+
+const modules = import.meta.glob('../../data/ai-news/*.json', { eager: true });
+const briefs = Object.values(modules).map((m: any) => m.default).sort((a: any, b: any) => b.date.localeCompare(a.date));
+const latest = briefs[0];
+const archive = briefs.slice(1, 30);
+
+const path = '/ai-news';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI News', path }];
+const newsArticle = latest ? [{
+  '@type': 'NewsArticle',
+  headline: latest.title,
+  datePublished: latest.generatedAt || latest.date,
+  dateModified: latest.generatedAt || latest.date,
+  inLanguage: 'en-ZA',
+  isAccessibleForFree: true,
+  author: { '@type': 'Organization', name: 'AI Guide', url: SITE.url },
+  publisher: { '@type': 'Organization', name: 'AI Guide', url: SITE.url },
+  mainEntityOfPage: new URL(path, SITE.url).href,
+}] : [];
+const jsonld = graph(websiteNode(), organizationNode(), breadcrumbNode(path, crumbs), ...newsArticle);
+---
+<Base
+  title="AI News for South African Business"
+  description="The daily AI brief for South African business: the developments that matter, what they cost, and what to do about them, in rand. Sourced and updated every day."
+  path={path}
+  schema={jsonld}
+  article={true}
+>
+  <div class="wrap ainews">
+    <Breadcrumb crumbs={crumbs} />
+    <p class="kicker reveal">Updated daily</p>
+    <h1 class="ainews__h1 reveal" data-d="1">The AI brief for South African business.</h1>
+    <p class="ainews__lede reveal" data-d="2">
+      The AI developments that actually matter, each one linked to its source and read through one lens:
+      what it means for a business operating in South Africa. Compiled automatically every morning,
+      never padded, never hyped.
+    </p>
+
+    {latest ? (
+      <section class="reveal" data-d="3"><BriefView brief={latest} heading="h2" /></section>
+    ) : (
+      <p class="ainews__empty">Today's brief is being compiled. Check back shortly.</p>
+    )}
+
+    {archive.length > 0 && (
+      <section class="ainews__archive reveal">
+        <p class="kicker">Earlier briefs</p>
+        <ul>
+          {archive.map((b: any) => (
+            <li><a href={`/ai-news/${b.date}`}>{b.dateHuman}</a><span>{b.items.length} items</span></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <p class="ainews__note mono">How this is made: each morning AI Guide gathers the day's reporting with Firecrawl, then synthesises this brief and its South African angle, grounded only in the linked sources. We show the sources so you can check the work.</p>
+
+    <CTA commercial={false} line="Need AI built into your business, not just read about? Talk to the studio." />
+  </div>
+</Base>
+
+<style>
+  .ainews { padding-top: 2.2rem; max-width: var(--measure-wide); }
+  .ainews__h1 { font-size: var(--fs-hero); }
+  .ainews__lede { font-size: var(--fs-lede); color: var(--graphite); max-width: 44rem; }
+  .ainews__archive { margin-top: 3rem; }
+  .ainews__archive ul { list-style: none; padding: 0; margin: 0.8rem 0 0; display: grid; gap: 0.3rem; }
+  .ainews__archive li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--hair); }
+  .ainews__archive a { color: var(--ink); text-decoration: none; font-family: var(--font-display); }
+  .ainews__archive a:hover { text-decoration: underline; }
+  .ainews__archive span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--cadmium-ink); }
+  .ainews__note { margin-top: 2.6rem; font-size: 0.78rem; color: var(--graphite); border-top: 1px solid var(--hair); padding-top: 1rem; max-width: 44rem; line-height: 1.6; }
+  .ainews__empty { color: var(--graphite); margin-top: 2rem; }
+</style>

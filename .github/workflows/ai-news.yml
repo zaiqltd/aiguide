@@ -1,0 +1,50 @@
+name: Daily AI brief
+
+on:
+  schedule:
+    - cron: "0 4 * * *" # 04:00 UTC = 06:00 SAST, every morning
+  workflow_dispatch: {} # allow manual runs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-news
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # The generator uses only native fetch + node:fs, so no install is needed.
+      # It aborts (non-zero) rather than publish an empty or thin brief, which
+      # fails the job and skips the commit/deploy. That is intentional.
+      - name: Generate today's brief
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: node scripts/ai-news.mjs
+
+      - name: Commit the brief
+        run: |
+          git config user.name "ai-guide-bot"
+          git config user.email "bot@aiguide.co.za"
+          git add src/data/ai-news
+          if git diff --cached --quiet; then
+            echo "No new brief to commit."; exit 0
+          fi
+          git commit -m "AI brief $(date -u +%F)"
+          git push
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: team_OV6QpYdgbDOQdgpUuwlNCHVu
+          VERCEL_PROJECT_ID: prj_eKhSHa15Ckt9VYQ4o8U4yW8hUhgl
+        run: npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"

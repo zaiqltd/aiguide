@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BriefView from '../../components/BriefView.astro';
+import CTA from '../../components/CTA.astro';
+import { SITE } from '../../lib/site';
+import { graph, websiteNode, organizationNode, breadcrumbNode } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const modules = import.meta.glob('../../data/ai-news/*.json', { eager: true });
+  return Object.values(modules).map((m: any) => ({ params: { date: m.default.date }, props: { brief: m.default } }));
+}
+const { brief } = Astro.props as { brief: any };
+const path = `/ai-news/${brief.date}`;
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI News', path: '/ai-news' }, { name: brief.dateHuman, path }];
+const newsArticle = {
+  '@type': 'NewsArticle',
+  headline: brief.title,
+  datePublished: brief.generatedAt || brief.date,
+  dateModified: brief.generatedAt || brief.date,
+  inLanguage: 'en-ZA',
+  isAccessibleForFree: true,
+  author: { '@type': 'Organization', name: 'AI Guide', url: SITE.url },
+  publisher: { '@type': 'Organization', name: 'AI Guide', url: SITE.url },
+  mainEntityOfPage: new URL(path, SITE.url).href,
+};
+const jsonld = graph(websiteNode(), organizationNode(), breadcrumbNode(path, crumbs), newsArticle);
+---
+<Base title={brief.title} description={brief.summary || `AI brief for South African business, ${brief.dateHuman}.`} path={path} schema={jsonld} article={true}>
+  <div class="wrap ainews">
+    <Breadcrumb crumbs={crumbs} />
+    <BriefView brief={brief} heading="h1" />
+    <p class="ainews__note mono">Compiled automatically by AI Guide from the linked sources on {brief.dateHuman}, read through a South African business lens. <a href="/ai-news">See the latest brief.</a></p>
+    <CTA commercial={false} line="Need it built, not just read about? Talk to the studio." />
+  </div>
+</Base>
+
+<style>
+  .ainews { padding-top: 2.2rem; max-width: var(--measure-wide); }
+  .ainews__note { margin-top: 2.4rem; font-size: 0.8rem; color: var(--graphite); border-top: 1px solid var(--hair); padding-top: 1rem; }
+  .ainews__note a { color: var(--ink); }
+</style>
