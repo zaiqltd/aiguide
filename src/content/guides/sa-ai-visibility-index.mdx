@@ -2,10 +2,10 @@
 title: The South African AI Visibility Index
 description: "The reference methodology for measuring which South African businesses ChatGPT, Google AI, Gemini and Perplexity name when buyers ask. How the Index is scored, the categories tracked, and how to read your own result."
 answer: >-
-  The South African AI Visibility Index measures which local businesses the AI engines name when
-  buyers ask "best [service] near me". A fixed buyer-question set is run quarterly across ChatGPT,
-  Google AI, Gemini and Perplexity, against a named sample of SA businesses per category, scored
-  Named, Outranked or Invisible. That AI shortlist is now the shelf buyers shop.
+  The South African AI Visibility Index measures which local businesses the leading AI models name
+  when buyers ask who to hire. In the first edition, June 2026, across 16 real buyer questions and 5
+  models, the AI named a specific South African business in only 46% of answers and named nobody at
+  all in 42.5%. For most categories the AI shelf is still empty, which is exactly what makes it open.
 cluster: research
 clusterLabel: "Original research"
 author: chad-etkind
@@ -26,8 +26,8 @@ faqs:
       It is a quarterly measurement of which South African businesses the major AI engines name when
       buyers ask for the best in a category. The same buyer questions are run across ChatGPT, Google
       AI, Gemini and Perplexity, against a named sample of businesses per category, and each business
-      is scored Named, Outranked or Invisible. The first edition publishes the methodology; the full
-      dataset is being collected now.
+      is scored Named, Outranked or Invisible. The first edition, June 2026, measures the model
+      baseline, what the leading models name unaided, and is published on this page with the data.
   - q: Which AI engines does the Index measure?
     a: >-
       Four: ChatGPT, Google AI (the AI answers shown above Google results), Gemini and Perplexity.
@@ -100,6 +100,90 @@ and most South African businesses have never checked whether they are on it.
 The old question was "where do I rank on Google?" The new one is "does the AI name me when a buyer
 asks?" The first is a position in a list. The second is a yes or a no.
 </Callout>
+
+## First edition: what the AI models name today (June 2026)
+
+The first edition is done, and it is the number every South African business should see. On 26 June
+2026 we put sixteen real buyer questions to five of the leading AI models, GPT-5.5, Google Gemini 3.5
+Flash, Claude Opus 4.8, DeepSeek V3.2 and Llama 4 Maverick, with no prompting tricks, and recorded
+which businesses each one named. Eighty answers in total, every raw answer kept so the result can be
+checked.
+
+The headline is stark. In 42.5% of answers the AI named no business at all: it pointed the buyer to
+"search Google" or "check reviews" and stopped. Only 46% of answers named a specific South African
+business. The single most-named result across the entire run was Google itself, mentioned 41 times,
+more than any actual company. When a buyer asks an AI who to hire, the most common answer is nobody.
+
+<Callout variant="fact">
+Across 80 answers, the AI named a specific South African business only 46% of the time, and named
+nobody at all 42.5% of the time. The most-recommended option was "go and search Google." For most
+categories the AI shelf is empty, and an empty shelf is an open one.
+</Callout>
+
+**The model you ask changes everything.** The spread between engines is not a detail, it is the result.
+
+<CostTable
+  caption="What each AI model named across 16 South African buyer questions, June 2026"
+  head={['AI model', 'Named any business', 'Named an SA business']}
+  rows={[
+    ['DeepSeek V3.2', '100%', '88%'],
+    ['Llama 4 Maverick', '88%', '75%'],
+    ['GPT-5.5', '50%', '38%'],
+    ['Claude Opus 4.8', '44%', '25%'],
+    ['Google Gemini 3.5 Flash', '6%', '6%'],
+  ]}
+  note="Same sixteen questions to every model, no system prompt, temperature 0. Google's own Gemini named a specific business in just one of sixteen answers; DeepSeek named one in every answer."
+/>
+
+A business that is visible to one model can be invisible to another, so "does AI recommend me" has no
+single answer. It has five, and Google's own model is the one least likely to name anyone.
+
+**Where the visibility actually sits.** The names that come up are the big, established brands in
+high-consideration categories. The everyday and urgent categories are wide open.
+
+<CostTable
+  caption="How often the AI named a business, by category (first edition)"
+  head={['Category', 'Named a business', 'Named an SA business', 'Most-named SA business']}
+  rows={[
+    ['Estate agents', '80%', '70%', 'Pam Golding (6 mentions)'],
+    ['Legal services', '70%', '70%', 'Bowmans (5)'],
+    ['Accounting and bookkeeping', '90%', '40%', 'Mazars (1)'],
+    ['SEO and digital marketing', '50%', '50%', 'Rogerwilco (3)'],
+    ['Web design', '60%', '40%', 'King James Group (2)'],
+    ['Dentists', '50%', '50%', 'Sandton Dental Studio (2)'],
+    ['Financial advisers', '30%', '30%', 'Old Mutual (2)'],
+    ['Trades: plumber, electrician', '30%', '20%', 'Dial-a-Plumber (1)'],
+  ]}
+  note="Ten answers per category, so read these as directional. Accounting scored high on naming a business mostly because the models named global software, Xero, QuickBooks and Sage, not a local accountant."
+/>
+
+Local and urgent categories are an open goal. For an emergency plumber or an electrician the AI names
+a specific business barely a fifth of the time, and an SA financial adviser only three in ten.
+Whoever becomes the answer in those categories owns an uncontested shelf.
+
+<CostTable
+  caption="Most-named South African businesses across all 80 answers"
+  head={['Mentions', 'Business', 'Category']}
+  rows={[
+    ['6', 'Pam Golding Properties', 'Estate agents'],
+    ['6', 'Seeff Properties', 'Estate agents'],
+    ['5', 'Bowmans', 'Legal'],
+    ['5', 'Chas Everitt', 'Estate agents'],
+    ["5", "Lew Geffen Sotheby's", 'Estate agents'],
+    ['4', 'Cliffe Dekker Hofmeyr', 'Legal'],
+    ['3', 'Rogerwilco', 'Digital marketing'],
+    ['3', 'Webber Wentzel', 'Legal'],
+    ['3', 'STBB', 'Legal'],
+    ['3', 'Rawson Properties', 'Estate agents'],
+  ]}
+  note="125 distinct SA businesses were named in total, but a handful soak up most of the mentions. Foreign brands also crowd in: the US franchise RE/MAX was named 7 times, more than every individual SA agency bar two."
+/>
+
+This first edition measures the model baseline: the five leading models asked directly, which is the
+floor of AI visibility, what the model knows with no live web search. The consumer apps people
+actually use, ChatGPT, the Gemini app and Perplexity, add real-time retrieval on top and would likely
+name more local businesses. The full programme adds those live products and the Named, Outranked,
+Invisible scoring described next; the honest limits are set out at the end.
 
 ## The methodology
 
@@ -195,17 +279,26 @@ your standing against the same three states the Index uses, so you can see your 
 edition publishes. Treat one reading as a snapshot; the trend across runs tells you whether your
 visibility is climbing or quietly slipping.
 
-## Methodology integrity note
+## Honest limits of the first edition
 
-This first edition publishes the methodology and the framework, not a leaderboard. That is deliberate.
-A visibility number is only worth anything if it is defensible, and a defensible number takes a full,
-careful run of the fixed question set against the named sample across all four engines. That data is
-being collected now, on the quarterly cadence described above.
+A number is only worth publishing if you say exactly how it was made and where it is weak. This edition:
 
-When the figures publish, the question set and sample will be disclosed so the result can be checked.
-No invented percentages, no benchmark presented as our own where it is not, which is why every context
-statistic on this page is cited to its source. A number you cannot defend is worth less than no number
-at all.
+- **Measures the model baseline, not the consumer apps.** We queried the five models through their
+  APIs, which reflects what each model knows unaided. The apps people actually use, ChatGPT, the
+  Gemini app, Perplexity and Google AI Mode, add live web search and local results on top, and would
+  likely name more specific local businesses. Read these numbers as a floor, not a ceiling. The
+  live-app edition is next.
+- **Is one snapshot.** One date, 26 June 2026, sixteen questions, five models, eighty answers. Ten
+  answers per category, so the category figures are directional and move in ten-point steps.
+- **Used no prompting tricks.** Temperature zero, no system prompt. Different wording, a persona, or a
+  "search the web" instruction would shift the result.
+- **Classified entities by hand afterwards.** Each named entity was tagged as an SA business, a global
+  brand, a directory or a regulator; franchise brands with local operations were counted conservatively
+  as global, which lowers the SA figure rather than inflating it.
+
+Every raw answer and every classification is kept, so the result can be checked rather than taken on
+trust. No invented percentages, and every context statistic on this page is cited to its source. A
+number you cannot defend is worth less than no number at all.
 
 <Callout variant="take">
 AI engines have quietly become the shortlist most buyers see first, and almost no South African business
