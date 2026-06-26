@@ -1,7 +1,7 @@
 ---
 // Renders one daily AI brief (data from src/data/ai-news/<date>.json, produced by
 // scripts/ai-news.mjs). Used by /ai-news (latest) and /ai-news/[date] (permalinks).
-interface Item { headline: string; what: string; soWhat?: string; sourceName?: string; sourceUrl: string; }
+interface Item { headline: string; what: string; soWhat?: string; sourceName?: string; sourceUrl: string; relatedPath?: string; relatedTitle?: string; }
 interface Brief { date: string; dateHuman: string; title: string; summary: string; items: Item[]; sources?: { name: string; url: string }[]; }
 const { brief, heading = 'h2' } = Astro.props as { brief: Brief; heading?: 'h1' | 'h2' };
 const H = heading;
@@ -17,7 +17,10 @@ const host = (u: string) => { try { return new URL(u).hostname.replace(/^www\./,
         <h3 class="brief__item-h">{it.headline}</h3>
         <p class="brief__what">{it.what}</p>
         {it.soWhat && <p class="brief__sowhat"><span>For a South African business:</span> {it.soWhat}</p>}
-        <a class="brief__src" href={it.sourceUrl} target="_blank" rel="noopener nofollow">{it.sourceName || host(it.sourceUrl)} &#8599;</a>
+        <div class="brief__foot">
+          <a class="brief__src" href={it.sourceUrl} target="_blank" rel="noopener nofollow">{it.sourceName || host(it.sourceUrl)} &#8599;</a>
+          {it.relatedPath && <a class="brief__guide" href={it.relatedPath}>Go deeper: {it.relatedTitle}</a>}
+        </div>
       </li>
     ))}
   </ol>
@@ -37,6 +40,9 @@ const host = (u: string) => { try { return new URL(u).hostname.replace(/^www\./,
   .brief__what { color: var(--ink); margin-top: 0.5rem; }
   .brief__sowhat { margin-top: 0.55rem; color: var(--graphite); font-size: 0.95rem; }
   .brief__sowhat span { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cadmium-ink); display: inline; margin-right: 0.35rem; }
-  .brief__src { display: inline-block; margin-top: 0.65rem; font-family: var(--font-mono); font-size: 0.74rem; color: var(--graphite); text-decoration: none; border-bottom: 1px solid var(--hair); }
+  .brief__foot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.45rem 1.1rem; margin-top: 0.85rem; }
+  .brief__src { font-family: var(--font-mono); font-size: 0.74rem; color: var(--graphite); text-decoration: none; border-bottom: 1px solid var(--hair); }
   .brief__src:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .brief__guide { font-family: var(--font-mono); font-size: 0.74rem; color: var(--cadmium-ink); text-decoration: none; border-bottom: 1px solid var(--hair); }
+  .brief__guide:hover { color: var(--ink); border-bottom-color: var(--cadmium); }
 </style>

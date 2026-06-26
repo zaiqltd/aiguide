@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import BriefView from '../../components/BriefView.astro';
+import CaptureBrief from '../../components/CaptureBrief.astro';
 import CTA from '../../components/CTA.astro';
 import { SITE } from '../../lib/site';
 import { graph, websiteNode, organizationNode, breadcrumbNode } from '../../lib/schema';
@@ -48,6 +49,8 @@ const jsonld = graph(websiteNode(), organizationNode(), breadcrumbNode(path, cru
     ) : (
       <p class="ainews__empty">Today's brief is being compiled. Check back shortly.</p>
     )}
+
+    <CaptureBrief />
 
     {archive.length > 0 && (
       <section class="ainews__archive reveal">

@@ -1,0 +1,66 @@
+---
+// Email capture for the daily AI brief. Posts to NEWSLETTER.action when set (a real ESP list);
+// otherwise a small inline handler falls back to a working mailto so signups are never lost.
+import { NEWSLETTER } from '../lib/site';
+const action = NEWSLETTER.action;
+const fallback = NEWSLETTER.fallbackEmail;
+---
+<section class="capture">
+  <div class="capture__inner">
+    <p class="capture__kicker mono">The morning brief, in your inbox</p>
+    <h2 class="capture__h">Wake up knowing what AI did overnight.</h2>
+    <p class="capture__sub">One short email each morning: the AI moves that actually matter, and what each one means for a business in South Africa. Sourced, no hype, free.</p>
+    <form class="capture__form" id="captureForm" data-fallback={fallback} action={action || undefined} method="post" target="_blank">
+      <input class="capture__input" type="email" name="email" required autocomplete="email" placeholder="you@company.co.za" aria-label="Your email address" />
+      <button class="btn btn--primary capture__btn" type="submit">Get the brief &rarr;</button>
+    </form>
+    <p class="capture__fine mono">No spam. Unsubscribe in one click.</p>
+  </div>
+</section>
+{!action && (
+  <script is:inline>
+    (function () {
+      var f = document.getElementById('captureForm');
+      if (!f) return;
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var input = f.querySelector('input[name="email"]');
+        var email = input ? input.value : '';
+        var to = f.getAttribute('data-fallback') || 'hello@zaiq.co.za';
+        var subj = encodeURIComponent('Subscribe me to the SA AI brief');
+        var body = encodeURIComponent('Please add this address to the daily AI Guide brief: ' + email);
+        window.location.href = 'mailto:' + to + '?subject=' + subj + '&body=' + body;
+      });
+    })();
+  </script>
+)}
+<style>
+  .capture { margin-top: 3.5rem; }
+  .capture__inner {
+    border: 1px solid var(--hair);
+    border-left: 3px solid var(--cadmium);
+    border-radius: var(--radius-lg);
+    background: var(--paper-raised);
+    padding: 1.8rem 1.6rem 1.6rem;
+    max-width: 44rem;
+  }
+  .capture__kicker { font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cadmium-ink); }
+  .capture__h { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.9rem); line-height: 1.12; letter-spacing: -0.01em; margin: 0.5rem 0 0; }
+  .capture__sub { color: var(--graphite); margin-top: 0.7rem; max-width: 38rem; }
+  .capture__form { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+  .capture__input {
+    flex: 1 1 16rem;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--hair-strong);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+  }
+  .capture__input::placeholder { color: var(--graphite-soft); }
+  .capture__input:focus { outline: none; border-color: var(--cadmium); }
+  .capture__btn { flex: 0 0 auto; }
+  .capture__fine { font-size: 0.66rem; color: var(--graphite-soft); margin-top: 0.7rem; letter-spacing: 0.04em; }
+</style>

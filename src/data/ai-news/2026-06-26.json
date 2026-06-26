@@ -2,42 +2,52 @@
   "date": "2026-06-26",
   "dateHuman": "26 June 2026",
   "title": "AI brief for South African business, 26 June 2026",
-  "summary": "This week's AI developments highlight increasing geopolitical tensions over AI model access, practical enterprise adoption of AI agents, and new regulatory frameworks. South African businesses face both constraints and opportunities in this evolving landscape.",
+  "summary": "Today's brief focuses on the escalating costs and complexity of AI agent deployment for South African businesses, with new pricing models shifting to outcome-based billing. We also cover ChatGPT's milestone of one billion users and what that means for local customer expectations.",
   "items": [
     {
-      "headline": "US order forces Anthropic to disable advanced AI models globally",
-      "what": "Anthropic disabled access to its Fable 5 and Mythos 5 models worldwide following a US government export-control directive, citing concerns about potential misuse for identifying software vulnerabilities.",
-      "soWhat": "South African businesses using these models must seek alternatives, potentially increasing costs by 15-30% for comparable capabilities from other providers.",
-      "sourceName": "MarketingProfs",
-      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55065/ai-update-june-19-2026-ai-news-and-views-from-the-past-week"
+      "headline": "AI agent pricing shifts to outcome-based models in 2026",
+      "what": "Major CRM platforms like Zendesk and HubSpot have moved from monthly subscriptions to charging per automated resolution ($0.50-$1.50 per successful action). Salesforce introduced Flex Credits at $0.10 per action.",
+      "soWhat": "South African businesses can now pay only for successful AI resolutions rather than fixed monthly fees. A small e-commerce store handling 1,000 queries/month would pay about R900-R2,700 instead of R1,850-R3,700 for basic plans.",
+      "sourceName": "Technova Partners",
+      "sourceUrl": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026",
+      "relatedPath": "/guides/ai-customer-service-whatsapp-south-africa",
+      "relatedTitle": "AI customer service on WhatsApp for South African business"
     },
     {
-      "headline": "G7 proposes trusted-partner framework for AI model access",
-      "what": "G7 leaders are discussing a framework that would allow approved countries or organizations to access restricted US AI models, aiming to balance national security with international cooperation.",
-      "soWhat": "South African businesses may gain access to advanced models if the country qualifies as a trusted partner, though compliance requirements could add 20+ hours/month to admin workloads.",
-      "sourceName": "MarketingProfs",
-      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55065/ai-update-june-19-2026-ai-news-and-views-from-the-past-week"
+      "headline": "ChatGPT reaches one billion monthly active users",
+      "what": "OpenAI's ChatGPT has surpassed one billion monthly active users globally, confirming mainstream adoption of AI assistants.",
+      "soWhat": "South African customers now expect AI-powered interactions as standard. Businesses without basic chatbot or self-service options risk appearing outdated, especially in sectors like banking and retail.",
+      "sourceName": "Medium",
+      "sourceUrl": "https://medium.com/@davidakpovi/ai-news-week-of-june-1-to-june-7-2026-7957940c805a",
+      "relatedPath": "/guides/ai-customer-service-whatsapp-south-africa",
+      "relatedTitle": "AI customer service on WhatsApp for South African business"
     },
     {
-      "headline": "40% of enterprise apps to include AI agents by 2026",
-      "what": "Gartner predicts a surge in task-specific AI agents embedded in enterprise applications, rising from less than 5% in 2025 to 40% by end of 2026.",
-      "soWhat": "South African businesses should budget R15,000-R50,000 per app for AI agent integration costs, with ROI expected within 6-18 months for workflow automation use cases.",
-      "sourceName": "Gartner",
-      "sourceUrl": "https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025"
+      "headline": "True cost of AI agents revealed: Development is just 25-35% of total",
+      "what": "A 2026 analysis shows initial AI agent development represents only 25-35% of three-year costs, with ongoing expenses for tokens, infrastructure and maintenance dominating budgets.",
+      "soWhat": "South African SMEs budgeting for AI should plan for R400,000-R1.2m over three years for a properly maintained system, not just the R150,000-R300,000 initial build cost. Factor in load-shedding resilient hosting.",
+      "sourceName": "AlphaCorp AI",
+      "sourceUrl": "https://alphacorp.ai/blog/what-does-it-cost-to-build-an-ai-agent-in-2026-a-transparent-pricing-guide",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
     },
     {
-      "headline": "AI agents becoming core infrastructure for startups",
-      "what": "Major cloud providers now treat AI agents as systems with goals, memory and autonomy rather than chatbots, with practical applications in support, sales and admin workflows.",
-      "soWhat": "South African SMEs can implement basic AI agents for R2,000-R5,000/month using platforms like AWS Bedrock or Microsoft Copilot Studio, focusing on narrow workflows first.",
-      "sourceName": "MEAN CEO",
-      "sourceUrl": "https://blog.mean.ceo/ai-agents-news-june-2026/"
-    },
-    {
-      "headline": "UN launches Open Source Week for AI development",
-      "what": "The UN hosted a global forum promoting open source AI collaboration to bridge digital divides and build capacity, with focus on open hardware and responsible development.",
-      "soWhat": "South African developers can access new open-source AI tools showcased at the event, though local POPIA compliance checks add 2-3 weeks to implementation timelines.",
+      "headline": "UN launches Open Source Week to bridge AI divides",
+      "what": "The UN's Open Source Week 2026 focuses on using open source AI to promote equitable access and digital development globally.",
+      "soWhat": "South African developers and businesses should monitor open-source AI alternatives that may offer more affordable and locally relevant options compared to closed US models.",
       "sourceName": "UN Web TV",
-      "sourceUrl": "https://webtv.un.org/en/asset/k14/k14ej1ucqu"
+      "sourceUrl": "https://webtv.un.org/en/asset/k14/k14ej1ucqu",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "Frontier AI models face Q3 2026 release crunch",
+      "what": "Five major AI labs (OpenAI, Anthropic, Google, xAI, DeepSeek) are preparing Q3 model releases, with timing constrained by hardware availability rather than training completion.",
+      "soWhat": "South African access to these models will depend on US export controls and local partner agreements. Most businesses should focus on currently available tools rather than waiting for future releases.",
+      "sourceName": "Digital Applied",
+      "sourceUrl": "https://www.digitalapplied.com/blog/frontier-model-q3-2026-release-forecast-roadmap-analysis",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
     }
   ],
   "sources": [
@@ -78,18 +88,18 @@
       "url": "https://levelup.gitconnected.com/ai-models-compared-openai-anthropic-google-deepseek-more-1e350b8df156"
     },
     {
-      "name": "AI Agents News | June, 2026 (STARTUP EDITION)",
-      "url": "https://blog.mean.ceo/ai-agents-news-june-2026/"
+      "name": "10 Best AI Agents for Business 2026: Tested & Ranked",
+      "url": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026"
     },
     {
-      "name": "20 AI Agency Offers That Actually Make Money in 2026 (With PROOF)",
-      "url": "https://www.youtube.com/watch?v=zMouHT0r8dY"
+      "name": "AI Agent Development Cost in 2026: Full Pricing Guide - AlphaCorp AI",
+      "url": "https://alphacorp.ai/blog/what-does-it-cost-to-build-an-ai-agent-in-2026-a-transparent-pricing-guide"
     },
     {
-      "name": "Gartner Predicts 40% of Enterprise Apps Will Feature Task-Specific ...",
-      "url": "https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025"
+      "name": "AI Automation Agency Pricing 2026: AI Agent Cost & Monthly Plans",
+      "url": "https://thecrunch.io/ai-agents-price/"
     }
   ],
-  "generatedAt": "2026-06-26T10:59:07.059Z",
+  "generatedAt": "2026-06-26T11:26:25.726Z",
   "model": "deepseek/deepseek-chat-v3"
 }

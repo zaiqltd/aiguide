@@ -29,8 +29,32 @@ const monthName = now.toLocaleString("en", { month: "long" });
 const QUERIES = [
   `most significant AI announcement this week ${monthName} ${now.getFullYear()}`,
   `new frontier AI model release OpenAI Anthropic Google DeepSeek Mistral ${monthName} ${now.getFullYear()}`,
-  `AI for business news automation agents pricing ${monthName} ${now.getFullYear()}`,
+  `AI for business automation agents enterprise pricing ${monthName} ${now.getFullYear()}`,
+  `South Africa AI business news ${monthName} ${now.getFullYear()} mybroadband itweb techcentral`,
+  `AI regulation POPIA data privacy Africa ${monthName} ${now.getFullYear()}`,
 ];
+
+// AI Guide's own evergreen guides. The synthesiser maps each news item to the single most
+// relevant one so the daily brief funnels readers into the pillar content (internal links =
+// SEO + the path to the Zaiq funnel). relatedGuide must be one of these exact paths or "".
+const GUIDES = [
+  { path: "/guides/ai-popia-data-safety", title: "AI and POPIA: is your data safe with AI tools?", hint: "POPIA, data privacy, is your data safe with AI tools" },
+  { path: "/guides/popia-compliant-ai-tools-south-africa", title: "POPIA-compliant AI tools for South African business", hint: "choosing POPIA-compliant tools, data residency" },
+  { path: "/guides/can-you-put-customer-data-in-chatgpt-south-africa", title: "Can you put customer data into ChatGPT in South Africa?", hint: "putting customer data into ChatGPT or an LLM" },
+  { path: "/guides/ai-automation-small-business-south-africa", title: "AI automation for South African small business: where to start", hint: "AI automation and agents for small business" },
+  { path: "/guides/automate-your-south-african-business", title: "Automate your South African business: what to fix first", hint: "what to automate first, agents doing real work" },
+  { path: "/guides/chatgpt-vs-gemini-vs-perplexity-for-business", title: "ChatGPT vs Gemini vs Perplexity for a South African business", hint: "comparing assistants, a new model release, which to use" },
+  { path: "/guides/ai-benchmarks-explained", title: "The AI benchmarks, explained for a normal person", hint: "benchmark scores and what model capability claims mean" },
+  { path: "/guides/ai-tools-for-small-business-south-africa", title: "The best AI tools for a South African small business (2026)", hint: "specific AI tools and apps for an SME" },
+  { path: "/guides/ai-customer-service-whatsapp-south-africa", title: "AI customer service on WhatsApp for South African business", hint: "customer service, chatbots, WhatsApp" },
+  { path: "/guides/get-found-on-ai-search-south-africa", title: "How to get found on AI search in South Africa", hint: "GEO and AEO, being found and cited by AI search" },
+  { path: "/guides/does-chatgpt-recommend-your-business", title: "Does ChatGPT recommend your business?", hint: "whether AI engines recommend a business" },
+  { path: "/guides/how-to-write-content-ai-will-cite", title: "How to write content that AI engines will cite", hint: "writing content AI engines will cite" },
+  { path: "/guides/is-ai-worth-it-south-africa", title: "Is AI worth it for a South African business in 2026?", hint: "ROI, cost vs benefit, the adoption decision" },
+  { path: "/guides/overhyped-ai-for-south-african-business", title: "Overhyped AI for South African business", hint: "hype versus reality, healthy scepticism" },
+  { path: "/guides/ai-for-south-african-business", title: "AI for South African business: the practical 2026 guide", hint: "general AI for SA business, the default hub" },
+];
+const GUIDE_BY_PATH = new Map(GUIDES.map((g) => [g.path, g]));
 
 async function firecrawlSearch(query) {
   try {
@@ -86,18 +110,23 @@ async function recentHeadlines() {
 
 function prompt(sources, avoid) {
   const ctx = sources.map((s, i) => `SOURCE ${i + 1}: ${s.title}\nURL: ${s.url}\n${s.markdown}`).join("\n\n---\n\n");
-  const system = `You are the senior analyst writing AI Guide's daily AI brief for South African business owners and operators. AI Guide is the authoritative, no-hype source on what AI means for South African business.
+  const guideList = GUIDES.map((g) => `${g.path} :: ${g.hint}`).join("\n");
+  const system = `You are the senior analyst writing AI Guide's daily AI brief for South African business owners and operators. AI Guide is THE authoritative, no-hype source on what AI means for South African business. People read this instead of the global tech press for one reason: you translate global AI news into what it concretely means for someone running a business in South Africa. If an item does not earn that translation, it does not belong in the brief.
 
 Strict rules:
 - Ground every item ONLY in the SOURCES provided. Never invent facts, numbers, dates, model names, prices or quotes. If it is not in the sources, do not write it.
 - Select the 5 to 8 MOST significant, genuinely newsworthy and recent developments. Ignore rumour, marketing, listicles, opinion fluff and trivia.
-- Every item needs a short "so what for a South African business": the practical implication, in rand where a price is involved, noting POPIA or local availability when relevant. This SA lens is the entire point.
-- Plain, sharp, factual English. No hype words like revolutionary or game-changer. NO em-dashes. NO emojis.
-- Each item cites the exact source URL it came from.
+- The "soWhat" is the entire reason this brief exists, so make it CONCRETE and specific to operating in South Africa. Wherever the source allows, anchor it to at least one of: whether the tool or model is actually available to use from South Africa; the cost in rand (convert any USD figure and label it approximate, for example "about R1,850 a month"); the POPIA or regulatory angle; the connectivity or load-shedding reality; or a concrete local example such as a Takealot seller, a small law firm, an accountant filing with SARS, or a WhatsApp-first customer base. Never write a vague line like "businesses should consider leveraging this". If an item genuinely has no South African implication yet, say so plainly and briefly explain why it does not change anything for an SA business right now.
+- Plain, sharp, factual English. Short sentences. No hype words like revolutionary, game-changer, unleash or supercharge. NO em-dashes. NO emojis. No exclamation marks.
+- Each item cites the exact source URL it came from in sourceUrl.
+- For each item set "relatedGuide" to the single most relevant guide PATH from RELATED GUIDES below, copied EXACTLY, or "" if none is a genuine fit. Do not invent paths.
 - Do not repeat these headlines already covered recently: ${avoid.join(" | ") || "(none)"}
 
+RELATED GUIDES (pick relatedGuide only from these exact paths):
+${guideList}
+
 Return ONLY valid JSON, no markdown fences:
-{"summary":"2 to 3 sentences on what mattered","items":[{"headline":"short headline","what":"2 to 3 sentences, what happened, grounded in the source","soWhat":"1 to 2 sentences, what it means for a South African business","sourceName":"publication or site name","sourceUrl":"https://..."}]}`;
+{"summary":"2 to 3 sentences on what actually mattered today and why an SA operator should care","items":[{"headline":"short, specific, factual headline","what":"2 to 3 sentences on what happened, grounded strictly in the source","soWhat":"1 to 2 sentences, concrete and specific to a South African business per the rules above","sourceName":"publication or site name","sourceUrl":"https://...","relatedGuide":"/guides/... or empty string"}]}`;
   const user = `Today is ${dateHuman}. Write today's brief from these sources only.\n\n${ctx}`;
   return { system, user };
 }
@@ -145,7 +174,12 @@ async function synthesize(sources, avoid) {
   const brief = await synthesize(sources, avoid);
   const items = (brief.items || [])
     .filter((it) => it.headline && it.what && /^https?:\/\//.test(it.sourceUrl || ""))
-    .slice(0, 8);
+    .slice(0, 8)
+    .map((it) => {
+      const g = it.relatedGuide && GUIDE_BY_PATH.get(it.relatedGuide.trim());
+      const { relatedGuide, ...rest } = it;
+      return g ? { ...rest, relatedPath: g.path, relatedTitle: g.title } : rest;
+    });
   if (items.length < 3) {
     console.error("Too few valid, sourced items; aborting.");
     process.exit(1);

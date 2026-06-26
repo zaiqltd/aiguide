@@ -2,6 +2,9 @@
 
 > The practical AI guide for South African business, written by Chad Etkind and Adam Sacharowitz, the engineers behind Zaiq (https://zaiq.co.za). Plain-English, rand-priced, POPIA-aware answers about what AI actually does for an SA business, what digital work costs, and how to get found by AI search. No hype.
 
+## AI News (updated daily)
+- [The daily AI brief for South African business](https://aiguide.co.za/ai-news): Every morning AI Guide compiles the AI developments that matter, each one linked to its source, and translates it into what it means for a business operating in South Africa. Sourced, no hype. RSS feed: https://aiguide.co.za/ai-news/feed.xml
+
 ## Start here
 - [AI for South African business: the practical 2026 guide](https://aiguide.co.za/guides/ai-for-south-african-business): The main hub — what AI does for an SA business, where to start, what works.
 - [What digital work costs in South Africa (2026)](https://aiguide.co.za/guides/what-digital-work-costs-south-africa): One honest rand reference for websites, SEO, ads, apps, CRM, and POS.

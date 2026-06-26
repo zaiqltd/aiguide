@@ -62,6 +62,15 @@ export const NAV = [
   { href: '/tools/ai-visibility-check', label: 'Free AI check' },
 ] as const;
 
+// Newsletter capture for the daily AI brief. Set `action` to a real ESP form-action URL
+// (Buttondown, MailerLite, Formspree: any provider that accepts a plain POST with an "email"
+// field) to turn this into a proper opt-in list. While `action` is empty the form falls back
+// to a mailto to `fallbackEmail` so no signup intent is lost in the meantime.
+export const NEWSLETTER = {
+  action: '',
+  fallbackEmail: 'hello@zaiq.co.za',
+} as const;
+
 // The one CTA, in the Zaiq voice (HOW-TO-MARKET-ZAIQ.md:8).
 export const CTA = {
   label: 'Send us the problem',
