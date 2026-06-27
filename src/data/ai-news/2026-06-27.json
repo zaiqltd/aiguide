@@ -1,0 +1,105 @@
+{
+  "date": "2026-06-27",
+  "dateHuman": "27 June 2026",
+  "title": "AI brief for South African business, 27 June 2026",
+  "summary": "Today's AI developments focus on Google's major search overhaul with 24/7 monitoring agents, Microsoft's enterprise AI tools, and the growing gap between open and closed AI models. South African businesses should note Google's new search features may impact local SEO strategies, while Microsoft's Work IQ could streamline operations for firms using Office 365.",
+  "items": [
+    {
+      "headline": "Google launches 24/7 search agents and multimodal search",
+      "what": "Google announced AI-powered 24/7 search agents that monitor the web for updates on specific topics and notify users. The new search experience also supports multimodal queries including text, images, and documents.",
+      "soWhat": "South African businesses should audit their online presence as these agents may change how customers find products. Local SEO strategies may need updating for image and document-based searches.",
+      "sourceName": "RiskInfo.ai",
+      "sourceUrl": "https://www.riskinfo.ai/post/ai-insights-key-global-developments-in-june-2026",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Microsoft introduces Work IQ for enterprise AI",
+      "what": "Microsoft unveiled Work IQ, an AI context layer that connects Microsoft 365 with company systems and external data to enhance Copilot and other AI agents.",
+      "soWhat": "South African businesses using Office 365 should evaluate Work IQ's potential to automate workflows, though connectivity during load-shedding may limit real-time functionality.",
+      "sourceName": "RiskInfo.ai",
+      "sourceUrl": "https://www.riskinfo.ai/post/ai-insights-key-global-developments-in-june-2026",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    },
+    {
+      "headline": "Open vs closed AI models gap persists",
+      "what": "Analysis shows open-weight AI models continue to trail behind proprietary frontier models in capability, despite some narrowing in coding and reasoning tasks.",
+      "soWhat": "South African developers choosing between open and closed models should weigh cost savings against performance needs, particularly for complex tasks.",
+      "sourceName": "RedMonk",
+      "sourceUrl": "https://redmonk.com/sogrady/2026/05/15/open-ai-models/",
+      "relatedPath": "/guides/ai-for-south-african-business",
+      "relatedTitle": "AI for South African business: the practical 2026 guide"
+    },
+    {
+      "headline": "Subquadratic launches long-context AI model",
+      "what": "Subquadratic released a non-transformer AI model with 12 million token context window, claiming lower costs for long document analysis.",
+      "soWhat": "South African legal and financial firms processing long documents could benefit from testing this model, though local API availability is unconfirmed.",
+      "sourceName": "whatllm.org",
+      "sourceUrl": "https://whatllm.org/blog/new-ai-models-may-2026",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "Frontier model releases expected Q3 2026",
+      "what": "Analysis predicts concentrated releases of next-gen AI models from major labs in Q3 2026, gated by hardware availability and evaluation cycles.",
+      "soWhat": "South African businesses should plan budgets for potential model upgrades later this year, but no immediate action is required.",
+      "sourceName": "Digital Applied",
+      "sourceUrl": "https://www.digitalapplied.com/blog/frontier-model-q3-2026-release-forecast-roadmap-analysis",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    }
+  ],
+  "sources": [
+    {
+      "name": "AI Insights: Key Global Developments in June 2026 - RiskInfo.ai",
+      "url": "https://www.riskinfo.ai/post/ai-insights-key-global-developments-in-june-2026"
+    },
+    {
+      "name": "Exciting AI Updates Weekly - June 12, 2026 - YouTube",
+      "url": "https://www.youtube.com/watch?v=zyE4uXQ5hS4&vl=en-US"
+    },
+    {
+      "name": "AI News Highlights from 4th of June, 2026 - LinkedIn",
+      "url": "https://www.linkedin.com/pulse/ai-news-highlights-from-4th-june-2026-ai-insiders-news-qifve"
+    },
+    {
+      "name": "AI NEWS: Week of June 1 to June 7, 2026 | by David Akpovi - Medium",
+      "url": "https://medium.com/@davidakpovi/ai-news-week-of-june-1-to-june-7-2026-7957940c805a"
+    },
+    {
+      "name": "June 2026 AI Launch Wave: A Builder's Decision Map - WaveSpeed AI",
+      "url": "https://wavespeed.ai/blog/posts/june-2026-ai-launch-wave/"
+    },
+    {
+      "name": "Frontier Model Q3 2026 Release Forecast: Roadmap Analysis",
+      "url": "https://www.digitalapplied.com/blog/frontier-model-q3-2026-release-forecast-roadmap-analysis"
+    },
+    {
+      "name": "[PDF] What Are Frontier AI Models? | Third Way",
+      "url": "https://www.thirdway.org/memo/what-are-frontier-ai-models.pdf"
+    },
+    {
+      "name": "Open and Closed: The Pursuit of Frontier Models - RedMonk",
+      "url": "https://redmonk.com/sogrady/2026/05/15/open-ai-models/"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "Frontier AI Models 2026: GPT-5.3, Claude 4.6, G - TeamDay.ai",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "10 Best AI Agents for Business 2026: Tested & Ranked",
+      "url": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026"
+    },
+    {
+      "name": "AI Agent Development Cost in 2026: Full Pricing Guide - AlphaCorp AI",
+      "url": "https://alphacorp.ai/blog/what-does-it-cost-to-build-an-ai-agent-in-2026-a-transparent-pricing-guide"
+    }
+  ],
+  "generatedAt": "2026-06-27T11:03:15.955Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
