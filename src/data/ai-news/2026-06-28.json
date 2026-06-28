@@ -1,0 +1,105 @@
+{
+  "date": "2026-06-28",
+  "dateHuman": "28 June 2026",
+  "title": "AI brief for South African business, 28 June 2026",
+  "summary": "Today's focus is on AI agents becoming more embedded in workflows, with Google upgrading Search to use Gemini 3.5 Flash and Microsoft introducing autonomous agents for Microsoft 365. For South African businesses, this means more powerful tools are available, but cost and integration challenges remain.",
+  "items": [
+    {
+      "headline": "Google upgrades Search with Gemini 3.5 Flash and AI agents",
+      "what": "Google announced at I/O 2026 that its AI Mode in Search now runs on Gemini 3.5 Flash, a faster version of Gemini designed for multimodal queries. The company also introduced 24/7 Search agents that can monitor the web for updates on specific topics.",
+      "soWhat": "South African businesses can now use more advanced AI-powered search tools, but need to ensure their online content is optimized for these agents to be found and cited. The 24/7 agents could help local businesses track competitors or market trends.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Microsoft introduces Scout, an autonomous agent for Microsoft 365",
+      "what": "Microsoft unveiled Scout, an always-on AI agent designed to operate across Microsoft 365 applications. Built on the OpenClaw framework, Scout can access information from Teams, Outlook, calendars, and other connected systems to coordinate schedules and carry out routine activities.",
+      "soWhat": "For South African businesses using Microsoft 365, Scout could automate administrative tasks, but local IT teams will need to assess data governance and POPIA compliance when deploying such agents.",
+      "sourceName": "Computerworld",
+      "sourceUrl": "https://www.computerworld.com/article/4180103/microsoft-unveils-scout-an-autonomous-ai-agent-built-on-openclaw.html",
+      "relatedPath": "/guides/automate-your-south-african-business",
+      "relatedTitle": "Automate your South African business: what to fix first"
+    },
+    {
+      "headline": "OpenAI expands Codex with business plugins and deeper ChatGPT integration",
+      "what": "OpenAI announced enterprise-focused enhancements for Codex, including six new business plugins covering sales, data analytics, and creative production. Codex capabilities will also begin appearing directly within ChatGPT.",
+      "soWhat": "South African businesses using ChatGPT may soon access more powerful coding and analytics tools, but should verify whether these plugins are available in their region and assess POPIA compliance before use.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/54909/ai-update-june-5-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "AI agent pricing shifts to outcome-based models",
+      "what": "Major vendors like Zendesk and HubSpot have moved from per-user/month pricing to outcome-based models, where businesses pay per resolution or completed action rather than per seat.",
+      "soWhat": "This could make AI agents more affordable for South African SMEs, as they only pay for successful outcomes rather than upfront licenses. HubSpot's $0.50 per resolution (about R9) may be viable for local businesses.",
+      "sourceName": "Technova Partners",
+      "sourceUrl": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "Microsoft introduces proprietary AI models to reduce costs",
+      "what": "Microsoft unveiled several proprietary AI models, including MAI-Code-1-Flash for code generation and MAI-Thinking-1 for reasoning tasks, positioning them as cost-effective alternatives for Azure developers.",
+      "soWhat": "South African developers building on Azure may benefit from lower token costs, but need to evaluate whether these models match the performance of more expensive alternatives for their specific use cases.",
+      "sourceName": "CNBC",
+      "sourceUrl": "https://www.cnbc.com/2026/06/02/microsoft-unveils-new-ai-models-lessen-reliance-on-openai-lower-costs.html",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Search's I/O 2026 updates: AI agents and more",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "AI Update, June 5, 2026: AI News and Views From the Past Week",
+      "url": "https://www.marketingprofs.com/opinions/2026/54909/ai-update-june-5-2026-ai-news-and-views-from-the-past-week"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "Exciting AI Updates Weekly - June 26, 2026 - YouTube",
+      "url": "https://www.youtube.com/watch?v=oofo72dsMM4"
+    },
+    {
+      "name": "AI Insights: Key Global Developments in June 2026 - RiskInfo.ai",
+      "url": "https://www.riskinfo.ai/post/ai-insights-key-global-developments-in-june-2026"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "Frontier AI Models 2026: GPT-5.3, Claude 4.6, G - TeamDay.ai",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "AI News : Deepseek Returns, Amazons Secret AI Models ... - YouTube",
+      "url": "https://www.youtube.com/watch?v=PZ-iu8w_Q3M"
+    },
+    {
+      "name": "How Much Does It Cost to Deploy AI Agents - LinkedIn",
+      "url": "https://www.linkedin.com/pulse/how-much-does-cost-deploy-ai-agents-complete-pricing-guide-foster-e7zxe"
+    },
+    {
+      "name": "10 Best AI Agents for Business 2026: Tested & Ranked",
+      "url": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026"
+    },
+    {
+      "name": "AI Agent Pricing Models Explained (2026) | Pickaxe",
+      "url": "https://pickaxe.co/post/ai-agent-pricing-models"
+    }
+  ],
+  "generatedAt": "2026-06-28T11:18:36.479Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
