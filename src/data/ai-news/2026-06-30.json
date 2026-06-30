@@ -1,0 +1,112 @@
+{
+  "date": "2026-06-30",
+  "dateHuman": "30 June 2026",
+  "title": "AI brief for South African business, 30 June 2026",
+  "summary": "Today's AI developments highlight the US government's push for AI security, OpenAI's growing ad business, and enterprise pricing shifts for AI agents. South African businesses should note the US cybersecurity directives may impact global AI tool access, while OpenAI's ad-supported model could lower ChatGPT costs for local users.",
+  "items": [
+    {
+      "headline": "US executive order prioritizes AI security and innovation",
+      "what": "The US government issued Executive Order 14409 to accelerate AI adoption while strengthening cybersecurity defenses for national security systems and critical infrastructure.",
+      "soWhat": "South African businesses using US-based AI tools may face stricter data handling requirements or access restrictions as these security measures roll out, particularly for sectors like finance and healthcare.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/",
+      "relatedPath": "/guides/ai-popia-data-safety",
+      "relatedTitle": "AI and POPIA: is your data safe with AI tools?"
+    },
+    {
+      "headline": "OpenAI expands advertising business around ChatGPT",
+      "what": "OpenAI confirmed advertising as a core revenue stream for ChatGPT, with 900 million weekly users and 20% of queries showing commercial intent.",
+      "soWhat": "Ad-supported ChatGPT tiers could become more affordable for South African SMEs, but businesses should verify if ad targeting complies with POPIA when processing customer data.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55130/ai-update-june-26-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "Enterprise AI shifts to outcome-based pricing models",
+      "what": "Salesforce, Zendesk and HubSpot now charge per resolution ($0.50-$2.00) rather than per user/month for AI agent deployments.",
+      "soWhat": "South African businesses can pilot AI customer service agents at lower risk, paying only for successful interactions rather than upfront licenses.",
+      "sourceName": "Crispidea",
+      "sourceUrl": "https://www.crispidea.com/agentic-ai-in-enterprise-pricing-2026/",
+      "relatedPath": "/guides/ai-customer-service-whatsapp-south-africa",
+      "relatedTitle": "AI customer service on WhatsApp for South African business"
+    },
+    {
+      "headline": "Google's personalized AI search may disadvantage new brands",
+      "what": "Google's AI Mode and Preferred Sources features create filter bubbles that favor established publishers over newer content.",
+      "soWhat": "South African businesses must diversify content across podcasts, research and social media to build authority signals that AI search systems recognize.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55130/ai-update-june-26-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "ChatGPT reaches one billion monthly active users",
+      "what": "OpenAI's ChatGPT hit one billion MAUs, cementing AI assistants as mainstream tools globally.",
+      "soWhat": "South African customer expectations now assume AI-powered interactions are standard, particularly for basic queries and transactions.",
+      "sourceName": "Medium",
+      "sourceUrl": "https://medium.com/@davidakpovi/ai-news-week-of-june-1-to-june-7-2026-7957940c805a",
+      "relatedPath": "/guides/ai-customer-service-whatsapp-south-africa",
+      "relatedTitle": "AI customer service on WhatsApp for South African business"
+    },
+    {
+      "headline": "Subquadratic launches long-context AI model",
+      "what": "Subquadratic released a 12M-token context window model using sparse attention architecture at 1/5 frontier model costs.",
+      "soWhat": "Not immediately relevant to most South African businesses as the API is proprietary and priced in USD, but may enable cheaper document analysis tools in future.",
+      "sourceName": "WhatLLM",
+      "sourceUrl": "https://whatllm.org/blog/new-ai-models-may-2026"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "AI Update, June 26, 2026: AI News and Views From the Past Week",
+      "url": "https://www.marketingprofs.com/opinions/2026/55130/ai-update-june-26-2026-ai-news-and-views-from-the-past-week"
+    },
+    {
+      "name": "Exciting AI Updates Weekly - June 26, 2026 - YouTube",
+      "url": "https://www.youtube.com/watch?v=oofo72dsMM4"
+    },
+    {
+      "name": "AI News Highlights from 4th of June, 2026 - LinkedIn",
+      "url": "https://www.linkedin.com/pulse/ai-news-highlights-from-4th-june-2026-ai-insiders-news-qifve"
+    },
+    {
+      "name": "AI NEWS: Week of June 1 to June 7, 2026 | by David Akpovi - Medium",
+      "url": "https://medium.com/@davidakpovi/ai-news-week-of-june-1-to-june-7-2026-7957940c805a"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "AI Frontier Model Builders Cheatsheet (Updated June 2026)",
+      "url": "https://cheatsheets.davidveksler.com/ai-frontier.html"
+    },
+    {
+      "name": "Frontier AI Models 2026: GPT-5.3, Claude 4.6, G - TeamDay.ai",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "Agentic AI in Enterprise: Pricing the Agent Economy in 2026",
+      "url": "https://www.crispidea.com/agentic-ai-in-enterprise-pricing-2026/"
+    },
+    {
+      "name": "10 Best AI Agents for Business 2026: Tested & Ranked",
+      "url": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026"
+    },
+    {
+      "name": "How Much Does It Cost to Deploy AI Agents - LinkedIn",
+      "url": "https://www.linkedin.com/pulse/how-much-does-cost-deploy-ai-agents-complete-pricing-guide-foster-e7zxe"
+    }
+  ],
+  "generatedAt": "2026-06-30T12:23:07.131Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
