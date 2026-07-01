@@ -1,0 +1,112 @@
+{
+  "date": "2026-07-01",
+  "dateHuman": "1 July 2026",
+  "title": "AI brief for South African business, 1 July 2026",
+  "summary": "Google Search upgrades with Gemini 3.5 Flash and AI agents, Apple overhauls Siri with Gemini, and the US government pushes AI security. For South African businesses, these updates mean more powerful AI tools are available globally, but local adoption depends on connectivity and cost.",
+  "items": [
+    {
+      "headline": "Google Search upgrades with Gemini 3.5 Flash and AI agents",
+      "what": "Google announced Gemini 3.5 Flash as the default model in AI Mode for Search globally. The Search box has been upgraded with AI capabilities, making it easier to ask complex questions.",
+      "soWhat": "South African businesses can now access more advanced AI tools through Google Search, but reliable internet remains a barrier. This upgrade could enhance local SEO strategies and customer engagement.",
+      "sourceName": "Google",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Apple overhauls Siri with Google Gemini",
+      "what": "Apple announced a major overhaul of Siri, powered by Google Gemini. Users can choose between Gemini, ChatGPT, or Claude for Apple Intelligence features.",
+      "soWhat": "South African iPhone users will have access to more advanced AI assistants, but the cost of Apple devices may limit adoption. Businesses should consider how this impacts customer interactions on iOS.",
+      "sourceName": "Build Fast with AI",
+      "sourceUrl": "https://www.buildfastwithai.com/blogs/ai-news-today-june-7-2026",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "US government prioritizes AI security and innovation",
+      "what": "The US government issued an executive order to enhance AI security and innovation, focusing on national security systems and critical infrastructure.",
+      "soWhat": "This order does not directly impact South Africa, but it highlights the global trend towards AI regulation. Local businesses should monitor international standards for potential future implications.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "headline": "AI for Good Summit focuses on global AI standards",
+      "what": "The AI for Good Summit in Geneva aims to develop AI standards and policies to unlock AI's potential for solving global challenges.",
+      "soWhat": "South African businesses can benefit from global AI standards, but local adoption will depend on infrastructure and regulatory alignment. This summit may influence future AI policies in South Africa.",
+      "sourceName": "AI for Good",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/ai-for-south-african-business",
+      "relatedTitle": "AI for South African business: the practical 2026 guide"
+    },
+    {
+      "headline": "DeepSeek releases open-weight frontier AI model",
+      "what": "DeepSeek released its R1 model, an open-weight frontier AI model that competes with top closed models like GPT and Gemini.",
+      "soWhat": "South African developers and businesses can access this open model for free, potentially reducing costs for AI projects. However, local expertise is needed to implement and customize it effectively.",
+      "sourceName": "IISS",
+      "sourceUrl": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "Enterprise AI agents shift to outcome-based pricing",
+      "what": "Enterprise AI agents like Zendesk and HubSpot have shifted from per-user pricing to outcome-based models, charging per resolution or action.",
+      "soWhat": "This pricing model could make AI agents more accessible for South African SMBs, as costs align with actual usage. Businesses should evaluate ROI based on their specific needs and customer volumes.",
+      "sourceName": "Technova Partners",
+      "sourceUrl": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Search's I/O 2026 updates: AI agents and more",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "Apple WWDC 2026 June 8: Introducing Siri AI and more - YouTube",
+      "url": "https://www.youtube.com/watch?v=hF8swzNR1-o"
+    },
+    {
+      "name": "AI News Today - June 7, 2026: 16 Biggest Stories - Build Fast with AI",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-june-7-2026"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "AI Frontier Model Tracker | DemandSphere",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "AI Frontier Model Builders Cheatsheet (Updated June 2026)",
+      "url": "https://cheatsheets.davidveksler.com/ai-frontier.html"
+    },
+    {
+      "name": "AI Models Compared: OpenAI, Anthropic, Google, DeepSeek & More",
+      "url": "https://levelup.gitconnected.com/ai-models-compared-openai-anthropic-google-deepseek-more-1e350b8df156"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "10 Best AI Agents for Business 2026: Tested & Ranked",
+      "url": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026"
+    },
+    {
+      "name": "2026 Guide to the Top 10 Enterprise AI Automation Platforms - Vellum",
+      "url": "https://www.vellum.ai/blog/guide-to-enterprise-ai-automation-platforms"
+    }
+  ],
+  "generatedAt": "2026-07-01T13:40:04.729Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
