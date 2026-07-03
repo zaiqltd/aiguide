@@ -1,0 +1,112 @@
+{
+  "date": "2026-07-03",
+  "dateHuman": "3 July 2026",
+  "title": "AI brief for South African business, 3 July 2026",
+  "summary": "Today's key developments include Google Search's AI upgrades with Gemini 3.5 Flash, the return of Anthropic's Fable 5 after a government suspension, and the AI for Good Summit focusing on global AI standards. South African businesses should note the practical implications of these updates, from search visibility to AI tool availability and compliance considerations.",
+  "items": [
+    {
+      "headline": "Google Search upgrades with Gemini 3.5 Flash and AI agents",
+      "what": "Google announced at I/O 2026 that Gemini 3.5 Flash is now the default model in AI Mode for Search globally. The Search box has been upgraded to be more intuitive and dynamic, allowing for more natural queries.",
+      "soWhat": "South African businesses should ensure their online content is optimized for AI-driven search results, as Gemini 3.5 Flash may change how information is surfaced. This is particularly relevant for local SEO and visibility in AI-generated answers.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Fable 5 returns globally after 19-day suspension",
+      "what": "Anthropic's Fable 5 model was restored globally on July 1 after a US government-ordered suspension due to a jailbreak vulnerability. A new safety classifier was added to block the exploit, with some trade-offs in false positives.",
+      "soWhat": "South African developers and businesses using Fable 5 can resume access, but should be aware of the new billing structure post-July 7 and potential false positives in coding queries. Enterprise users should review credit usage.",
+      "sourceName": "Build Fast with AI",
+      "sourceUrl": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "AI for Good Summit focuses on global AI standards",
+      "what": "The UN's AI for Good Summit, starting July 7 in Geneva, will focus on developing AI standards and policies to harness AI for solving global challenges, with participation from over 50 UN agencies.",
+      "soWhat": "South African businesses should monitor outcomes as these standards may influence future local AI regulations and compliance requirements, particularly around data privacy and ethical AI use.",
+      "sourceName": "AI for Good",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/ai-popia-data-safety",
+      "relatedTitle": "AI and POPIA: is your data safe with AI tools?"
+    },
+    {
+      "headline": "US executive order prioritizes AI security and innovation",
+      "what": "A June 2026 US executive order emphasizes AI innovation while addressing security concerns, including directives to upgrade government systems and form an AI cybersecurity clearinghouse within 30 days.",
+      "soWhat": "While directly affecting US systems, this may indirectly impact South African businesses using US-based AI services through potential changes in security requirements or data handling policies.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "headline": "DeepSeek releases open-weight frontier AI model",
+      "what": "Chinese firm DeepSeek released its R1 model in January 2025 as an open-weight alternative to closed models like GPT and Claude, with performance nearly matching top proprietary models at lower cost.",
+      "soWhat": "South African developers have access to this open model for local deployment, which could be cost-effective for businesses needing AI capabilities without relying on international APIs, especially with connectivity challenges.",
+      "sourceName": "IISS",
+      "sourceUrl": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "Enterprise AI agents shift to outcome-based pricing",
+      "what": "AI automation agencies are moving from hourly billing to outcome-based models, with setups ranging from R90,000 to R360,000+ and monthly licenses around R36,000, according to 2026 pricing guides.",
+      "soWhat": "South African businesses evaluating AI automation should consider these pricing models, which align costs with measurable ROI rather than time spent, but require clear outcome definitions.",
+      "sourceName": "Taskip",
+      "sourceUrl": "https://taskip.net/ai-automation-agency-pricing/",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Search's I/O 2026 updates: AI agents and more",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "Apple WWDC 2026 June 8: Introducing Siri AI and more - YouTube",
+      "url": "https://www.youtube.com/watch?v=hF8swzNR1-o"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "Frontier AI Models 2026: GPT-5.3, Claude 4.6, G - TeamDay.ai",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "AI Frontier Model Builders Cheatsheet (Updated June 2026)",
+      "url": "https://cheatsheets.davidveksler.com/ai-frontier.html"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "AI Automation Agency Pricing: What to Charge in 2026",
+      "url": "https://taskip.net/ai-automation-agency-pricing/"
+    },
+    {
+      "name": "AI Agency Services Pricing: Strategies for 2026",
+      "url": "https://www.digitalapplied.com/blog/ai-agency-services-pricing-strategies-2026"
+    }
+  ],
+  "generatedAt": "2026-07-03T11:57:06.801Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
