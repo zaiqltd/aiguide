@@ -1,0 +1,105 @@
+{
+  "date": "2026-07-05",
+  "dateHuman": "5 July 2026",
+  "title": "AI brief for South African business, 5 July 2026",
+  "summary": "Google Search upgrades with Gemini 3.5 Flash and AI agents, marking a significant shift in how businesses can leverage AI for search. The AI for Good Summit focuses on global AI standards, which could impact South African businesses as they adopt AI technologies.",
+  "items": [
+    {
+      "headline": "Google Search upgrades with Gemini 3.5 Flash and AI agents",
+      "what": "Google Search has introduced Gemini 3.5 Flash as the default model in AI Mode globally. This upgrade includes an intelligent Search box, making it easier to ask complex questions and use AI agents directly within Search.",
+      "soWhat": "South African businesses can now access more advanced AI capabilities directly through Google Search, potentially improving customer interactions and internal research efficiency. This is available globally, including in South Africa.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "AI for Good Summit focuses on global AI standards",
+      "what": "The AI for Good Summit, organized by ITU, aims to unlock AI's potential to serve humanity by developing AI standards and fostering innovation. The summit will take place in Geneva from 7-10 July 2026.",
+      "soWhat": "South African businesses should monitor the outcomes of this summit as it could influence global AI standards, which may impact local AI adoption and compliance requirements.",
+      "sourceName": "AI for Good",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/ai-for-south-african-business",
+      "relatedTitle": "AI for South African business: the practical 2026 guide"
+    },
+    {
+      "headline": "US executive order prioritizes AI security and innovation",
+      "what": "The US government has issued an executive order to promote AI innovation and security, focusing on modernizing information systems and protecting intellectual property.",
+      "soWhat": "While this order is US-focused, it may influence global AI security practices, which South African businesses should consider as they adopt AI technologies.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/",
+      "relatedPath": "/guides/ai-for-south-african-business",
+      "relatedTitle": "AI for South African business: the practical 2026 guide"
+    },
+    {
+      "headline": "DeepSeek releases open-weight frontier AI model",
+      "what": "DeepSeek has released an open-weight frontier AI model, R1, which nearly matches the performance of top closed models at a fraction of the cost.",
+      "soWhat": "This open-weight model could provide South African businesses with a cost-effective alternative to expensive closed models, though it requires technical expertise to implement.",
+      "sourceName": "IISS",
+      "sourceUrl": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/",
+      "relatedPath": "/guides/ai-benchmarks-explained",
+      "relatedTitle": "The AI benchmarks, explained for a normal person"
+    },
+    {
+      "headline": "Enterprise AI agents shift to outcome-based pricing",
+      "what": "Enterprise AI agents are increasingly adopting outcome-based pricing models, where businesses pay per resolution or completed action rather than per user or month.",
+      "soWhat": "This pricing shift could make AI agents more accessible to South African businesses, particularly SMEs, by reducing upfront costs and aligning expenses with actual usage.",
+      "sourceName": "Technova Partners",
+      "sourceUrl": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Search's I/O 2026 updates: AI agents and more",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good - ITU",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "Apple WWDC 2026 June 8: Introducing Siri AI and more - YouTube",
+      "url": "https://www.youtube.com/watch?v=hF8swzNR1-o"
+    },
+    {
+      "name": "RAISE Summit: AI Summit 2026 Paris",
+      "url": "https://www.raisesummit.com/"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "AI Frontier Model Tracker | DemandSphere",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "[PDF] What Are Frontier AI Models? | Third Way",
+      "url": "https://www.thirdway.org/memo/what-are-frontier-ai-models.pdf"
+    },
+    {
+      "name": "AI Frontier Model Builders Cheatsheet (Updated June 2026)",
+      "url": "https://cheatsheets.davidveksler.com/ai-frontier.html"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "AI Automation Agency Pricing: What to Charge in 2026 - Taskip",
+      "url": "https://taskip.net/ai-automation-agency-pricing/"
+    },
+    {
+      "name": "10 Best AI Agents for Business 2026: Tested & Ranked",
+      "url": "https://technovapartners.com/en/insights/best-ai-agents-enterprise-2026"
+    }
+  ],
+  "generatedAt": "2026-07-05T07:19:10.642Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
