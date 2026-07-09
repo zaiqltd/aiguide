@@ -1,0 +1,105 @@
+{
+  "date": "2026-07-09",
+  "dateHuman": "9 July 2026",
+  "title": "AI brief for South African business, 9 July 2026",
+  "summary": "Google upgrades Search with Gemini 3.5 Flash globally, including South Africa, making AI-powered search more accessible. The UN's AI for Good summit focuses on global AI standards, while US policy shifts may impact local AI tool availability. Enterprise AI agent pricing models are shifting to outcome-based approaches, relevant for SA businesses considering automation.",
+  "items": [
+    {
+      "headline": "Google Search upgrades to Gemini 3.5 Flash globally",
+      "what": "Google announced the integration of Gemini 3.5 Flash as the default model in AI Mode for Search worldwide, including a redesigned AI-powered search box.",
+      "soWhat": "South African businesses will now have access to more advanced AI search capabilities at no additional cost, which could impact how customers find and interact with local businesses online.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "UN AI for Good summit focuses on global standards",
+      "what": "The UN's AI for Good Global Summit is running in Geneva from 7-10 July 2026, focusing on developing AI standards and policies.",
+      "soWhat": "While primarily a policy discussion, outcomes could eventually influence South Africa's AI regulations and compliance requirements for businesses using AI tools.",
+      "sourceName": "AI for Good",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/ai-popia-data-safety",
+      "relatedTitle": "AI and POPIA: is your data safe with AI tools?"
+    },
+    {
+      "headline": "US executive order prioritizes AI innovation and security",
+      "what": "The US issued Executive Order 14409 to promote AI innovation while addressing security concerns, including cybersecurity upgrades for critical infrastructure.",
+      "soWhat": "This may affect availability and pricing of US-based AI tools in South Africa, as security requirements could lead to regional restrictions or higher costs for enterprise solutions.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "Enterprise AI agents shifting to outcome-based pricing",
+      "what": "AI agencies are moving from hourly billing to value-based pricing models, with typical setup fees of R370,000 (approx. $20K) plus monthly licenses of R37,000 (approx. $2K).",
+      "soWhat": "South African businesses evaluating AI automation should budget for these new pricing structures, which focus on ROI rather than development hours.",
+      "sourceName": "Digital Applied",
+      "sourceUrl": "https://www.digitalapplied.com/blog/ai-agency-services-pricing-strategies-2026",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "Anthropic's Fable 5 returns after 19-day suspension",
+      "what": "Fable 5 is now available globally after a US government-ordered suspension, with new safety classifiers and billing changes taking effect July 7.",
+      "soWhat": "South African users of Claude.ai can resume using Fable 5, but should review the new billing structure as usage beyond 50% of limits will now incur additional costs.",
+      "sourceName": "Build Fast with AI",
+      "sourceUrl": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    }
+  ],
+  "sources": [
+    {
+      "name": "A new era for AI Search",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and ...",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "Open and Closed: The Pursuit of Frontier Models - RedMonk",
+      "url": "https://redmonk.com/sogrady/2026/05/15/open-ai-models/"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "AI Frontier Model Tracker | DemandSphere",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "AI Frontier Model Builders Cheatsheet (Updated July 2026)",
+      "url": "https://cheatsheets.davidveksler.com/ai-frontier.html"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "AI Agency Services Pricing: Strategies for 2026 - Digital Applied",
+      "url": "https://www.digitalapplied.com/blog/ai-agency-services-pricing-strategies-2026"
+    },
+    {
+      "name": "How I Charge $5k-$60k for AI Agents in 2026 (52+ Clients) - YouTube",
+      "url": "https://www.youtube.com/watch?v=qo1g7jnbXBY"
+    }
+  ],
+  "generatedAt": "2026-07-09T07:36:52.985Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
