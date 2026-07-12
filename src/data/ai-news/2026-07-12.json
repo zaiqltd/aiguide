@@ -1,0 +1,94 @@
+{
+  "date": "2026-07-12",
+  "dateHuman": "12 July 2026",
+  "title": "AI brief for South African business, 12 July 2026",
+  "summary": "Today's key developments focus on OpenAI's new conversational voice model and the ongoing shift to outcome-based pricing for enterprise AI agents. South African businesses should note GPT-Live's potential for smoother customer interactions and evaluate whether new agent pricing models align with their automation budgets.",
+  "items": [
+    {
+      "headline": "OpenAI launches GPT-Live for more natural voice interactions",
+      "what": "OpenAI released GPT-Live, a full-duplex voice model that enables simultaneous listening and speaking during conversations. It powers a new ChatGPT Voice experience with more natural back-and-forth interaction.",
+      "soWhat": "South African customer service operations using ChatGPT Voice will see smoother interactions, but should test call quality under local network conditions. The API version coming soon may offer local integration opportunities.",
+      "sourceName": "OpenAI",
+      "sourceUrl": "https://openai.com/index/introducing-gpt-live/",
+      "relatedPath": "/guides/ai-customer-service-whatsapp-south-africa",
+      "relatedTitle": "AI customer service on WhatsApp for South African business"
+    },
+    {
+      "headline": "Enterprise AI agents shift to outcome-based pricing models",
+      "what": "Rasa's 2026 enterprise AI agent guide shows a clear industry shift from per-token pricing to outcome-based models, particularly for customer service automation.",
+      "soWhat": "South African businesses evaluating AI agents should compare traditional per-token costs against outcome-based options, which may better align costs with actual business results in rand terms.",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    },
+    {
+      "headline": "AI automation agencies adopt hybrid pricing models",
+      "what": "Taskip's 2026 pricing guide shows agencies combining setup fees (R9,000-R180,000) with monthly retainers or outcome-based pricing for AI automation services.",
+      "soWhat": "South African SMEs should benchmark these ranges against local service providers, noting that outcome-based pricing may require clear KPIs tied to business impact.",
+      "sourceName": "Taskip",
+      "sourceUrl": "https://taskip.net/ai-automation-agency-pricing/",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "US executive order prioritizes AI security innovation",
+      "what": "A June 2026 US executive order directs agencies to accelerate AI adoption for cybersecurity while protecting critical infrastructure.",
+      "soWhat": "While focused on US systems, this may indirectly affect South African businesses using American cloud services through enhanced security features in enterprise AI tools.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Exciting AI Updates Weekly - July 10, 2026 - YouTube",
+      "url": "https://www.youtube.com/watch?v=6x28pfmf0yU"
+    },
+    {
+      "name": "Introducing GPT-Live - OpenAI",
+      "url": "https://openai.com/index/introducing-gpt-live/"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "Exciting AI Updates Weekly - July 03, 2026 - YouTube",
+      "url": "https://www.youtube.com/watch?v=FFz3iOBVldY"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "Open and Closed: The Pursuit of Frontier Models - RedMonk",
+      "url": "https://redmonk.com/sogrady/2026/05/15/open-ai-models/"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "AI Updates Today (July 2026) – Latest AI Model Releases - LLM Stats",
+      "url": "https://llm-stats.com/llm-updates"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "AI Automation Agency Pricing: What to Charge in 2026 | Taskip",
+      "url": "https://taskip.net/ai-automation-agency-pricing/"
+    }
+  ],
+  "generatedAt": "2026-07-12T06:27:45.115Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
