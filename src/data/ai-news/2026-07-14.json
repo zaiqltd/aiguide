@@ -1,0 +1,132 @@
+{
+  "date": "2026-07-14",
+  "dateHuman": "14 July 2026",
+  "title": "AI brief for South African business, 14 July 2026",
+  "summary": "Today's updates focus on AI search behavior shifts and enterprise AI agent pricing models. Google's AI Mode data reveals users are moving beyond traditional keywords, requiring South African businesses to adapt their SEO strategies. Meanwhile, AI automation agencies are adopting hybrid pricing models, offering more flexibility for local SMEs.",
+  "items": [
+    {
+      "headline": "Google data shows AI search behavior moving beyond traditional keywords",
+      "what": "Google's AI Mode data reveals users are adopting longer, conversational, and multimodal search behavior. Average prompts are three times longer than traditional queries, with follow-up searches growing over 40% monthly.",
+      "soWhat": "South African businesses must adapt SEO strategies to target conversational prompts and provide richer context around products and images to remain visible in AI-driven search results.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "AI automation agencies adopt hybrid pricing models",
+      "what": "AI automation agencies are shifting to hybrid pricing models combining fixed fees, usage-based charges, and outcome-based pricing. This approach offers flexibility for clients across small businesses, mid-market, and enterprise tiers.",
+      "soWhat": "South African SMEs can now access AI automation services with pricing models tailored to their budgets and specific needs, reducing upfront costs and aligning fees with measurable outcomes.",
+      "sourceName": "Taskip",
+      "sourceUrl": "https://taskip.net/ai-automation-agency-pricing/",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    },
+    {
+      "headline": "Google upgrades Search with Gemini 3.5 Flash globally",
+      "what": "Google announced Gemini 3.5 Flash as the new default model in AI Mode for Search globally. The upgrade includes an intelligent Search box designed to handle longer, more complex queries.",
+      "soWhat": "South African businesses should ensure their websites and content are optimized for Gemini 3.5 Flash to maintain visibility in AI-driven search results, especially for informational queries.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Enterprise AI agents shift to outcome-based pricing models",
+      "what": "Enterprise AI agents are increasingly adopting outcome-based pricing, charging clients based on measurable results rather than per-conversation or per-token usage.",
+      "soWhat": "This pricing model benefits South African enterprises by aligning AI agent costs with business outcomes, making it easier to justify investments in AI automation.",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    },
+    {
+      "headline": "DeepSeek's open-weight frontier AI model challenges closed models",
+      "what": "DeepSeek released an open-weight frontier AI model, R1, which nearly matches the performance of top closed models at a fraction of the cost. The model is available for download and modification.",
+      "soWhat": "South African developers and businesses can leverage DeepSeek's open-weight model for cost-effective AI solutions, particularly in scenarios where proprietary models are prohibitively expensive.",
+      "sourceName": "IISS",
+      "sourceUrl": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "UN AI for Good Summit focuses on global AI standards",
+      "what": "The UN AI for Good Summit in Geneva emphasized developing global AI standards to ensure AI serves humanity. The event brought together stakeholders from over 50 UN agencies and governments.",
+      "soWhat": "South African businesses should monitor these global AI standards, as they may influence local regulations and compliance requirements for AI deployment.",
+      "sourceName": "ITU",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/ai-popia-data-safety",
+      "relatedTitle": "AI and POPIA: is your data safe with AI tools?"
+    },
+    {
+      "headline": "US executive order promotes AI innovation and security",
+      "what": "The US issued an executive order to promote AI innovation and security, focusing on modernizing government and private sector systems and protecting intellectual property from exploitation.",
+      "soWhat": "While this order is US-focused, it may influence global AI development trends, including tools and practices that South African businesses can adopt to enhance their AI capabilities.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/",
+      "relatedPath": "/guides/ai-for-south-african-business",
+      "relatedTitle": "AI for South African business: the practical 2026 guide"
+    },
+    {
+      "headline": "SubQ launches first commercial subquadratic LLM",
+      "what": "Subquadratic launched SubQ 1M-Preview, the first commercially available LLM using sparse, subquadratic attention architecture. The model offers a 12 million token context window at a fraction of the cost of frontier models.",
+      "soWhat": "South African businesses handling large datasets or long-context tasks can explore SubQ's cost-effective solution for AI-driven analysis and research.",
+      "sourceName": "WhatLLM",
+      "sourceUrl": "https://whatllm.org/blog/new-ai-models-may-2026",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Search's I/O 2026 updates: AI agents and more",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "AI Update, July 10, 2026: AI News and Views From the Past Week",
+      "url": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week"
+    },
+    {
+      "name": "Exciting AI Updates Weekly - July 10, 2026 - YouTube",
+      "url": "https://www.youtube.com/watch?v=6x28pfmf0yU"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good - ITU",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "AI Frontier Model Tracker",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "AI Updates Today (July 2026) – Latest AI Model Releases",
+      "url": "https://llm-stats.com/llm-updates"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "AI Automation Agency Pricing: What to Charge in 2026 | Taskip",
+      "url": "https://taskip.net/ai-automation-agency-pricing/"
+    }
+  ],
+  "generatedAt": "2026-07-14T06:05:14.188Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
