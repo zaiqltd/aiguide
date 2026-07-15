@@ -1,0 +1,105 @@
+{
+  "date": "2026-07-15",
+  "dateHuman": "15 July 2026",
+  "title": "AI brief for South African business, 15 July 2026",
+  "summary": "Today's AI developments highlight significant shifts in enterprise pricing transparency, conversational AI capabilities, and African AI initiatives. South African businesses should note GPT-5.6's broad availability, Google's AI search behavior data, and OpenAI's new GPT-Live for more natural voice interactions.",
+  "items": [
+    {
+      "headline": "OpenAI begins broad GPT-5.6 rollout after government testing",
+      "what": "OpenAI is launching GPT-5.6 models Sol, Terra, and Luna broadly after additional testing and meetings with US Commerce Department officials. The government had previously encouraged a staggered release due to national-security concerns.",
+      "soWhat": "South African businesses can now access GPT-5.6, but should evaluate its suitability for workflows involving proprietary data or automated decisions. Local POPIA compliance remains a key consideration.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "Google data shows AI search behavior moving beyond traditional keywords",
+      "what": "Google's AI Mode data reveals users adopting longer, conversational, and increasingly multimodal search behavior. Average prompts are three times longer than traditional queries, with follow-up searches growing over 40% monthly.",
+      "soWhat": "South African businesses must adapt content strategies for conversational queries to remain visible in AI search results, especially for informational searches where AI Overviews dominate.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "OpenAI launches GPT-Live for more natural voice interactions",
+      "what": "OpenAI introduced GPT-Live, a full-duplex voice AI that can listen and speak simultaneously, making conversations more natural with features like live translation and intelligent task delegation.",
+      "soWhat": "South African businesses using voice interfaces can explore GPT-Live for customer service applications, but should test its performance under local connectivity conditions and accent variations.",
+      "sourceName": "OpenAI",
+      "sourceUrl": "https://openai.com/index/introducing-gpt-live/",
+      "relatedPath": "/guides/ai-customer-service-whatsapp-south-africa",
+      "relatedTitle": "AI customer service on WhatsApp for South African business"
+    },
+    {
+      "headline": "Google launches AI program for African researchers and entrepreneurs",
+      "what": "Google Africa Applied AI Lab in Accra will support African researchers and entrepreneurs with early access to AI technologies and technical guidance from Google experts.",
+      "soWhat": "South African tech startups and researchers can leverage this program to develop locally relevant AI solutions, though practical access details for SA participants remain unclear.",
+      "sourceName": "Medium",
+      "sourceUrl": "https://medium.com/@davidakpovi/ai-news-week-of-july-6-to-july-12-2026-f81a26c49c55",
+      "relatedPath": "/guides/ai-for-south-african-business",
+      "relatedTitle": "AI for South African business: the practical 2026 guide"
+    },
+    {
+      "headline": "Enterprise AI pricing becomes more transparent",
+      "what": "Platforms like Coworker AI ($30/user/month) and Amazon Q Business ($20/user/month) are breaking from traditional custom pricing models with published rates, while Microsoft 365 Copilot requires additional licensing.",
+      "soWhat": "South African enterprises can now better budget for AI tools, though local currency fluctuations may impact actual costs. POPIA compliance should be verified for any cloud-based solutions.",
+      "sourceName": "Coworker.ai",
+      "sourceUrl": "https://coworker.ai/blog/enterprise-ai-pricing-comparison-2026",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    }
+  ],
+  "sources": [
+    {
+      "name": "AI Update, July 10, 2026: AI News and Views From the ...",
+      "url": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week"
+    },
+    {
+      "name": "Introducing GPT-Live",
+      "url": "https://openai.com/index/introducing-gpt-live/"
+    },
+    {
+      "name": "Exciting AI Updates Weekly - July 03, 2026",
+      "url": "https://www.youtube.com/watch?v=FFz3iOBVldY"
+    },
+    {
+      "name": "AI NEWS: Week of July 6 to July 12, 2026 | by David Akpovi",
+      "url": "https://medium.com/@davidakpovi/ai-news-week-of-july-6-to-july-12-2026-f81a26c49c55"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "AI Updates Today (July 2026) – Latest AI Model Releases",
+      "url": "https://llm-stats.com/llm-updates"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "AI Frontier Model Tracker",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "AI Automation Agency Pricing: What to Charge in 2026",
+      "url": "https://taskip.net/ai-automation-agency-pricing/"
+    },
+    {
+      "name": "Enterprise AI Pricing Compared: 2026 Guide",
+      "url": "https://coworker.ai/blog/enterprise-ai-pricing-comparison-2026"
+    },
+    {
+      "name": "AI Automation Agency Costs in the USA: 2026 Pricing Guide",
+      "url": "https://agixtech.com/insights/how-much-does-it-cost-to-hire-an-ai-automation-agency-in-the-usa/"
+    }
+  ],
+  "generatedAt": "2026-07-15T06:09:24.268Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
