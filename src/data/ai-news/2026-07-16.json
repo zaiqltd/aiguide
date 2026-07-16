@@ -1,0 +1,114 @@
+{
+  "date": "2026-07-16",
+  "dateHuman": "16 July 2026",
+  "title": "AI brief for South African business, 16 July 2026",
+  "summary": "Today's brief highlights significant AI developments with direct implications for South African businesses. Google's AI-powered Search upgrade could impact local SEO strategies, while OpenAI's GPT-5.6 rollout offers new capabilities for enterprises. The UN's AI for Good summit outcomes may influence future regulatory frameworks affecting AI adoption.",
+  "items": [
+    {
+      "headline": "Google upgrades Search with Gemini 3.5 Flash globally",
+      "what": "Google has upgraded its Search with Gemini 3.5 Flash as the default model in AI Mode worldwide. The search box has been redesigned to better handle conversational queries and longer prompts.",
+      "soWhat": "South African businesses need to adapt SEO strategies for longer, more conversational queries as AI search behavior shifts. Content should be rewritten to answer follow-up questions and provide richer context.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "OpenAI begins broad GPT-5.6 rollout after government testing",
+      "what": "OpenAI has launched GPT-5.6 models Sol, Terra, and Luna broadly after additional government testing. The models were previously limited to approved organizations due to national security concerns.",
+      "soWhat": "South African enterprises can now access these models but should conduct internal evaluations before replacing existing systems, especially for workflows involving sensitive data or automated decisions.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "UN AI for Good Summit focuses on global AI standards",
+      "what": "The UN's AI for Good summit brought together stakeholders to discuss AI standards, policy frameworks, and innovation opportunities to address global challenges.",
+      "soWhat": "South African businesses should monitor outcomes as they may influence future local AI regulations and compliance requirements, particularly around data privacy and ethical AI use.",
+      "sourceName": "AI for Good",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "Study shows AI Overviews reduce quality traffic by 39.8%",
+      "what": "A study found that Google AI Overviews reduced organic clicks by 39.8% on searches where summaries appeared, with no significant difference in visitor quality when Overviews were removed.",
+      "soWhat": "South African businesses relying on informational content may see traffic declines, making alternative acquisition channels like email capture and direct traffic more important.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Google brings AI visibility reporting into Search Console",
+      "what": "Google is adding reporting for AI Overviews, AI Mode, and AI-powered Discover features to Search Console, initially for UK websites, showing impressions by page and device.",
+      "soWhat": "When available in South Africa, this will help businesses track AI search visibility but should not be mistaken for business impact metrics. SEO strategies will need to adapt.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Enterprise AI agents shift to outcome-based pricing models",
+      "what": "Enterprise AI agent platforms are increasingly adopting outcome-based pricing rather than per-token or per-conversation models, with some charging for successful task completion.",
+      "soWhat": "South African enterprises evaluating AI agents should consider total cost of ownership and alignment with business outcomes rather than just upfront pricing.",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    }
+  ],
+  "sources": [
+    {
+      "name": "The United Nations' leading platform on Artificial Intelligence - AI for Good",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "A new era for AI Search",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "AI's 3 big narrative violations — 7/2/2026",
+      "url": "https://www.youtube.com/watch?v=yFEOnBT0Hgw"
+    },
+    {
+      "name": "AI Update, July 10, 2026: AI News and Views From the Past Week",
+      "url": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "Frontier Model Q3 2026 Release Forecast: Roadmap Analysis",
+      "url": "https://www.digitalapplied.com/blog/frontier-model-q3-2026-release-forecast-roadmap-analysis"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "AI Frontier Model Tracker",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "Top 10 AI Agents for Business in 2026: Best AI Automation Tools",
+      "url": "https://evrone.com/blog/top-10-ai-agents-business-2026"
+    }
+  ],
+  "generatedAt": "2026-07-16T06:11:50.454Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
