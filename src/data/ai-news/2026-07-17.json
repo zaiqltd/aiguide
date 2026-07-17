@@ -1,0 +1,112 @@
+{
+  "date": "2026-07-17",
+  "dateHuman": "17 July 2026",
+  "title": "AI brief for South African business, 17 July 2026",
+  "summary": "Today's key developments include Google's global rollout of Gemini 3.5 Flash in Search, OpenAI's broad release of GPT-5.6 after government testing, and a study showing AI Overviews significantly reduce quality traffic. South African businesses should note these changes as they impact search visibility, AI tool availability, and content strategy.",
+  "items": [
+    {
+      "headline": "Google upgrades Search with Gemini 3.5 Flash globally",
+      "what": "Google has upgraded its Search with Gemini 3.5 Flash, making it the default model in AI Mode for users worldwide. The new model is designed for sustained performance in agent and coding tasks.",
+      "soWhat": "South African businesses using Google Search for visibility should adapt content to longer, conversational queries as AI Mode usage grows. The upgrade is available globally, including in South Africa.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "OpenAI begins broad GPT-5.6 rollout after government testing",
+      "what": "OpenAI has launched GPT-5.6 models Sol, Terra, and Luna broadly after additional testing and meetings with US Commerce Department officials. The models were previously limited to approved organizations.",
+      "soWhat": "South African businesses can now access GPT-5.6, but should evaluate its suitability for workflows involving proprietary data or automated decisions, considering POPIA compliance.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "Study shows AI Overviews reduce quality traffic by 39.8%",
+      "what": "A study found that Google AI Overviews reduced organic clicks by 39.8% on searches where summaries appeared. The lost visits were not low-quality, challenging Google's claim that AI answers mainly prevent accidental clicks.",
+      "soWhat": "South African businesses relying on organic search traffic should diversify acquisition channels, as informational content is most affected by AI Overviews.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Google brings AI visibility reporting into Search Console",
+      "what": "Google is adding reporting for AI Overviews, AI Mode, and AI-powered Discover features to Search Console, initially for UK websites. The reports show impressions but not clicks or actions.",
+      "soWhat": "South African businesses should monitor these reports when available locally to understand AI visibility, but remember that exposure does not equal business impact.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Fable 5 returns globally after 19-day suspension",
+      "what": "Anthropic's Fable 5 model has returned globally after a 19-day US government-ordered suspension. The model now includes a new safety classifier and changed billing structure.",
+      "soWhat": "South African users of Claude models can resume access to Fable 5, but should note the new billing cliff on July 7, after which usage credits will be required.",
+      "sourceName": "Build Fast with AI",
+      "sourceUrl": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "SubQ launches first commercial subquadratic LLM",
+      "what": "Subquadratic has launched SubQ 1M-Preview, the first commercially available LLM using subquadratic sparse attention architecture. It offers a 12 million token context window at lower cost for long-context tasks.",
+      "soWhat": "This could eventually benefit South African businesses with long-document analysis needs, but the model is not yet widely accessible or proven in local use cases.",
+      "sourceName": "What LLM",
+      "sourceUrl": "https://whatllm.org/blog/new-ai-models-may-2026"
+    }
+  ],
+  "sources": [
+    {
+      "name": "The United Nations' leading platform on Artificial Intelligence - AI for Good",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "A new era for AI Search",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "AI's 3 big narrative violations — 7/2/2026",
+      "url": "https://www.youtube.com/watch?v=yFEOnBT0Hgw"
+    },
+    {
+      "name": "AI Update, July 10, 2026: AI News and Views From the Past Week",
+      "url": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "Frontier Model Q3 2026 Release Forecast: Roadmap Analysis",
+      "url": "https://www.digitalapplied.com/blog/frontier-model-q3-2026-release-forecast-roadmap-analysis"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "AI Frontier Model Tracker",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "Top 10 AI Agents for Business in 2026: Best AI Automation Tools",
+      "url": "https://evrone.com/blog/top-10-ai-agents-business-2026"
+    }
+  ],
+  "generatedAt": "2026-07-17T06:10:00.682Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
