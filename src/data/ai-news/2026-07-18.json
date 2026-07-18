@@ -1,0 +1,105 @@
+{
+  "date": "2026-07-18",
+  "dateHuman": "18 July 2026",
+  "title": "AI brief for South African business, 18 July 2026",
+  "summary": "Today's AI developments highlight significant shifts in model pricing, regulatory changes, and enterprise AI adoption. South African businesses should note the aggressive price drops in AI models, which could make advanced AI tools more accessible. Additionally, new POPIA amendments and cybersecurity standards for financial institutions emphasize the need for compliance in data handling and AI usage.",
+  "items": [
+    {
+      "headline": "GPT-5.6, Grok 4.5, and Muse Spark 1.1 trigger AI price war",
+      "what": "OpenAI, SpaceXAI, and Meta released GPT-5.6, Grok 4.5, and Muse Spark 1.1 within days of each other, drastically lowering AI model costs. Grok 4.5 costs $2 per million input tokens and $6 per million output tokens, while GPT-5.6's Luna model is priced at $1 for input and $6 for output.",
+      "soWhat": "South African businesses can now access advanced AI models at significantly lower costs, making it more feasible to integrate AI into workflows. For example, a small law firm could automate document review for about R18 per million tokens.",
+      "sourceName": "Kersai",
+      "sourceUrl": "https://kersai.com/ai-breakthroughs-july-2026/",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "POPIA amendments enforce stricter direct marketing rules",
+      "what": "Amended POPIA regulations require explicit written consent for direct marketing, banning pre-ticked boxes and silent opt-outs. Consent must be recorded and provided upon request.",
+      "soWhat": "South African businesses must update their marketing practices to comply with these stricter POPIA rules. For example, a Takealot seller must ensure explicit consent is obtained before sending promotional emails.",
+      "sourceName": "Lex Africa",
+      "sourceUrl": "https://lexafrica.com/2026/02/south-africas-cybersecurity-shift-2026/",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "Cybersecurity Joint Standard for financial institutions takes effect",
+      "what": "The Prudential Authority and Financial Sector Conduct Authority introduced a Joint Standard on Cybersecurity, requiring financial institutions to implement comprehensive cybersecurity strategies and incident response plans.",
+      "soWhat": "South African banks, insurers, and fund administrators must ensure compliance with these new cybersecurity standards to avoid potential fines. This includes updating breach response plans and conducting regular vulnerability assessments.",
+      "sourceName": "Lex Africa",
+      "sourceUrl": "https://lexafrica.com/2026/02/south-africas-cybersecurity-shift-2026/",
+      "relatedPath": "/guides/ai-popia-data-safety",
+      "relatedTitle": "AI and POPIA: is your data safe with AI tools?"
+    },
+    {
+      "headline": "AI Overviews reduce organic clicks by 39.8%, study finds",
+      "what": "A study revealed that Google AI Overviews reduced organic clicks by 39.8% on searches where summaries appeared. The lost clicks were not low-quality, challenging Google's claim that AI Overviews filter out irrelevant traffic.",
+      "soWhat": "South African businesses relying on organic search traffic should focus on capturing leads through email, branded demand, and direct traffic, as AI Overviews may divert users away from their sites.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Google adds AI visibility reporting to Search Console",
+      "what": "Google introduced AI visibility reporting in Search Console, showing impressions from AI Overviews, AI Mode, and AI-powered Discover features. The reports are initially available for UK websites.",
+      "soWhat": "While not yet available in South Africa, this feature highlights the growing importance of optimizing content for AI search visibility. Businesses should prepare for similar reporting tools locally.",
+      "sourceName": "MarketingProfs",
+      "sourceUrl": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    }
+  ],
+  "sources": [
+    {
+      "name": "AI Update, July 10, 2026: AI News and Views From the ...",
+      "url": "https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "AI Breakthroughs July 2026",
+      "url": "https://kersai.com/ai-breakthroughs-july-2026/"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "Frontier AI Model Releases 2026: Timeline, Capabilities & What They ...",
+      "url": "https://jobsecuritymeter.com/guides/frontier-ai-models-2026"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath, Architecture ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "AI race heats up as OpenAI, Google and Mistral release new models",
+      "url": "https://www.theguardian.com/technology/2024/apr/10/ai-race-heats-up-as-openai-google-and-mistral-release-new-models"
+    },
+    {
+      "name": "22 AI Frontier Models Compared for 2026",
+      "url": "https://teamai.com/blog/large-language-models-llms/the-2026-ai-frontier-model-war/"
+    },
+    {
+      "name": "South Africa's Tech and Telecom Sector Sees Major Shifts in AI ...",
+      "url": "https://www.youtube.com/watch?v=4GHvWzPZe4U"
+    },
+    {
+      "name": "South Africa's Data, AI & Cybersecurity Outlook 2026",
+      "url": "https://lexafrica.com/2026/02/south-africas-cybersecurity-shift-2026/"
+    },
+    {
+      "name": "africa data protection report",
+      "url": "https://www.africadataprotection.org/EN-AFRICA-DATA-PROTECTION-REPORT-JAN-2026.pdf"
+    },
+    {
+      "name": "Is Africa Ready for AI? Digital Information Privacy Awareness and ...",
+      "url": "https://www.mdpi.com/2076-0760/15/3/155"
+    }
+  ],
+  "generatedAt": "2026-07-18T05:59:16.285Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
