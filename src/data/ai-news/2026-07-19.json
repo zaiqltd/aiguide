@@ -1,0 +1,105 @@
+{
+  "date": "2026-07-19",
+  "dateHuman": "19 July 2026",
+  "title": "AI brief for South African business, 19 July 2026",
+  "summary": "Google upgrades Search with Gemini 3.5 Flash globally, making AI-powered search more accessible. The UN's AI for Good Summit focuses on global AI standards, which may influence future regulations affecting South African businesses. Meanwhile, AI agent pricing models show that SMEs should carefully evaluate costs versus potential ROI before investing in automation.",
+  "items": [
+    {
+      "headline": "Google upgrades Search with Gemini 3.5 Flash globally",
+      "what": "Google announced the integration of Gemini 3.5 Flash into its Search engine, marking the biggest upgrade to the Search box in 25 years. The new AI-powered Search box allows users to ask complex questions directly.",
+      "soWhat": "South African businesses should ensure their online content is optimized for AI-powered search to maintain visibility. This includes clear, structured information that AI can easily interpret and cite.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "UN AI for Good Summit focuses on global AI standards",
+      "what": "The UN's AI for Good Summit in Geneva brought together stakeholders to discuss AI standards and policies aimed at solving global challenges.",
+      "soWhat": "South African businesses should monitor these developments as they may influence future local regulations and compliance requirements for AI use.",
+      "sourceName": "AI for Good",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/ai-popia-data-safety",
+      "relatedTitle": "AI and POPIA: is your data safe with AI tools?"
+    },
+    {
+      "headline": "AI agent pricing models show wide cost range for SMEs",
+      "what": "A breakdown of AI agent pricing reveals costs ranging from $50/month for basic chatbots to $200,000+ for custom enterprise solutions.",
+      "soWhat": "South African SMEs should carefully evaluate ROI before investing, as integration and maintenance costs can significantly increase total expenditure. Local businesses may find mid-tier solutions (about R9,000-R36,000/month) more practical.",
+      "sourceName": "The Crunch",
+      "sourceUrl": "https://thecrunch.io/ai-agents-price/",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "Claude Sonnet 5 and GPT-5.6 launch in competitive AI wave",
+      "what": "Anthropic's Claude Sonnet 5 and OpenAI's GPT-5.6 were released within weeks of each other, offering different strengths for business applications.",
+      "soWhat": "South African businesses should focus on flexible AI setups that allow easy model switching, rather than locking into one provider, to adapt to rapid advancements.",
+      "sourceName": "Raulji Technologies",
+      "sourceUrl": "https://www.rauljitechnologies.com/blog/july-2026-ai-model-wave/",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "Enterprise AI agents shift to outcome-based pricing",
+      "what": "Top enterprise AI agent platforms like Rasa and Sierra are adopting outcome-based pricing models rather than per-token or per-conversation charges.",
+      "soWhat": "This may benefit South African enterprises with predictable workflows, but SMEs should carefully assess whether outcome-based models align with their usage patterns and budget.",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    }
+  ],
+  "sources": [
+    {
+      "name": "A new era for AI Search",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "AI's 3 big narrative violations — 7/2/2026",
+      "url": "https://www.youtube.com/watch?v=yFEOnBT0Hgw"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and ...",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "Frontier AI Model Releases 2026: Timeline, Capabilities ...",
+      "url": "https://jobsecuritymeter.com/guides/frontier-ai-models-2026"
+    },
+    {
+      "name": "AI race heats up as OpenAI, Google and Mistral release ...",
+      "url": "https://www.theguardian.com/technology/2024/apr/10/ai-race-heats-up-as-openai-google-and-mistral-release-new-models"
+    },
+    {
+      "name": "The July 2026 AI Model Wave: What It Means for You",
+      "url": "https://www.rauljitechnologies.com/blog/july-2026-ai-model-wave/"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "Top 10 AI Agents for Business in 2026: Best AI Automation Tools",
+      "url": "https://evrone.com/blog/top-10-ai-agents-business-2026"
+    },
+    {
+      "name": "AI Automation Agency Pricing 2026: AI Agent Cost & Monthly ...",
+      "url": "https://thecrunch.io/ai-agents-price/"
+    }
+  ],
+  "generatedAt": "2026-07-19T06:24:57.531Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
