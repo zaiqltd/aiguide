@@ -1,0 +1,114 @@
+{
+  "date": "2026-07-20",
+  "dateHuman": "20 July 2026",
+  "title": "AI brief for South African business, 20 July 2026",
+  "summary": "Google Search upgrades with AI agents and a new intelligent search box, while the UN's AI for Good Summit focuses on global AI standards. For South African businesses, the key takeaway is that AI-powered search changes how customers find you, and global standards may influence local POPIA regulations.",
+  "items": [
+    {
+      "headline": "Google Search upgrades with AI agents and intelligent search box",
+      "what": "Google announced at I/O 2026 that it is upgrading Search with Gemini 3.5 Flash as the default model in AI Mode globally. The search box has been redesigned with AI to make it easier to ask questions.",
+      "soWhat": "South African businesses need to ensure their online content is optimized for AI-powered search, as traditional SEO tactics may become less effective. This affects how customers discover local services and products.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "UN AI for Good Summit focuses on global AI standards",
+      "what": "The UN's AI for Good Summit in Geneva brought together stakeholders to discuss AI standards, policy frameworks, and innovation to address global challenges.",
+      "soWhat": "While not immediately impactful, these discussions may influence future POPIA amendments in South Africa, particularly around AI data handling and privacy standards.",
+      "sourceName": "ITU",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "Fable 5 returns globally after 19-day suspension",
+      "what": "Anthropic's Fable 5 model was restored globally on July 1 after a US government suspension. It now includes a new safety classifier to block specific jailbreak techniques.",
+      "soWhat": "South African developers and businesses using Claude models can now access Fable 5 again, but should be aware of potential false positives in coding queries.",
+      "sourceName": "Build Fast with AI",
+      "sourceUrl": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "US executive order promotes AI innovation and security",
+      "what": "The US issued Executive Order 14409 to promote AI innovation while addressing national security concerns, including cybersecurity upgrades for critical infrastructure.",
+      "soWhat": "While a US policy, this may indirectly affect South African businesses using US-based AI services through changed security requirements or data handling practices.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/",
+      "relatedPath": "/guides/ai-popia-data-safety",
+      "relatedTitle": "AI and POPIA: is your data safe with AI tools?"
+    },
+    {
+      "headline": "AMD Advancing AI conference to showcase latest developments",
+      "what": "AMD's annual AI conference in San Francisco will feature sessions on AI infrastructure, architecture, and development, with a focus on performance and scale.",
+      "soWhat": "South African tech teams may gain insights into cost-effective AI hardware solutions that could be relevant given local power constraints and budget considerations.",
+      "sourceName": "AMD",
+      "sourceUrl": "https://www.amd.com/en/corporate/events/advancing-ai.html",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "Enterprise AI agents shift focus to production deployment",
+      "what": "Recent analyses show enterprises moving beyond AI agent pilots to production-grade deployments, with emphasis on hallucination control and integration depth.",
+      "soWhat": "South African businesses considering AI automation should evaluate solutions based on real production needs rather than demo capabilities, especially for customer-facing applications.",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/automate-your-south-african-business",
+      "relatedTitle": "Automate your South African business: what to fix first"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Search's I/O 2026 updates: AI agents and more",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good - ITU",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "AMD Advancing AI 2026 | San Francisco, July 22-23",
+      "url": "https://www.amd.com/en/corporate/events/advancing-ai.html"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "AI Updates Today (July 2026) – Latest AI Model Releases",
+      "url": "https://llm-stats.com/llm-updates"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "Top 10 AI Agents for Business in 2026: Best AI Automation Tools",
+      "url": "https://evrone.com/blog/top-10-ai-agents-business-2026"
+    }
+  ],
+  "generatedAt": "2026-07-20T06:40:17.101Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
