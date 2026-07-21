@@ -1,0 +1,103 @@
+{
+  "date": "2026-07-21",
+  "dateHuman": "21 July 2026",
+  "title": "AI brief for South African business, 21 July 2026",
+  "summary": "Today's key developments focus on AI model upgrades and enterprise agent adoption. Google Search's AI Mode now uses Gemini 3.5 Flash globally, while Claude Fable 5 returns after a 19-day suspension. Enterprise AI agents are shifting from pilots to production, with pricing models becoming more outcome-based. South African businesses should note these changes for automation decisions and search visibility strategies.",
+  "items": [
+    {
+      "headline": "Google Search upgrades with AI agents and intelligent search box",
+      "what": "Google announced at I/O 2026 that AI Mode in Search now uses Gemini 3.5 Flash as the default model globally. The search box has been redesigned with AI capabilities for more natural queries.",
+      "soWhat": "South African businesses should verify their visibility in AI Mode results, as this upgrade may change how customers find them. The new search box makes voice and conversational queries more effective.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Fable 5 returns globally after 19-day suspension",
+      "what": "Anthropic's Claude Fable 5 model was restored worldwide on July 1 after a US government suspension. It now includes a new safety classifier to block specific jailbreak techniques.",
+      "soWhat": "South African developers using Claude API can resume Fable 5 access, but should test for false positives in coding queries. The model requires usage credits after July 7.",
+      "sourceName": "Build Fast with AI",
+      "sourceUrl": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    },
+    {
+      "headline": "Enterprise AI agents shift focus to production deployment",
+      "what": "Enterprise buyers are moving beyond AI agent pilots to production-grade deployments, with emphasis on hallucination control, voice readiness and multi-channel continuity.",
+      "soWhat": "South African businesses considering AI automation should evaluate total cost of ownership and integration depth, not just model capabilities. Local POPIA compliance remains critical for customer-facing agents.",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    },
+    {
+      "headline": "AI agent pricing models show wide cost range for SMEs",
+      "what": "Enterprise AI agent platforms now offer varied pricing from $2/conversation (Salesforce) to custom $150K+/year contracts (Sierra), with some moving to outcome-based models.",
+      "soWhat": "South African SMEs should calculate actual usage patterns - per-conversation costs can exceed R36,000/month at scale. Self-hosted options may offer better cost control for regulated industries.",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "AMD Advancing AI conference to showcase latest developments",
+      "what": "AMD's annual AI conference in San Francisco on July 22-23 will feature new AI infrastructure and architecture developments, with hands-on workshops for developers.",
+      "soWhat": "South African businesses using AMD hardware for local AI deployments should monitor announcements for potential cost or efficiency improvements in inference workloads.",
+      "sourceName": "AMD",
+      "sourceUrl": "https://www.amd.com/en/corporate/events/advancing-ai.html"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Search's I/O 2026 updates: AI agents and more",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good - ITU",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "AI News Today July 3 2026: 15 Biggest Stories",
+      "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and Security",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "AMD Advancing AI 2026 | San Francisco, July 22-23",
+      "url": "https://www.amd.com/en/corporate/events/advancing-ai.html"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "AI Updates Today (July 2026) – Latest AI Model Releases",
+      "url": "https://llm-stats.com/llm-updates"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "New AI Models May 2026: The Frontier Took a Breath ...",
+      "url": "https://whatllm.org/blog/new-ai-models-may-2026"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "Top 10 AI Agents for Business in 2026: Best AI Automation Tools",
+      "url": "https://evrone.com/blog/top-10-ai-agents-business-2026"
+    }
+  ],
+  "generatedAt": "2026-07-21T06:23:12.739Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
