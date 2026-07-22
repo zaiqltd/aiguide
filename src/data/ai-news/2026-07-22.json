@@ -1,0 +1,124 @@
+{
+  "date": "2026-07-22",
+  "dateHuman": "22 July 2026",
+  "title": "AI brief for South African business, 22 July 2026",
+  "summary": "Google upgrades Search with Gemini 3.5 Flash globally, making AI-powered search more accessible. Meanwhile, enterprise AI pricing remains complex, with costs ranging from R500 to R20,000+ per user per month. South African businesses must weigh these costs against potential ROI, especially given local economic constraints.",
+  "items": [
+    {
+      "headline": "Google Search upgrades globally with Gemini 3.5 Flash",
+      "what": "Google has upgraded its Search engine globally with Gemini 3.5 Flash, its newest Flash model. This upgrade introduces AI-powered features, including an intelligent Search box, making it easier for users to ask complex questions.",
+      "soWhat": "South African businesses can now access more advanced AI search capabilities for free. This could improve local SEO strategies and help smaller businesses compete more effectively online.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Enterprise AI pricing remains opaque in 2026",
+      "what": "Enterprise AI pricing varies widely, from $3 to over $100 per user per month. Platforms like Microsoft 365 Copilot and Coworker AI offer published pricing, but many vendors still rely on custom quotes.",
+      "soWhat": "South African enterprises must carefully evaluate AI costs, which can range from about R500 to R20,000+ per user per month. Budgeting for hidden costs like integration and training is crucial.",
+      "sourceName": "Coworker AI",
+      "sourceUrl": "https://coworker.ai/blog/enterprise-ai-pricing-comparison-2026",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "AI agent pricing varies widely for SMEs",
+      "what": "AI agent pricing ranges from $50 to $200,000+ depending on complexity. Basic chatbots start at $50/month, while custom-built solutions can cost over $200,000 upfront.",
+      "soWhat": "South African SMEs should consider mid-tier solutions costing R7,500 to R75,000 per month, balancing affordability with functionality. Open-source options may save costs but require technical expertise.",
+      "sourceName": "The Crunch",
+      "sourceUrl": "https://thecrunch.io/ai-agents-price/",
+      "relatedPath": "/guides/ai-automation-small-business-south-africa",
+      "relatedTitle": "AI automation for South African small business: where to start"
+    },
+    {
+      "headline": "AI Economics Institute launched in UK",
+      "what": "The UK government has established the AI Economics Institute to study AI's impact on the economy, focusing on labour markets and business productivity.",
+      "soWhat": "While not directly impacting South Africa, this initiative highlights the growing global focus on AI's economic implications. Local policymakers may consider similar studies to guide AI adoption strategies.",
+      "sourceName": "Jisc",
+      "sourceUrl": "https://nationalcentreforai.jiscinvolve.org/wp/2026/07/01/june-2026-round-up-of-interesting-ai-news-and-announcements/"
+    },
+    {
+      "headline": "AI-powered train monitoring reduces overcrowding",
+      "what": "Researchers at Loughborough University have developed an AI system using depth-sensing cameras to monitor train occupancy in real time, helping manage overcrowding.",
+      "soWhat": "While not yet implemented in South Africa, this technology could address local public transport challenges, especially in cities like Johannesburg and Cape Town.",
+      "sourceName": "Jisc",
+      "sourceUrl": "https://nationalcentreforai.jiscinvolve.org/wp/2026/07/01/june-2026-round-up-of-interesting-ai-news-and-announcements/"
+    },
+    {
+      "headline": "US executive order promotes AI innovation and security",
+      "what": "The US has issued an executive order to promote AI innovation while addressing national security concerns. It focuses on modernising government systems and protecting intellectual property.",
+      "soWhat": "While this order primarily affects the US, it may influence global AI standards and practices, potentially impacting South African businesses that collaborate with US partners.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "headline": "AI for Good Summit focuses on global AI standards",
+      "what": "The UN's AI for Good Summit in Geneva aims to develop AI standards and policies to harness AI's potential for solving global challenges.",
+      "soWhat": "South African businesses should monitor these developments, as global standards could influence local AI regulations and adoption practices.",
+      "sourceName": "AI for Good",
+      "sourceUrl": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "headline": "GPT-5.6 and Claude Fable 5 lead AI model releases",
+      "what": "GPT-5.6 Sol and Claude Fable 5 are the top AI models for complex tasks, while Claude Sonnet 5 and Gemini 3.5 Flash offer practical daily use options.",
+      "soWhat": "South African businesses can leverage these models for advanced tasks, but must consider costs, with GPT-5.6 priced at $5 per million tokens input and $30 output.",
+      "sourceName": "Teamday",
+      "sourceUrl": "https://www.teamday.ai/blog/frontier-ai-models-february-2026",
+      "relatedPath": "/guides/chatgpt-vs-gemini-vs-perplexity-for-business",
+      "relatedTitle": "ChatGPT vs Gemini vs Perplexity for a South African business"
+    }
+  ],
+  "sources": [
+    {
+      "name": "A new era for AI Search",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "June 2026 round-up of interesting AI news and ...",
+      "url": "https://nationalcentreforai.jiscinvolve.org/wp/2026/07/01/june-2026-round-up-of-interesting-ai-news-and-announcements/"
+    },
+    {
+      "name": "AI's 3 big narrative violations — 7/2/2026",
+      "url": "https://www.youtube.com/watch?v=yFEOnBT0Hgw"
+    },
+    {
+      "name": "Summit 26 - Unlock AI's potential to serve humanity - AI for Good",
+      "url": "https://aiforgood.itu.int/summit26/"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and ...",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "Best AI Models July 2026: GPT-5.6 & Claude 5",
+      "url": "https://www.teamday.ai/blog/frontier-ai-models-february-2026"
+    },
+    {
+      "name": "Frontier AI Model Releases 2026: Timeline, Capabilities ...",
+      "url": "https://jobsecuritymeter.com/guides/frontier-ai-models-2026"
+    },
+    {
+      "name": "AI race heats up as OpenAI, Google and Mistral release ...",
+      "url": "https://www.theguardian.com/technology/2024/apr/10/ai-race-heats-up-as-openai-google-and-mistral-release-new-models"
+    },
+    {
+      "name": "How to Route AI in 2026: The Ultimate Frontier Model Playbook",
+      "url": "https://www.youtube.com/watch?v=_Yt4oRgqCqc"
+    },
+    {
+      "name": "22 AI Frontier Models Compared for 2026",
+      "url": "https://teamai.com/blog/large-language-models-llms/the-2026-ai-frontier-model-war/"
+    },
+    {
+      "name": "AI Automation Agency Pricing 2026: AI Agent Cost & Monthly ...",
+      "url": "https://thecrunch.io/ai-agents-price/"
+    },
+    {
+      "name": "Enterprise AI Pricing Compared: 2026 Guide",
+      "url": "https://coworker.ai/blog/enterprise-ai-pricing-comparison-2026"
+    }
+  ],
+  "generatedAt": "2026-07-22T06:22:58.845Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
