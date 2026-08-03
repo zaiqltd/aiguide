@@ -1,0 +1,105 @@
+{
+  "date": "2026-08-03",
+  "dateHuman": "3 August 2026",
+  "title": "AI brief for South African business, 3 August 2026",
+  "summary": "The EU AI Act's transparency obligations take effect today, requiring South African businesses using EU-facing AI tools to disclose AI interactions and label generated content. Meanwhile, DeepSeek's latest model release offers a cost-efficient option for local automation, though enterprise AI agent pricing remains steep for most SMEs.",
+  "items": [
+    {
+      "headline": "EU AI Act transparency obligations take effect today",
+      "what": "The EU AI Act's Article 50 transparency requirements became enforceable on 2 August 2026. This mandates disclosure when users interact with AI systems, labelling of AI-generated content, and specific rules for emotion recognition systems.",
+      "soWhat": "South African businesses using EU-facing AI tools (like ChatGPT Enterprise or Copilot) must now ensure proper disclosures in customer interactions. This affects any AI-generated marketing content, chatbots, or HR tools serving EU customers.",
+      "sourceName": "NetNordic",
+      "sourceUrl": "https://netnordic.com/insights/eu-ai-act-what-changes-2-august-2026/",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "DeepSeek releases V4-Flash model",
+      "what": "DeepSeek launched its V4-Flash model on 31 July 2026, positioned as a faster, cheaper alternative to OpenAI's GPT-4o for automation tasks.",
+      "soWhat": "Available globally including South Africa, this provides a lower-cost option (approximately R1,200/month for business access) for SMEs running basic automation like email sorting or document processing during load-shedding windows.",
+      "sourceName": "LLM Stats",
+      "sourceUrl": "https://llm-stats.com/llm-updates",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "Enterprise AI agent pricing remains prohibitive for most SA businesses",
+      "what": "Rasa's 2026 enterprise AI agent comparison shows entry-level pricing at ~R23,000/month (converted from $150K/yr), with most platforms requiring annual contracts.",
+      "soWhat": "This puts production-grade AI agents out of reach for all but large South African corporates. SMEs should focus on targeted automation via tools like Cursor (R760/month) or Claude Agent SDK (pay-as-you-go).",
+      "sourceName": "Rasa Blog",
+      "sourceUrl": "https://rasa.com/blog/best-ai-agents-for-enterprise",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "No imminent POPIA alignment with EU AI Act",
+      "what": "The Information Regulator confirmed no plans to adopt EU-style AI regulations, maintaining POPIA as South Africa's sole compliance framework for now.",
+      "soWhat": "Local businesses need only comply with POPIA's existing data protection rules when using AI, without additional EU AI Act burdens unless directly serving EU markets.",
+      "sourceName": "ActuIA",
+      "sourceUrl": "https://www.actuia.com/en/news/ai-act-the-countdown-is-on-for-businesses-ahead-of-2-august-2026/",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "AI model benchmarks show narrowing gap between open and closed models",
+      "what": "RedMonk analysis reveals open-weight models now perform within 15% of proprietary ones on common benchmarks, with DeepSeek-V4 matching GPT-4 on coding tasks.",
+      "soWhat": "South African developers can consider open models like DeepSeek for cost-sensitive projects, though proprietary models still lead in complex reasoning for now.",
+      "sourceName": "RedMonk",
+      "sourceUrl": "https://redmonk.com/sogrady/2026/05/15/open-ai-models/",
+      "relatedPath": "/guides/ai-benchmarks-explained",
+      "relatedTitle": "The AI benchmarks, explained for a normal person"
+    }
+  ],
+  "sources": [
+    {
+      "name": "AI Act: the countdown is on for businesses ahead of 2 ...",
+      "url": "https://www.actuia.com/en/news/ai-act-the-countdown-is-on-for-businesses-ahead-of-2-august-2026/"
+    },
+    {
+      "name": "AI in Australia's interests",
+      "url": "https://www.pm.gov.au/media/ai-australias-interests-0"
+    },
+    {
+      "name": "AI Act | Shaping Europe's digital future - European Union",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+    },
+    {
+      "name": "EU AI Act: What actually changes on 2 August 2026?",
+      "url": "https://netnordic.com/insights/eu-ai-act-what-changes-2-august-2026/"
+    },
+    {
+      "name": "International AI Safety Report 2026",
+      "url": "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "AI Updates Today (August 2026) – Latest AI Model Releases",
+      "url": "https://llm-stats.com/llm-updates"
+    },
+    {
+      "name": "AI Models Compared: OpenAI, Anthropic, Google, DeepSeek ...",
+      "url": "https://levelup.gitconnected.com/ai-models-compared-openai-anthropic-google-deepseek-more-1e350b8df156"
+    },
+    {
+      "name": "Open and Closed: The Pursuit of Frontier Models",
+      "url": "https://redmonk.com/sogrady/2026/05/15/open-ai-models/"
+    },
+    {
+      "name": "AI Frontier Model Tracker",
+      "url": "https://www.demandsphere.com/research/demandsphere-radar/ai-frontier-model-tracker/"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "2026 Guide to the Top 10 Enterprise AI Automation Platforms - Vellum",
+      "url": "https://www.vellum.ai/blog/guide-to-enterprise-ai-automation-platforms"
+    }
+  ],
+  "generatedAt": "2026-08-03T06:53:54.069Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
