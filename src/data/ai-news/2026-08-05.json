@@ -1,0 +1,103 @@
+{
+  "date": "2026-08-05",
+  "dateHuman": "5 August 2026",
+  "title": "AI brief for South African business, 5 August 2026",
+  "summary": "The EU AI Act's transparency obligations take effect today, requiring businesses to disclose AI use in customer interactions. Google Search upgrades globally with Gemini 3.5 Flash, while enterprise AI agent pricing remains prohibitive for most South African businesses.",
+  "items": [
+    {
+      "headline": "EU AI Act transparency obligations take effect today",
+      "what": "The EU AI Act's transparency obligations under Article 50 came into force on 2 August 2026. This requires businesses to disclose when customers are interacting with AI systems, including chatbots, AI-generated content, and HR tools.",
+      "soWhat": "South African businesses serving EU customers must now clearly label AI interactions. While POPIA has no equivalent rule yet, this sets a likely future standard for transparency in AI use.",
+      "sourceName": "ActuIA",
+      "sourceUrl": "https://www.actuia.com/en/news/ai-act-the-countdown-is-on-for-businesses-ahead-of-2-august-2026/",
+      "relatedPath": "/guides/popia-compliant-ai-tools-south-africa",
+      "relatedTitle": "POPIA-compliant AI tools for South African business"
+    },
+    {
+      "headline": "Google Search upgrades globally with Gemini 3.5 Flash",
+      "what": "Google has upgraded its Search with Gemini 3.5 Flash as the default model in AI Mode worldwide. The search box has been redesigned to better handle complex queries using AI.",
+      "soWhat": "South African businesses should check how their sites appear in AI-powered search results. The upgrade may affect visibility for complex queries, though basic search remains unchanged.",
+      "sourceName": "Google Blog",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/search-io-2026/",
+      "relatedPath": "/guides/get-found-on-ai-search-south-africa",
+      "relatedTitle": "How to get found on AI search in South Africa"
+    },
+    {
+      "headline": "Enterprise AI agent pricing remains prohibitive for most SA businesses",
+      "what": "Enterprise AI agent development costs range from $15,000 for simple chatbots to $800,000+ for multi-agent systems, with most mid-market projects costing $80,000-$350,000 (about R1.4m-R6.3m at current rates).",
+      "soWhat": "At these prices, custom AI agents remain out of reach for most South African SMEs. Pre-built solutions or open-source alternatives may be more viable for local businesses.",
+      "sourceName": "Intellectyx",
+      "sourceUrl": "https://www.intellectyx.com/ai-agent-development-cost/",
+      "relatedPath": "/guides/is-ai-worth-it-south-africa",
+      "relatedTitle": "Is AI worth it for a South African business in 2026?"
+    },
+    {
+      "headline": "DeepSeek releases open-weight frontier AI model",
+      "what": "Chinese firm DeepSeek released its R1 model in January 2025 as an open-weight frontier AI model nearly matching top closed models' performance at lower cost.",
+      "soWhat": "This open model is available for download and could offer South African developers a lower-cost alternative to proprietary models, though local hosting costs may offset savings.",
+      "sourceName": "IISS",
+      "sourceUrl": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/",
+      "relatedPath": "/guides/ai-tools-for-small-business-south-africa",
+      "relatedTitle": "The best AI tools for a South African small business (2026)"
+    },
+    {
+      "headline": "US executive order promotes AI innovation and security",
+      "what": "A June 2026 US executive order prioritizes AI cybersecurity and modernizing systems for AI, focusing on national security systems and critical infrastructure.",
+      "soWhat": "This has no direct impact on South Africa, but may influence global AI security standards over time. Local businesses should monitor for any trickle-down effects on tools they use.",
+      "sourceName": "White House",
+      "sourceUrl": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    }
+  ],
+  "sources": [
+    {
+      "name": "AI Act: the countdown is on for businesses ahead of 2 ...",
+      "url": "https://www.actuia.com/en/news/ai-act-the-countdown-is-on-for-businesses-ahead-of-2-august-2026/"
+    },
+    {
+      "name": "August 2026: Where AI Is Headed in Next 5 Years",
+      "url": "https://etcjournal.com/2026/08/01/august-2026-where-ai-is-headed-in-next-5-years/"
+    },
+    {
+      "name": "AI News Explosion: 10 Biggest AI Stories of May 2026",
+      "url": "https://www.youtube.com/watch?v=VXCgKIh2iKY"
+    },
+    {
+      "name": "Promoting Advanced Artificial Intelligence Innovation and ...",
+      "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "name": "A new era for AI Search",
+      "url": "https://blog.google/products-and-platforms/products/search/search-io-2026/"
+    },
+    {
+      "name": "AI Release Tracker — Every LLM Release Since ChatGPT",
+      "url": "https://aireleasetracker.com/"
+    },
+    {
+      "name": "DeepSeek's release of an open-weight frontier AI model",
+      "url": "https://www.iiss.org/publications/strategic-comments/2025/04/deepseeks-release-of-an-open-weight-frontier-ai-model/"
+    },
+    {
+      "name": "Frontier AI Labs List: Companies, Models & Strategy (2026)",
+      "url": "https://cheatsheets.davidveksler.com/ai-frontier.html"
+    },
+    {
+      "name": "15 Best AI Agents for Enterprise in 2026 | Rasa Blog",
+      "url": "https://rasa.com/blog/best-ai-agents-for-enterprise"
+    },
+    {
+      "name": "2026 Guide to the Top 10 Enterprise AI Automation Platforms",
+      "url": "https://www.vellum.ai/blog/guide-to-enterprise-ai-automation-platforms"
+    },
+    {
+      "name": "9 must‑try AI agents for automating workflows in 2026",
+      "url": "https://sanalabs.com/agents-blog/ai-agents-for-automating-work-enterprise-guide-2026"
+    },
+    {
+      "name": "AI Agent Development Cost in 2026: Full Pricing Guide",
+      "url": "https://www.intellectyx.com/ai-agent-development-cost/"
+    }
+  ],
+  "generatedAt": "2026-08-05T06:21:31.272Z",
+  "model": "deepseek/deepseek-chat-v3"
+}
