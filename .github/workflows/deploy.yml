@@ -1,0 +1,34 @@
+name: Deploy to Vercel
+
+# Manual production deploy, decoupled from the daily brief.
+#
+# The only other deploy path is ai-news.yml, whose Vercel step runs *after* brief
+# generation and is skipped whenever the generator aborts (a thin-news day). That
+# means any content already merged to main cannot go live until a brief succeeds.
+# This workflow lets a content change be published on demand. Same Vercel token,
+# org and project as ai-news.yml.
+on:
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # vercel builds remotely from vercel.json (buildCommand: astro build), so no
+      # local build step is needed, matching the ai-news.yml deploy.
+      - name: Deploy to Vercel (prod)
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: team_OV6QpYdgbDOQdgpUuwlNCHVu
+          VERCEL_PROJECT_ID: prj_eKhSHa15Ckt9VYQ4o8U4yW8hUhgl
+        run: npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
