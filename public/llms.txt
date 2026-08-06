@@ -1,6 +1,6 @@
 # AI Guide (aiguide.co.za)
 
-> The practical AI guide for South African business, written by Chad Etkind and Adam Sacharowitz, the engineers behind Zaiq (https://zaiq.ai). Plain-English, rand-priced, POPIA-aware answers about what AI actually does for an SA business, what digital work costs, and how to get found by AI search. No hype.
+> The practical AI guide for South African business, written by Chad Alexander and Adam Sacharowitz, the engineers behind Zaiq (https://zaiq.ai). Plain-English, rand-priced, POPIA-aware answers about what AI actually does for an SA business, what digital work costs, and how to get found by AI search. No hype.
 
 ## AI News (updated daily)
 - [The daily AI brief for South African business](https://aiguide.co.za/ai-news): Every morning AI Guide compiles the AI developments that matter, each one linked to its source, and translates it into what it means for a business operating in South Africa. Sourced, no hype. RSS feed: https://aiguide.co.za/ai-news/feed.xml
@@ -39,6 +39,6 @@
 
 ## About
 - [About AI Guide](https://aiguide.co.za/about): Why this guide exists and how it is written.
-- [Chad Etkind](https://aiguide.co.za/authors/chad-etkind): Co-founder of Zaiq.
+- [Chad Alexander](https://aiguide.co.za/authors/chad-alexander): Co-founder of Zaiq.
 - [Adam Sacharowitz](https://aiguide.co.za/authors/adam-sacharowitz): Co-founder of Zaiq.
 - [Zaiq](https://zaiq.ai): The AI engineering studio behind this guide — two engineers who point AI at a business problem and ship a fix in days.

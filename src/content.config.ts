@@ -13,7 +13,7 @@ const guides = defineCollection({
     cluster: z.enum(['costs', 'ai-business', 'build', 'frontier', 'research']),
     clusterLabel: z.string(),
     clusterPath: z.string().optional(),
-    author: z.string(), // author slug, e.g. 'chad-etkind'
+    author: z.string(), // author slug, e.g. 'chad-alexander'
     datePublished: z.string(),
     dateModified: z.string().optional(),
     lastVerified: z.string().optional(),

@@ -61,7 +61,7 @@ export function organizationNode(): Json {
 }
 
 export interface AuthorInput {
-  id: string; // slug, e.g. 'chad-etkind'
+  id: string; // slug, e.g. 'chad-alexander'
   name: string;
   jobTitle?: string;
   description?: string;

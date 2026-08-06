@@ -1,5 +1,5 @@
 ---
-name: Chad Etkind
+name: Chad Alexander
 jobTitle: Co-founder, Zaiq
 credential: Electrical and Information Engineering, University of the Witwatersrand (third year)
 affiliation: University of the Witwatersrand
@@ -11,12 +11,13 @@ knowsAbout:
   - product and delivery
   - business automation
 short: Co-founder of Zaiq. Keeps every build pointed at the outcome the business cares about.
-sameAs:
-  - https://www.linkedin.com/in/chadetkind
-  - https://about.me/chadetkind
+# LinkedIn (in/chadetkind) + about.me/chadetkind intentionally omitted while the public
+# name is "Chad Alexander": both carry the real surname and would re-expose it. Restore
+# both URLs under sameAs when reverting.
+sameAs: []
 ---
 
-Chad Etkind is co-founder of [Zaiq](https://zaiq.ai), an AI engineering studio in Johannesburg.
+Chad Alexander is co-founder of [Zaiq](https://zaiq.ai), an AI engineering studio in Johannesburg.
 He made the Golden Key at Wits, top of his class, then went all-in on AI in his third year of
 Electrical and Information Engineering. Not a fallback, a bet: a frontier model ships every few
 weeks, and a course outline is locked years before you write the exam.
